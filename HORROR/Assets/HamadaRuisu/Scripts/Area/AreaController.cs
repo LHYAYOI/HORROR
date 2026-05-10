@@ -3,17 +3,19 @@ using UnityEngine.Tilemaps;
 
 public class AreaController : MonoBehaviour
 {
-    [SerializeField] Tilemap m_areaTileMap;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] AreaModel m_model;
+ 
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    public string GetAreaName() => m_model.GetAreaName();
+
+    public Material GetAreaSkyBoxMaterial() => m_model.GetAreaSkyBoxMaterial();
 }

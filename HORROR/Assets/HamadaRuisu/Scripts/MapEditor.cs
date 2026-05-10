@@ -5,7 +5,7 @@ using UnityEngine;
 [CustomEditor(typeof(MapData))]
 public class MapDataEditor : Editor
 {
-    AreaData selectedType;
+    AreaController selectedType;
 
     public override void OnInspectorGUI()
     {
@@ -34,7 +34,7 @@ public class MapDataEditor : Editor
         // 選択タイプ
         EditorGUILayout.Space();
 
-        selectedType = (AreaData)EditorGUILayout.ObjectField("PaintArea", selectedType, typeof(AreaData), false);
+        selectedType = (AreaController)EditorGUILayout.ObjectField("PaintArea", selectedType, typeof(AreaController), false);
 
         EditorGUILayout.Space();
 
@@ -52,13 +52,16 @@ public class MapDataEditor : Editor
 
                 if (GUILayout.Button("", GUILayout.Width(25), GUILayout.Height(25)))
                 {
-                    map.SetArea(x, y, selectedType);
+                    map.SetArea(new Vector2Int(x, y), selectedType);
                     EditorUtility.SetDirty(map);
                 }
             }
 
             EditorGUILayout.EndHorizontal();
         }
+
+        map.DebugArea(new Vector2Int(0, 0));
+        map.DebugArea(new Vector2Int(1, 0));
     }
 }
 #endif

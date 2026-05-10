@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class AreaModel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] string m_areaName;
+    [SerializeField] Material m_skyboxMaterial;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string GetAreaName() => m_areaName;
+    public Material GetAreaSkyBoxMaterial() => m_skyboxMaterial;
 }

@@ -4,23 +4,23 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "MapData", menuName = "Map/MapData")]
+[CreateAssetMenu(fileName = "MapData", menuName = "Scriptable Objects/MapData")]
 public class MapData : ScriptableObject
 {
-   private int width = 1;
-   private int height = 1;
+    [SerializeField] private int width = 1;
+    [SerializeField] private int height = 1;
 
-    List<AreaData> m_areaData;
+    [SerializeField] List<AreaController> m_areaData;
 
     public void Init()
     {
-        m_areaData = new List<AreaData>(new AreaData[width * height]);
+        m_areaData = new List<AreaController>(new AreaController[width * height]);
     }
 
     public void Resize(int newWidth, int newHeight)
     {
         // 新しいサイズのリストを作成
-        List<AreaData> newData = new List<AreaData>(new AreaData[newWidth * newHeight]);
+        List<AreaController> newData = new List<AreaController>(new AreaController[newWidth * newHeight]);
 
         // 既にあるデータを新しいリストにコピー（既に作ってたものを消さないため）
         for (int y = 0; y < Mathf.Min(height, newHeight); y++)
@@ -37,9 +37,14 @@ public class MapData : ScriptableObject
         m_areaData = newData;
     }
 
-    public AreaData GetArea(int x, int y)
+    public AreaController GetArea(Vector2Int index)
     {
-        return m_areaData[y * width + x];
+        if (index.x < 0 || index.x >= width || index.y < 0 || index.y >= height)
+        {
+            return null;
+        }
+
+        return m_areaData[index.y * width + index.x];
     }
 
     public int GetWidth()
@@ -52,26 +57,26 @@ public class MapData : ScriptableObject
         return height;
     }
 
-    public void SetArea(int x, int y, AreaData data)
+    public void SetArea(Vector2Int index, AreaController data)
     {
         if (data == null)
         {
             return;
         }
 
-        m_areaData[y * width + x] = data;
+        m_areaData[index.y * width + index.x] = data;
     }
 
-    //横幅増やす
-    public void AddWidth()
+    public void DebugArea(Vector2Int index)
     {
-        width++;
-    }
+        AreaController data = GetArea(index);
 
-    //立幅増やす
-    public void AddHeight()
-    {
-        height++;
-    }
+        if (data == null)
+        {
+            Debug.Log("この要素には何もありません");
+            return;
+        }
 
+        Debug.Log($"Area at ({index.x}, {index.y}): {data.GetAreaName()}");
+    }
 }
