@@ -68,4 +68,9 @@ public class AreaManager : MonoBehaviour
             }
         }
     }
+
+    public MapData GetMapData()
+    {
+        return m_MapData;
+    }
 }

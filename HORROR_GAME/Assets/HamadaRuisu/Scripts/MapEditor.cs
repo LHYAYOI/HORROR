@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ public class MapDataEditor : Editor
 
         if (EditorGUI.EndChangeCheck())
         {
-            map.Resize(newWidth, newHeight);
+            Resize(map, newWidth, newHeight);
             EditorUtility.SetDirty(map);
         }
 
@@ -62,6 +63,26 @@ public class MapDataEditor : Editor
 
         map.DebugArea(new Vector2Int(0, 0));
         map.DebugArea(new Vector2Int(1, 0));
+    }
+
+    public void Resize(MapData map, int newWidth, int newHeight)
+    {
+        // 新しいサイズのリストを作成
+        List<AreaController> newData = new List<AreaController>(new AreaController[newWidth * newHeight]);
+
+        // 既にあるデータを新しいリストにコピー（既に作ってたものを消さないため）
+        for (int y = 0; y < Mathf.Min(map.GetHeight(), newHeight); y++)
+        {
+            for (int x = 0; x < Mathf.Min(map.GetWidth(), newWidth); x++)
+            {
+                newData[y * newWidth + x] = map.GetArea(new Vector2Int(x, y)); ;
+            }
+        }
+
+        // サイズ更新
+        map.SetWidth(newWidth);
+        map.SetHeight(newHeight);
+        map.SetAreaData(newData);
     }
 }
 #endif
