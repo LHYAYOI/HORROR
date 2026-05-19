@@ -49,7 +49,10 @@ public class MapDataEditor : Editor
                 //AreaData area = map.GetArea(x, y);
 
                 // 色分け(テクスチャの方がいいかも？)
-                //GUI.backgroundColor = GetColor(value);
+                if (map.GetArea(new Vector2Int(x, y)) != null)  
+                {
+                    GUI.backgroundColor = Color.red;
+                }
 
                 if (GUILayout.Button("", GUILayout.Width(25), GUILayout.Height(25)))
                 {

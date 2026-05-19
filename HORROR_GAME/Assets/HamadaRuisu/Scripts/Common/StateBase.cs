@@ -5,6 +5,7 @@
 
 using UnityEngine;
 
+[]
 public class StateBase : ScriptableObject
 {
     protected StateMachine m_stateMachine = null;
