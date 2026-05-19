@@ -31,7 +31,7 @@ public class StateMachine : MonoBehaviour
         }
     }
 
-    public void UpdateStatemachine() 
+    public void Update() 
     {
         if (m_currentState != null)
         {

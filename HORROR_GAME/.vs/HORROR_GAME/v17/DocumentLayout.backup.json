@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\GitHub\\HORROR\\HORROR_GAME\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\common\\statebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\common\\statebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|C:\\GitHub\\HORROR\\HORROR_GAME\\assets\\hamadaruisu\\scripts\\area\\areamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\area\\areamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|C:\\GitHub\\HORROR\\HORROR_GAME\\assets\\hamadaruisu\\scripts\\area\\mapdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\area\\mapdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\common\\statemachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\common\\statemachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|C:\\GitHub\\HORROR\\HORROR_GAME\\assets\\hamadaruisu\\scripts\\mapeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\mapeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\area\\mapdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\area\\mapdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|C:\\GitHub\\HORROR\\HORROR_GAME\\assets\\hamadaruisu\\scripts\\area\\areamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\area\\areamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|C:\\GitHub\\HORROR\\HORROR_GAME\\assets\\hamadaruisu\\scripts\\common\\statebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\common\\statebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,40 +39,65 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StateBase.cs",
-              "DocumentMoniker": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
-              "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\PlayerController.cs",
+              "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\PlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T03:40:02.472Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MapEditor.cs",
-              "DocumentMoniker": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
-              "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAADgAAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T03:03:23.788Z",
+              "WhenOpened": "2026-05-19T04:27:04.822Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "StateMachine.cs",
+              "DocumentMoniker": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
+              "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T04:25:41.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "StateBase.cs",
+              "DocumentMoniker": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
+              "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Common\\StateBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T03:40:02.472Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MapEditor.cs",
+              "DocumentMoniker": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
+              "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\MapEditor.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAC8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T03:03:23.788Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "AreaManager.cs",
               "DocumentMoniker": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
               "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
               "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
               "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T03:00:24.485Z"
+              "WhenOpened": "2026-05-18T03:00:24.485Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -74,7 +107,7 @@
               "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Area\\MapData.cs",
               "ToolTip": "C:\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\MapData.cs",
               "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Area\\MapData.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAUwFQAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAADkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-11T02:53:01.432Z",
               "EditorCaption": ""

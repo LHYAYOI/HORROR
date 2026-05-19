@@ -312,7 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkyboxTransition_2
   m_panoramaA: {fileID: 2800000, guid: 796d1cf6afc56714fa66d31a37af74dc, type: 3}
   panoramaB: {fileID: 2800000, guid: 9a297ccebe07cd74b9f8c4ed3bfaeaeb, type: 3}
-  blend: 0.431
+  blend: 0
   exposure: 1
   moveStrength: 0.05
   zoomStrength: 0.15

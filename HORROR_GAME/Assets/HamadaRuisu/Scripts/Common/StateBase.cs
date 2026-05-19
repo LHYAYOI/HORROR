@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-[]
+
 public class StateBase : ScriptableObject
 {
     protected StateMachine m_stateMachine = null;
@@ -16,6 +16,7 @@ public class StateBase : ScriptableObject
     public void SetStateMachine(StateMachine stateMachine) { m_stateMachine = stateMachine; }
     public void SetStateOwner(GameObject gameObject) { m_stateOwner = gameObject; }
     public string GetStateName() { return m_stateName; }
+    public float GetStateTime() { return m_stateTime; }
 
     public virtual void Awake() { }
     public virtual void Start() { }

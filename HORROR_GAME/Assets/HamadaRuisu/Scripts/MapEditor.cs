@@ -46,12 +46,15 @@ public class MapDataEditor : Editor
 
             for (int x = 0; x < map.GetWidth(); x++)
             {
-                //AreaData area = map.GetArea(x, y);
 
                 // 色分け(テクスチャの方がいいかも？)
                 if (map.GetArea(new Vector2Int(x, y)) != null)  
                 {
                     GUI.backgroundColor = Color.red;
+                }
+                else
+                {
+                    GUI.backgroundColor = Color.white;
                 }
 
                 if (GUILayout.Button("", GUILayout.Width(25), GUILayout.Height(25)))
@@ -64,8 +67,8 @@ public class MapDataEditor : Editor
             EditorGUILayout.EndHorizontal();
         }
 
-        map.DebugArea(new Vector2Int(0, 0));
-        map.DebugArea(new Vector2Int(1, 0));
+        DebugArea(map, new Vector2Int(0, 0));
+        DebugArea(map, new Vector2Int(1, 0));
     }
 
     public void Resize(MapData map, int newWidth, int newHeight)
@@ -86,6 +89,19 @@ public class MapDataEditor : Editor
         map.SetWidth(newWidth);
         map.SetHeight(newHeight);
         map.SetAreaData(newData);
+    }
+
+    public void DebugArea(MapData map, Vector2Int index)
+    {
+        AreaController data = map.GetArea(index);
+
+        if (data == null)
+        {
+            Debug.Log("この要素には何もありません");
+            return;
+        }
+
+        Debug.Log($"Area at ({index.x}, {index.y}): {data.GetAreaName()}");
     }
 }
 #endif
