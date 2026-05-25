@@ -60,11 +60,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex1:
-        m_Texture: {fileID: 2800000, guid: 796d1cf6afc56714fa66d31a37af74dc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 44ae6bc4f6d656e4591bba055cfbc50e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex2:
-        m_Texture: {fileID: 2800000, guid: 9a297ccebe07cd74b9f8c4ed3bfaeaeb, type: 3}
+        m_Texture: {fileID: 2800000, guid: c252a5261811d1d45bbbeacbcda93f66, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -75,7 +75,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Exposure: 1
-    - _FocusU: 1
+    - _FocusU: 0.4086938
     - _FocusV: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -92,7 +92,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Tex2StartZoomOut: 0.287
+    - _Tex2StartZoomOut: 0.12
     - _UVSec: 0
     - _ViewCenterU: 1
     - _ViewCenterV: 0.5

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: e91ff43fba98cf646a0cfefbca65215c, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7c271fe763c81f54ca4c63711e7c7191, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -35,7 +35,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0.139
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_UseRadianceAmbientProbe: 0
@@ -575,13 +575,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356138177}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.28292936, z: -0, w: -0.9591407}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 327.13, z: 0}
 --- !u!114 &1356138181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,9 +950,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1356138179}
     - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
+      propertyPath: m_transition
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_AreaManager
       value: 
       objectReference: {fileID: 2074026103}
+    - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
+      propertyPath: m_skyBoxMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e91ff43fba98cf646a0cfefbca65215c, type: 2}
     - target: {fileID: 7887013651728871417, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
