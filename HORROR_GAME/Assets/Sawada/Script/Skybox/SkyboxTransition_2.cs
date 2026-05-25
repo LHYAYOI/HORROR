@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SkyboxTransition_2 : MonoBehaviour
 {
@@ -59,7 +58,6 @@ public class SkyboxTransition_2 : MonoBehaviour
     private void Update()
     {
         //Apply();
-        //ApplySkyboxTransition();
     }
 
     private void ApplySkyboxTransition()
@@ -112,43 +110,6 @@ public class SkyboxTransition_2 : MonoBehaviour
 
         if (move.sqrMagnitude > 1f)
             move.Normalize();
-    }
-
-    public IEnumerator BlendRoutine(Texture from, Texture to)
-    {
-        m_panoramaA = from;
-
-        panoramaB = to;
-
-        float elapsedTime = 0.0f;
-
-        while (elapsedTime < 0.5f) 
-        {
-            elapsedTime += Time.deltaTime;
-
-            float rate = elapsedTime / 0.5f;
-
-            blend = rate;
-
-            yield return null;
-        }
-
-        m_panoramaA = to;
-
-        panoramaB = null;
-
-        //blend = 0;
-    }
-
-    public void SetBlend(float rate) 
-    {
-        blend = rate;
-    }
-
-    public void SetBlendingTextures(Texture from, Texture to) 
-    {
-        m_panoramaA = from;
-        panoramaB = to;
     }
 
     // skyboxの向きを変更

@@ -24,6 +24,7 @@ public class MapData : ScriptableObject
             return null;
         }
 
+        Debug.Log(m_areaData[index.y * m_width + index.x]);
         return m_areaData[index.y * m_width + index.x];
     }
 

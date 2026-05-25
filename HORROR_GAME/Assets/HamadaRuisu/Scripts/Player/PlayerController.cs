@@ -44,7 +44,10 @@ public class PlayerController : MonoBehaviour
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
     }
 
-    public Vector2Int GetCurrent
+    public Vector2Int GetCurrentIndex() 
+    {
+        return m_currentAreaIndex;
+    }
 
     private void CameraInputHandler()
     {
