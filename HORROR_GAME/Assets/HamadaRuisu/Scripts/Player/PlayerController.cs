@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour
         OFF
     };
 
+    public enum PLAYER_STATE
+    {
+        NORMAL,
+        HIDE
+    }
+
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] AreaManager m_AreaManager;
@@ -22,9 +28,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera m_camera;
     [SerializeField] float m_rotationDuration;
 
+    [SerializeField] LayerMask m_layerMask;
+
     Vector2Int m_currentAreaIndex;
 
     CAMERA_ON_OFF_ATATE m_cameraOnOffState = CAMERA_ON_OFF_ATATE.OFF;
+    PLAYER_STATE m_playerState = PLAYER_STATE.NORMAL;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,10 +50,28 @@ public class PlayerController : MonoBehaviour
 
         RotateCameraInputHandler();
 
+        InteractionHandler();
+
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
     }
 
-    public Vector2Int GetCurrentIndex() 
+    private void InteractionHandler() 
+    {
+        Ray ray = m_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) 
+        {
+            IIntaractable interactableTarget = hit.collider.gameObject.GetComponent<IIntaractable>();
+
+            if (interactableTarget != null && Input.GetMouseButtonDown(0)) 
+            {
+                interactableTarget.OnInteracted();
+            }
+        }
+    }
+
+    public Vector2Int GetCurrentIndex()
     {
         return m_currentAreaIndex;
     }
@@ -58,16 +85,12 @@ public class PlayerController : MonoBehaviour
             {
                 m_PlayerModel.DrainBattery(1);
 
-                //m_PlayerView.HideBatteryUI();
-
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
             }
 
             //ƒJƒƒ‰ƒIƒ“
             else if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF && m_PlayerModel.GetCurrentBatteryValue() > 0)
             {
-                //m_PlayerView.ShowBatteryUI();
-
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.ON);
             }
         }
@@ -78,9 +101,19 @@ public class PlayerController : MonoBehaviour
         return m_cameraOnOffState;
     }
 
+    public PLAYER_STATE GetPlayerState() 
+    {
+        return m_playerState;
+    }
+
     public void ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE state)
     {
         m_cameraOnOffState = state;
+    }
+
+    public void ChangePlayerState(PLAYER_STATE state) 
+    {
+        m_playerState = state;
     }
 
     private void MoveAreaInputHandler()
@@ -154,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
         //m_currentAreaIndex = moveIndex;
 
-       // m_transition.SetBlend(0);
+        // m_transition.SetBlend(0);
 
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KaiController : MonoBehaviour
+public class KaiController : MonoBehaviour,IIntaractable
 {
     [SerializeField] KaiView m_kaiView;
     [SerializeField] PlayerController m_playerController;
@@ -8,7 +8,7 @@ public class KaiController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        //m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -22,5 +22,10 @@ public class KaiController : MonoBehaviour
         {
             m_kaiView.Hide();
         }
+    }
+
+    public void OnInteracted() 
+    {
+        Debug.Log("êGÇÁÇÍÇΩÇÊ");
     }
 }
