@@ -50,30 +50,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        ChangeSate("NormalState");
     }
 
     // Update is called once per frame
     void Update()
     {
-        CameraInputHandler();
-
-        MoveAreaInputHandler();
-
-        RotateCameraInputHandler();
-
-        if (m_playerState == PLAYER_STATE.HIDE)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("oooooooo");
-                m_hideAnimator.SetTrigger("StartFade");
-                ChangePlayerState(PLAYER_STATE.NORMAL);
-            }
-        }
-
-        InteractionHandler();
-
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
     }
 
@@ -82,7 +64,7 @@ public class PlayerController : MonoBehaviour
         return m_interactedKai;
     }
 
-    private void InteractionHandler() 
+    public void InteractionHandler() 
     {
         Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -105,6 +87,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ChangeSate(string stateName) 
+    {
+        m_StateMachine.ChangeState(stateName);
+    }
+
     public StateMachine GetStateMachine() 
     {
         return m_StateMachine;
@@ -115,7 +102,12 @@ public class PlayerController : MonoBehaviour
         return m_currentAreaIndex;
     }
 
-    private void CameraInputHandler()
+    public Animator GetHideAnimator() 
+    {
+        return m_hideAnimator;
+    }
+
+    public void CameraInputHandler()
     {
         if (Input.GetMouseButtonDown(1))
         {
@@ -155,7 +147,7 @@ public class PlayerController : MonoBehaviour
         m_playerState = state;
     }
 
-    private void MoveAreaInputHandler()
+    public void MoveAreaInputHandler()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -212,7 +204,7 @@ public class PlayerController : MonoBehaviour
         m_transition.SetNextTexture(nextAreaTexture);
     }
 
-    private void RotateCameraInputHandler()
+    public void RotateCameraInputHandler()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {

@@ -16,7 +16,7 @@ public class HideSpotController : MonoBehaviour,IIntaractable
 
     public void OnInteracted() 
     {
-        m_player.ChangePlayerState(PlayerController.PLAYER_STATE.HIDE);
+        m_player.ChangeSate("HideState");
 
         m_animator.SetTrigger("StartFade");
     }
