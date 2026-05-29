@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour
         InteractionHandler();
 
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
-
-        Debug.Log(m_playerState);
     }
 
     public bool InteractedWithKai() 
@@ -211,7 +209,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(currentAreaTexture);
         Debug.Log(nextAreaTexture);
 
-        //m_transition.SetNextTexture(nextAreaTexture);
+        m_transition.SetNextTexture(nextAreaTexture);
     }
 
     private void RotateCameraInputHandler()
