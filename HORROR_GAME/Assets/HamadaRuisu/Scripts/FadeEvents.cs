@@ -15,11 +15,11 @@ public class FadeEvents : MonoBehaviour
 
     public void EnableDisableVignette()
     {
-        if (m_player.GetPlayerState() == PlayerController.PLAYER_STATE.NORMAL)
+        if (m_player.GetStateMachine().GetCurrentState().GetStateName() == "NormalState")
         {
             m_vignette.active = false;
         }
-        else if (m_player.GetPlayerState() == PlayerController.PLAYER_STATE.HIDE)
+        else if (m_player.GetStateMachine().GetCurrentState().GetStateName() == "HideState")
         {
             m_vignette.active = true;
         }

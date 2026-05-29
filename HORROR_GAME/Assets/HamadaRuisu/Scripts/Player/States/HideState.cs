@@ -23,6 +23,9 @@ public class HideState:StateBase
 
     public override void UpdateState()
     {
+
+        m_controller.RotateCameraInputHandler();
+
         if (Input.GetMouseButtonDown(0))
         {
             m_controller.GetHideAnimator().SetTrigger("StartFade");
