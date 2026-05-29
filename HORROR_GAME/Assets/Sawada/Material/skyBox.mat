@@ -75,7 +75,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Exposure: 1
-    - _FocusU: 1
+    - _FocusU: 0.5
     - _FocusV: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -92,7 +92,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Tex2StartZoomOut: 0.287
+    - _Tex2StartZoomOut: 0.12
     - _UVSec: 0
     - _ViewCenterU: 1
     - _ViewCenterV: 0.5
