@@ -935,7 +935,7 @@ MonoBehaviour:
   m_nextTexture: {fileID: 2800000, guid: 9a297ccebe07cd74b9f8c4ed3bfaeaeb, type: 3}
   m_blend: 0
   m_exposure: 1
-  m_transitionSpeed: 0.1
+  m_transitionSpeed: 0.05
   m_moveStrength: 0.05
   m_zoomStrength: 0.15
   m_tex2StartZoomOut: 0.12
