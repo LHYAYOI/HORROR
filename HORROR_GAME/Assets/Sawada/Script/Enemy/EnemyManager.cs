@@ -12,6 +12,8 @@ public class EnemyManager : MonoBehaviour
 
     AreaManager m_areaManager;
     [SerializeField] PlayerController m_playerController;
+    Vector2Int m_lastPlayerPosition;
+    [SerializeField] PlayerHide m_playerHide;
 
     void Start()
     {
@@ -29,7 +31,8 @@ public class EnemyManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            MoveTarget(m_playerController.GetCurrentIndex());
+            m_lastPlayerPosition = m_playerController.GetCurrentIndex();
+            MoveTarget(m_lastPlayerPosition);
         }
     }
 

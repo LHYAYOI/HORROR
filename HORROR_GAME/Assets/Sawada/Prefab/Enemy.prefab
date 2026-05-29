@@ -160,7 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f31248c714737e49841e96679ac4b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KaiController
-  m_kaiView: {fileID: 4888164912630154047}
+  m_enemyView: {fileID: 4888164912630154047}
+  m_playerController: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
 --- !u!114 &4888164912630154047
 MonoBehaviour:
   m_ObjectHideFlags: 0
