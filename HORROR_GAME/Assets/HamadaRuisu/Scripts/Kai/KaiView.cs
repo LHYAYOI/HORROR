@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class KaiView : MonoBehaviour
 {
-    [SerializeField] GameObject m_kaiVisual;
-
-    public void Show()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        m_kaiVisual.SetActive(true);
+        
     }
 
-    public void Hide()
+    // Update is called once per frame
+    void Update()
     {
-        m_kaiVisual.SetActive(false);
+        
     }
 }

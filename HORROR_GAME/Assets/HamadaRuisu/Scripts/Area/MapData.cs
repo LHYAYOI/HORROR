@@ -4,8 +4,8 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "MapData", menuName = "Scriptable Objects/MapData")]
-public class MapData : ScriptableObject
+//[CreateAssetMenu(fileName = "MapData", menuName = "Scriptable Objects/MapData")]
+public class MapData : MonoBehaviour
 {
     [SerializeField] private int m_width = 1;
     [SerializeField] private int m_height = 1;
@@ -24,8 +24,14 @@ public class MapData : ScriptableObject
             return null;
         }
 
-        Debug.Log(m_areaData[index.y * m_width + index.x]);
-        return m_areaData[index.y * m_width + index.x];
+        int targetIndex = index.y * m_width + index.x;
+
+        if (targetIndex >= m_areaData.Count) 
+        {
+            return null;
+        }
+
+        return m_areaData[targetIndex];
     }
 
     public int GetWidth()
@@ -36,6 +42,11 @@ public class MapData : ScriptableObject
     public int GetHeight()
     {
         return m_height;
+    }
+
+    public List<AreaController> GetAreaData() 
+    {
+        return m_areaData;
     }
 
     public void SetHeight(int height) 

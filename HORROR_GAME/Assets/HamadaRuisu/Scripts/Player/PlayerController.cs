@@ -30,15 +30,23 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask m_layerMask;
 
+    [SerializeField] Vector2Int m_startPosition;
     Vector2Int m_currentAreaIndex;
 
     CAMERA_ON_OFF_ATATE m_cameraOnOffState = CAMERA_ON_OFF_ATATE.OFF;
     PLAYER_STATE m_playerState = PLAYER_STATE.NORMAL;
 
+    bool m_interactedKai = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        m_currentAreaIndex = m_startPosition;
+    }
+
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -55,18 +63,30 @@ public class PlayerController : MonoBehaviour
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
     }
 
+    public bool InteractedWithKai() 
+    {
+        return m_interactedKai;
+    }
+
     private void InteractionHandler() 
     {
-        Ray ray = m_camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) 
         {
-            IIntaractable interactableTarget = hit.collider.gameObject.GetComponent<IIntaractable>();
+            GameObject interactedObject = hit.collider.gameObject;
+
+            IIntaractable interactableTarget = interactedObject.GetComponent<IIntaractable>();
 
             if (interactableTarget != null && Input.GetMouseButtonDown(0)) 
             {
                 interactableTarget.OnInteracted();
+
+                if (interactedObject.tag == "Kai")
+                {
+                    m_interactedKai = true;
+                }
             }
         }
     }
@@ -143,12 +163,16 @@ public class PlayerController : MonoBehaviour
     {
         MapData m_MapData = m_AreaManager.GetMapData();
 
-        AreaController area = m_MapData.GetArea(moveIndex);
+        AreaController currentArea = m_MapData.GetArea(m_currentAreaIndex);
+        AreaController nextArea = m_MapData.GetArea(moveIndex);
 
-        if (area == null)
+        if (nextArea == null || nextArea.GetAreaType() == AREA_TYPE.WALL)
         {
             yield break;
         }
+
+        currentArea.gameObject.SetActive(false);
+        nextArea.gameObject.SetActive(true);
 
         //バッテリー回復
         if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF)

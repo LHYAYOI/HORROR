@@ -58,5 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff728a6ebe54d7745a7ffcc385a420f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaModel
-  m_areaName: Area_A
+  m_areaType: 0
+  m_areaName: Area_A 2
   m_skyboxTexture: {fileID: 2800000, guid: c25c289b0de3a4144a8d158a8d032895, type: 3}

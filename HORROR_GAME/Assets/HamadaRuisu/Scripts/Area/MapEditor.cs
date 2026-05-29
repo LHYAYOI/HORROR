@@ -35,7 +35,7 @@ public class MapDataEditor : Editor
         // 選択タイプ
         EditorGUILayout.Space();
 
-        selectedType = (AreaController)EditorGUILayout.ObjectField("PaintArea", selectedType, typeof(AreaController), false);
+        selectedType = (AreaController)EditorGUILayout.ObjectField("PaintArea", selectedType, typeof(AreaController), true);
 
         EditorGUILayout.Space();
 
@@ -46,7 +46,6 @@ public class MapDataEditor : Editor
 
             for (int x = 0; x < map.GetWidth(); x++)
             {
-
                 // 色分け(テクスチャの方がいいかも？)
                 if (map.GetArea(new Vector2Int(x, y)) != null)  
                 {
@@ -60,15 +59,13 @@ public class MapDataEditor : Editor
                 if (GUILayout.Button("", GUILayout.Width(25), GUILayout.Height(25)))
                 {
                     map.SetArea(new Vector2Int(x, y), selectedType);
+                    map.GetArea(new Vector2Int(x, y)).SetAreaPosition(new Vector2Int(x, y));
                     EditorUtility.SetDirty(map);
                 }
             }
 
             EditorGUILayout.EndHorizontal();
         }
-
-        DebugArea(map, new Vector2Int(0, 0));
-        DebugArea(map, new Vector2Int(1, 0));
     }
 
     public void Resize(MapData map, int newWidth, int newHeight)
