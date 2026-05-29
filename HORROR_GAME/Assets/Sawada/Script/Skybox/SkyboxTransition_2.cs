@@ -4,47 +4,52 @@ using UnityEngine;
 public class SkyboxTransition_2 : MonoBehaviour
 {
     [Header("Panorama Textures")]
-    [SerializeField] private Texture m_panoramaA;
-    [SerializeField] private Texture panoramaB;
+    [SerializeField] private Texture m_currentTexture;
+    [SerializeField] private Texture m_nextTexture;
 
     [Header("Blend Settings")]
     [Range(0f, 1f)]
-    [SerializeField] private float blend = 0f;
+    [SerializeField] private float m_blend = 0f;
 
     [Range(0f, 8f)]
-    [SerializeField] private float exposure = 1f;
+    [SerializeField] private float m_exposure = 1f;
+
+    private bool m_updateSkyBoxFlag;
+    [Range(0f, 1f)]
+    [SerializeField] private float m_transitionSpeed;
 
     [Header("Move Effect")]
-    Camera m_targetCamera;
 
     [Range(0f, 0.2f)]
-    [SerializeField] private float moveStrength = 0.05f;
+    [SerializeField] private float m_moveStrength = 0.05f;
 
     [Range(0f, 0.5f)]
-    [SerializeField] private float zoomStrength = 0.15f;
+    [SerializeField] private float m_zoomStrength = 0.15f;
     
     [Range(0f, 0.5f)]
-    [SerializeField] private float tex2StartZoomOut = 0.12f;
+    [SerializeField] private float m_tex2StartZoomOut = 0.12f;
 
     [Header("Target")]
-    [SerializeField] private Material targetSkyboxMaterial;
+    [SerializeField] private Material m_targetSkyboxMaterial;
     [SerializeField] private bool m_applyToSceneSkyboxFlag = true;
+    private Camera m_targetCamera;
+
 
     private static readonly int m_tex1Id = Shader.PropertyToID("_Tex1");
-    private static readonly int Tex2ID = Shader.PropertyToID("_Tex2");
-    private static readonly int BlendID = Shader.PropertyToID("_Blend");
-    private static readonly int ExposureID = Shader.PropertyToID("_Exposure");
+    private static readonly int m_tex2ID = Shader.PropertyToID("_Tex2");
+    private static readonly int m_blendID = Shader.PropertyToID("_Blend");
+    private static readonly int m_exposureID = Shader.PropertyToID("_Exposure");
 
-    private static readonly int MoveStrengthID = Shader.PropertyToID("_MoveStrength");
-    private static readonly int ZoomStrengthID = Shader.PropertyToID("_ZoomStrength");
-    private static readonly int Tex2StartZoomOutID = Shader.PropertyToID("_Tex2StartZoomOut");
+    private static readonly int m_moveStrengthID = Shader.PropertyToID("_MoveStrength");
+    private static readonly int m_zoomStrengthID = Shader.PropertyToID("_ZoomStrength");
+    private static readonly int m_tex2StartZoomOutID = Shader.PropertyToID("_Tex2StartZoomOut");
 
-    private static readonly int FocusUID = Shader.PropertyToID("_FocusU");
-    private static readonly int FocusVID = Shader.PropertyToID("_FocusV");
+    private static readonly int m_focusUID = Shader.PropertyToID("_FocusU");
+    private static readonly int m_focusVID = Shader.PropertyToID("_FocusV");
 
-    private static readonly int SeamUID = Shader.PropertyToID("_SeamU");
-    private static readonly int ViewCenterUID = Shader.PropertyToID("_ViewCenterU");
-    private static readonly int ViewCenterVID = Shader.PropertyToID("_ViewCenterV");
+    private static readonly int m_seamUID = Shader.PropertyToID("_SeamU");
+    private static readonly int m_viewCenterUID = Shader.PropertyToID("_ViewCenterU");
+    private static readonly int m_viewCenterVID = Shader.PropertyToID("_ViewCenterV");
 
     private void OnValidate()
     {
@@ -54,36 +59,60 @@ public class SkyboxTransition_2 : MonoBehaviour
     private void Start()
     {
         m_targetCamera = Camera.main;
+
+        m_updateSkyBoxFlag = false;
     }
     private void Update()
     {
-        //Apply();
+        if (m_updateSkyBoxFlag)
+        {
+            // blend値更新
+            m_blend += m_transitionSpeed;
+            if (1.0f < m_blend)
+            {
+                m_currentTexture = m_nextTexture;
+                m_nextTexture = null;
+                m_blend = 0.0f;
+                m_updateSkyBoxFlag = false;
+            }
+
+            // 反映
+            ApplySkyboxTransition();
+        }
+    }
+
+    public void SetNextTexture(Texture next)
+    {
+        if (m_currentTexture != null) m_nextTexture = next;
+        else m_nextTexture = m_currentTexture;
+        m_updateSkyBoxFlag = true;
+        ApplySkyboxTransition();
     }
 
     private void ApplySkyboxTransition()
     {
-        if (targetSkyboxMaterial == null)
+        if (m_targetSkyboxMaterial == null)
             return;
 
         if (m_targetCamera == null)
             m_targetCamera = Camera.main;
 
-        targetSkyboxMaterial.SetTexture(m_tex1Id, m_panoramaA);
-        targetSkyboxMaterial.SetTexture(Tex2ID, panoramaB);
+        m_targetSkyboxMaterial.SetTexture(m_tex1Id, m_currentTexture);
+        m_targetSkyboxMaterial.SetTexture(m_tex2ID, m_nextTexture);
 
-        targetSkyboxMaterial.SetFloat(BlendID, blend);
-        targetSkyboxMaterial.SetFloat(ExposureID, exposure);
+        m_targetSkyboxMaterial.SetFloat(m_blendID, m_blend);
+        m_targetSkyboxMaterial.SetFloat(m_exposureID, m_exposure);
 
-        targetSkyboxMaterial.SetFloat(MoveStrengthID, moveStrength);
-        targetSkyboxMaterial.SetFloat(ZoomStrengthID, zoomStrength);
-        targetSkyboxMaterial.SetFloat(Tex2StartZoomOutID, tex2StartZoomOut);
+        m_targetSkyboxMaterial.SetFloat(m_moveStrengthID, m_moveStrength);
+        m_targetSkyboxMaterial.SetFloat(m_zoomStrengthID, m_zoomStrength);
+        m_targetSkyboxMaterial.SetFloat(m_tex2StartZoomOutID, m_tex2StartZoomOut);
 
         //SetSeamAndViewCenterFromCamera();
         SetMoveDirectionFromCamera();
 
         if (m_applyToSceneSkyboxFlag)
         {
-            RenderSettings.skybox = targetSkyboxMaterial;
+            RenderSettings.skybox = m_targetSkyboxMaterial;
             DynamicGI.UpdateEnvironment();
         }
     }
@@ -102,8 +131,8 @@ public class SkyboxTransition_2 : MonoBehaviour
         float u = longitude / (2f * Mathf.PI) + 0.5f;
         float v = latitude / Mathf.PI + 0.5f;
 
-        targetSkyboxMaterial.SetFloat(FocusUID, u);
-        targetSkyboxMaterial.SetFloat(FocusVID, v);
+        m_targetSkyboxMaterial.SetFloat(m_focusUID, u);
+        m_targetSkyboxMaterial.SetFloat(m_focusVID, v);
 
         // 既存の移動方向も一応残す
         Vector2 move = new Vector2(forward.x, forward.y);
@@ -115,7 +144,7 @@ public class SkyboxTransition_2 : MonoBehaviour
     // skyboxの向きを変更
     private void SetSeamAndViewCenterFromCamera()
     {
-        if (m_targetCamera == null || targetSkyboxMaterial == null)
+        if (m_targetCamera == null || m_targetSkyboxMaterial == null)
             return;
 
         // -----------------------------
@@ -134,7 +163,7 @@ public class SkyboxTransition_2 : MonoBehaviour
 
         // forward の反対側 = seam
         float seamU = Mathf.Repeat(forwardUFlat + 0.5f, 1f);
-        targetSkyboxMaterial.SetFloat(SeamUID, seamU);
+        m_targetSkyboxMaterial.SetFloat(m_seamUID, seamU);
 
         // -----------------------------
         // 現在見えている景色を変えないため、
@@ -146,7 +175,7 @@ public class SkyboxTransition_2 : MonoBehaviour
         float viewCenterU = Mathf.Atan2(fullForward.x, fullForward.z) / (2f * Mathf.PI) + 0.5f;
         float viewCenterV = Mathf.Asin(Mathf.Clamp(fullForward.y, -1f, 1f)) / Mathf.PI + 0.5f;
 
-        targetSkyboxMaterial.SetFloat(ViewCenterUID, viewCenterU);
-        targetSkyboxMaterial.SetFloat(ViewCenterVID, viewCenterV);
+        m_targetSkyboxMaterial.SetFloat(m_viewCenterUID, viewCenterU);
+        m_targetSkyboxMaterial.SetFloat(m_viewCenterVID, viewCenterV);
     }
 }

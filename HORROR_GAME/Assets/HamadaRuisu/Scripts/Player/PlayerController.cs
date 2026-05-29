@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] AreaManager m_AreaManager;
     [SerializeField] Material m_skyBoxMaterial;
-    //[SerializeField] SkyboxTransition_2 m_transition;
+    [SerializeField] SkyboxTransition_2 m_transition;
 
     [Header("ÉJÉÅÉâé¸ÇËÇÃê›íË")]
     [SerializeField] Camera m_camera;
@@ -133,6 +133,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log(currentAreaTexture);
         Debug.Log(nextAreaTexture);
 
+        m_transition.SetNextTexture(nextAreaTexture);
+
         //yield return StartCoroutine(m_transition.BlendRoutine(currentAreaTexture, nextAreaTexture));
 
         //m_transition.SetBlendingTextures(currentAreaTexture, nextAreaTexture);
@@ -154,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
         //m_currentAreaIndex = moveIndex;
 
-       // m_transition.SetBlend(0);
+        // m_transition.SetBlend(0);
 
     }
 

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: e91ff43fba98cf646a0cfefbca65215c, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7c271fe763c81f54ca4c63711e7c7191, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -902,6 +902,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3244082309394504539, guid: 02f891e93651f0b45a37956af01eb7b6, type: 3}
   m_PrefabInstance: {fileID: 6229433150654911838}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1710672484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1710672486}
+  - component: {fileID: 1710672485}
+  m_Layer: 0
+  m_Name: SkyBoxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1710672485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710672484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c5530d48cd24d43b45087d229ff5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkyboxTransition_2
+  m_currentTexture: {fileID: 2800000, guid: 796d1cf6afc56714fa66d31a37af74dc, type: 3}
+  m_nextTexture: {fileID: 2800000, guid: 9a297ccebe07cd74b9f8c4ed3bfaeaeb, type: 3}
+  m_blend: 0
+  m_exposure: 1
+  m_transitionSpeed: 0.1
+  m_moveStrength: 0.05
+  m_zoomStrength: 0.15
+  m_tex2StartZoomOut: 0.12
+  m_targetSkyboxMaterial: {fileID: 2100000, guid: 7c271fe763c81f54ca4c63711e7c7191, type: 2}
+  m_applyToSceneSkyboxFlag: 1
+--- !u!4 &1710672486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710672484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2074026101
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +1045,10 @@ PrefabInstance:
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 1356138179}
+    - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
+      propertyPath: m_transition
+      value: 
+      objectReference: {fileID: 1710672485}
     - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_AreaManager
       value: 
@@ -1165,6 +1223,7 @@ SceneRoots:
   - {fileID: 1194047418}
   - {fileID: 2074026102}
   - {fileID: 1553392035}
+  - {fileID: 1710672486}
   - {fileID: 14212912688128893}
   - {fileID: 1536823205}
   - {fileID: 206296784}
