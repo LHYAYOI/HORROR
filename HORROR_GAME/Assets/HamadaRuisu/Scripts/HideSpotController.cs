@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class HideSpotController : MonoBehaviour,IIntaractable
 {
-
     Animator m_animator;
     PlayerController m_player;
 

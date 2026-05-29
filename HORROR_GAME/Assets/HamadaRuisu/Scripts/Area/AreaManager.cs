@@ -19,9 +19,6 @@ public class AreaManager : MonoBehaviour
                     continue;
                 }
 
-                Debug.Log(area.GetAreaPosition());
-                Debug.Log(m_PlayerController.GetCurrentIndex());
-
                 if (area.GetAreaPosition() != m_PlayerController.GetCurrentIndex()) 
                 {
                     

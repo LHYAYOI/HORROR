@@ -2,6 +2,8 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
@@ -20,9 +22,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
+    [SerializeField] StateMachine m_StateMachine;
+    [SerializeField] Animator m_hideAnimator;
     [SerializeField] AreaManager m_AreaManager;
     [SerializeField] Material m_skyBoxMaterial;
-    //[SerializeField] SkyboxTransition_2 m_transition;
+    [SerializeField] SkyboxTransition_2 m_transition;
 
     [Header("ÉJÉÅÉâé¸ÇËÇÃê›íË")]
     [SerializeField] Camera m_camera;
@@ -58,9 +62,21 @@ public class PlayerController : MonoBehaviour
 
         RotateCameraInputHandler();
 
+        if (m_playerState == PLAYER_STATE.HIDE)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("oooooooo");
+                m_hideAnimator.SetTrigger("StartFade");
+                ChangePlayerState(PLAYER_STATE.NORMAL);
+            }
+        }
+
         InteractionHandler();
 
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
+
+        Debug.Log(m_playerState);
     }
 
     public bool InteractedWithKai() 
@@ -89,6 +105,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public StateMachine GetStateMachine() 
+    {
+        return m_StateMachine;
     }
 
     public Vector2Int GetCurrentIndex()
@@ -190,29 +211,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(currentAreaTexture);
         Debug.Log(nextAreaTexture);
 
-        //yield return StartCoroutine(m_transition.BlendRoutine(currentAreaTexture, nextAreaTexture));
-
-        //m_transition.SetBlendingTextures(currentAreaTexture, nextAreaTexture);
-
-        //float elapsedTime = 0.0f;
-
-        //while (elapsedTime < 0.5f) 
-        //{
-        //    elapsedTime += Time.deltaTime;
-
-        //    float rate = elapsedTime / 0.5f;
-
-        //    Mathf.Clamp01(rate);
-
-        //    m_transition.SetBlend(rate);
-
-        //    yield return null;
-        //}
-
-        //m_currentAreaIndex = moveIndex;
-
-        // m_transition.SetBlend(0);
-
+        //m_transition.SetNextTexture(nextAreaTexture);
     }
 
     private void RotateCameraInputHandler()
