@@ -1,4 +1,5 @@
 using UnityEngine;
+using static PlayerController;
 
 [CreateAssetMenu(fileName = "newHideState", menuName = "States/PlayerStates/HideState")]
 public class HideState:StateBase
@@ -22,7 +23,11 @@ public class HideState:StateBase
 
     public override void UpdateState()
     {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            m_controller.GetHideAnimator().SetTrigger("StartFade");
+            m_controller.GetStateMachine().ChangeState("NormalState");
+        }
     }
 
     public override void ExitState()
