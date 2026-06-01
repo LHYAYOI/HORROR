@@ -41,7 +41,9 @@ public class PlayerController : MonoBehaviour
     CAMERA_ON_OFF_ATATE m_cameraOnOffState = CAMERA_ON_OFF_ATATE.OFF;
     PLAYER_STATE m_playerState = PLAYER_STATE.NORMAL;
 
+    bool m_isRotatingCamera = false;
     bool m_interactedKai = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -210,12 +212,12 @@ public class PlayerController : MonoBehaviour
 
     public void RotateCameraInputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !m_isRotatingCamera)
         {
             StartCoroutine(RotateCameraRoutine(new Vector3(0, 90, 0)));
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && !m_isRotatingCamera)
         {
             StartCoroutine(RotateCameraRoutine(new Vector3(0, -90, 0)));
         }
@@ -223,6 +225,8 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator RotateCameraRoutine(Vector3 rotationValue)
     {
+        m_isRotatingCamera = true;
+
         float elapsedTime = 0f;
 
         Quaternion startRotation = m_camera.transform.rotation;
@@ -233,9 +237,13 @@ public class PlayerController : MonoBehaviour
 
             float rate = Easing.InOutCubic(elapsedTime / m_rotationDuration);
 
+            rate = Mathf.Clamp01(rate);
+
             m_camera.transform.rotation = startRotation * Quaternion.Euler(rotationValue.x * rate, rotationValue.y * rate, rotationValue.z * rate);
 
             yield return null;
         }
+
+        m_isRotatingCamera = false;
     }
 }
