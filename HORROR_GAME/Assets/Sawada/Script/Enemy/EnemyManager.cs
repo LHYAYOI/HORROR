@@ -6,47 +6,68 @@ using static UnityEditor.PlayerSettings;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] GameObject m_EnemyPrefab;
-    [SerializeField] List<DefaultEnemy> m_SpownEnemyList;
-    List<GameObject> m_spownEnemyList = new();
-
-    AreaManager m_areaManager;
+    [Header("Player")]
     [SerializeField] PlayerController m_playerController;
+    [SerializeField] StateMachine m_playerState;
+    Vector2Int m_lastPlayerPosition;
 
-    void Start()
-    {
-        foreach (var enemy in m_SpownEnemyList)
-        {
-            GameObject instantEnemy = Instantiate(m_EnemyPrefab);
-            instantEnemy.GetComponent<EnemyObject>().Init(enemy);
-            m_spownEnemyList.Add(instantEnemy);
-        }
+    [Header("Enemy")]
+    [SerializeField] GameObject m_enemyPrefab;
+    [SerializeField] GameObject m_enemyParent;
+    [SerializeField] List<DefaultEnemy> m_spawnEnemyList;
+    [SerializeField] List<GameObject> m_spawnedEnemyList = new();
 
-        m_areaManager = FindFirstObjectByType<AreaManager>();
-    }
+    [Header("Area")]
+    [SerializeField] AreaManager m_areaManager;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        // kaiに触れてたら
+        if (m_playerController.InteractedWithKai())
         {
-            MoveTarget(m_playerController.GetCurrentIndex());
+            /*
+             * PlayerControllerのInteractionHandler()のif (interactedObject.tag == "Kai")の中に追加
+             * if (!m_interactedKai) m_nemyManager.FarstEncount();
+             */
+            if (Input.GetKeyDown(KeyCode.R) && m_spawnedEnemyList.Count == 0) FarstEncount();     // 削除
         }
+
+        // 進む
+        /*
+         * PlayerControllerのMoveArea()の中に追加
+         * m_nemyManager.AutoMove();
+         */
+        if (Input.GetKeyDown(KeyCode.E)) AutoMove();                               // 削除
     }
 
     // Targetが移動したらEnemysも移動処理
     public void MoveTarget(Vector2Int target)
     {
-        foreach (var enemy in m_spownEnemyList)
+        // 自動
+        foreach (GameObject enemy in m_spawnedEnemyList)
         {
-            enemy.GetComponent<EnemyObject>().MoveTarget(target);
+            enemy.GetComponent<EnemyObject>().AutoMove();
+        }
+    }
+    public void AutoMove()
+    {
+        // 自動
+        foreach (GameObject enemy in m_spawnedEnemyList)
+        {
+            enemy.GetComponent<EnemyObject>().AutoMove();
         }
     }
 
-    // Playerを追いかけるか？
-    private bool CanChasePlayer()
+    // 始めて怪異と触れた時
+    private void FarstEncount()
     {
-
-
-        return true;
+        // スポーン
+        foreach (DefaultEnemy enemy in m_spawnEnemyList)
+        {
+            GameObject instantEnemy = Instantiate(m_enemyPrefab);
+            instantEnemy.transform.SetParent(m_enemyParent.transform);
+            instantEnemy.GetComponent<EnemyObject>().Init(enemy);
+            m_spawnedEnemyList.Add(instantEnemy);
+        }
     }
 }

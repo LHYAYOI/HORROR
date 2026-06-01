@@ -5,19 +5,26 @@ using static DefaultEnemy;
 [CreateAssetMenu(fileName = "DefaultEnemy", menuName = "Scriptable Objects/Enemy/DefaultEnemy")]
 public class DefaultEnemy : ScriptableObject
 {
-    public int m_speed;
-    public Vector2 m_size;
-    public Sprite m_image;
-    public Vector2Int m_spawnPosition;
+    [SerializeField] int m_speed;
+    [SerializeField] Vector2 m_size;
+    [SerializeField] Sprite m_image;
+    [SerializeField] Vector2Int m_spawnPosition;
 
     [Header("索敵範囲")]
-    public float m_searchRange;
+    [SerializeField] float m_searchRange;
     public enum SearchMethod
     {
         circle = 0,
         line
     }
     public SearchMethod m_searchMethod;
+
+
+    // ゲット
+    public int GetSpeed() { return m_speed; }
+    public Vector2 GetSize() { return m_size; }
+    public Sprite GetImage() { return m_image; }
+    public Vector2Int GetSpawnPosition() { return m_spawnPosition; }
 
 
     // atargetを追いかけるか判定
