@@ -415,7 +415,7 @@ PrefabInstance:
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: m_enemyParent
       value: 
-      objectReference: {fileID: 609120566}
+      objectReference: {fileID: 337933038}
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: m_enemyPrefab
       value: 
@@ -485,6 +485,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
+--- !u!1 &337933038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 350122987937614585, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
+  m_PrefabInstance: {fileID: 337933037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &355435740
 PrefabInstance:
   m_ObjectHideFlags: 0

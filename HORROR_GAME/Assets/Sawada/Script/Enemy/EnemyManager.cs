@@ -22,22 +22,6 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        // kaiに触れてたら
-        if (m_playerController.InteractedWithKai())
-        {
-            /*
-             * PlayerControllerのInteractionHandler()のif (interactedObject.tag == "Kai")の中に追加
-             * if (!m_interactedKai) m_nemyManager.FarstEncount();
-             */
-            if (Input.GetKeyDown(KeyCode.R) && m_spawnedEnemyList.Count == 0) FarstEncount();     // 削除
-        }
-
-        // 進む
-        /*
-         * PlayerControllerのMoveArea()の中に追加
-         * m_nemyManager.AutoMove();
-         */
-        if (Input.GetKeyDown(KeyCode.E)) AutoMove();                               // 削除
     }
 
     // Targetが移動したらEnemysも移動処理
@@ -59,7 +43,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     // 始めて怪異と触れた時
-    private void FarstEncount()
+    public void FarstEncount()
     {
         // スポーン
         foreach (DefaultEnemy enemy in m_spawnEnemyList)

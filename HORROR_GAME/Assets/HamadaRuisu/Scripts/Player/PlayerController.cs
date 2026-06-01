@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] StateMachine m_StateMachine;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] AreaManager m_AreaManager;
+    [SerializeField] EnemyManager m_enemyManager;
     [SerializeField] Material m_skyBoxMaterial;
     [SerializeField] SkyboxTransition_2 m_transition;
 
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
                 if (interactedObject.tag == "Kai")
                 {
+                    if (!m_interactedKai) m_enemyManager.FarstEncount();
                     m_interactedKai = true;
                 }
             }
@@ -202,6 +204,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log(nextAreaTexture);
 
         m_transition.SetNextTexture(nextAreaTexture);
+
+        m_enemyManager.AutoMove();
     }
 
     public void RotateCameraInputHandler()
