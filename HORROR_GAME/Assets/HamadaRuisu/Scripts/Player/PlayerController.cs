@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements.Experimental;
+using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,11 +27,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] AreaManager m_AreaManager;
     [SerializeField] EnemyManager m_enemyManager;
-    [SerializeField] Material m_skyBoxMaterial;
+    [SerializeField] FullScreenPassRendererFeature m_cameraPostEffectFeature;
     [SerializeField] SkyboxTransition_2 m_transition;
 
     [Header("カメラ周りの設定")]
-    [SerializeField] Camera m_camera;
+    [SerializeField] CinemachineCamera m_camera;
     [SerializeField] float m_rotationDuration;
 
     [SerializeField] LayerMask m_layerMask;
@@ -54,6 +55,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         ChangeSate("NormalState");
+        ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
+
+        //カメラのポストエフェクトオフ
+        SetCameraPostEffectFlag(false);
+
     }
 
     // Update is called once per frame
@@ -69,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     public void InteractionHandler() 
     {
-        Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) 
@@ -121,14 +127,25 @@ public class PlayerController : MonoBehaviour
                 m_PlayerModel.DrainBattery(1);
 
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
+
+                //カメラのポストエフェクトオフ
+                SetCameraPostEffectFlag(false);
             }
 
             //カメラオン
             else if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF && m_PlayerModel.GetCurrentBatteryValue() > 0)
             {
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.ON);
+
+                //カメラのポストエフェクトオン
+                SetCameraPostEffectFlag(true);
             }
         }
+    }
+
+    private void SetCameraPostEffectFlag(bool flag) 
+    {
+        m_cameraPostEffectFeature.SetActive(flag);
     }
 
     public CAMERA_ON_OFF_ATATE GetCameraOnOffState()
@@ -196,14 +213,9 @@ public class PlayerController : MonoBehaviour
         }
 
         //テクスチャの取得
-        Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
         Texture nextAreaTexture = m_MapData.GetArea(moveIndex).GetAreaSkyBoxTexture();
 
-        m_skyBoxMaterial.mainTexture = nextAreaTexture;
         m_currentAreaIndex = moveIndex;
-
-        Debug.Log(currentAreaTexture);
-        Debug.Log(nextAreaTexture);
 
         m_transition.SetNextTexture(nextAreaTexture);
 
