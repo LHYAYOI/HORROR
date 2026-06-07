@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KaiControler : MonoBehaviour,IIntaractable
+public class KaiControler : MonoBehaviour,IPressable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,8 +14,14 @@ public class KaiControler : MonoBehaviour,IIntaractable
         
     }
 
-    public void OnInteracted()
+    public void OnPressed()
     {
-        Debug.Log("êGÇÁÇÍÇΩÇÊ");
+        Debug.Log("âüÇ≥ÇÍÇΩ");
     }
+
+    public void OnReleased()
+    {
+        Debug.Log("ó£ÇµÇΩ");
+    }
+
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class HideSpotController : MonoBehaviour,IIntaractable
+public class HideSpotController : MonoBehaviour, IPressable
 {
     Animator m_animator;
     PlayerController m_player;
@@ -14,10 +14,14 @@ public class HideSpotController : MonoBehaviour,IIntaractable
         m_animator = GameObject.Find("FadeImage").GetComponent<Animator>();
     }
 
-    public void OnInteracted() 
+    public void OnPressed()
     {
         m_player.ChangeSate("HideState");
 
         m_animator.SetTrigger("StartFade");
+    }
+
+    public void OnReleased()
+    {
     }
 }

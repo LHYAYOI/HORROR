@@ -82,17 +82,28 @@ public class PlayerController : MonoBehaviour
         {
             GameObject interactedObject = hit.collider.gameObject;
 
-            IIntaractable interactableTarget = interactedObject.GetComponent<IIntaractable>();
+            IPressable interactableTarget = interactedObject.GetComponent<IPressable>();
 
-            if (interactableTarget != null && Input.GetMouseButtonDown(0)) 
+            if (interactableTarget == null) 
             {
-                interactableTarget.OnInteracted();
+                return;
+            }
+
+            //インタラクト可能なオブジェクトを押したときの処理
+            if (Input.GetMouseButtonDown(0)) 
+            {
+                interactableTarget.OnPressed();
 
                 if (interactedObject.tag == "Kai")
                 {
                     if (!m_interactedKai) m_enemyManager.FarstEncount();
                     m_interactedKai = true;
                 }
+            }
+            //インタラクト可能なオブジェクトを離したときの処理
+            else if (Input.GetMouseButtonUp(0)) 
+            {
+                interactableTarget.OnReleased();
             }
         }
     }
@@ -170,25 +181,45 @@ public class PlayerController : MonoBehaviour
 
     public void MoveAreaInputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
-        }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
+        //}
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
+        //}
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
-        }
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
+        //}
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
+        //}
+    }
+
+    public void MoveUp() 
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
+    }
+
+    public void MoveDown()
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
+    }
+
+    public void MoveRight()
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
+    }
+
+    public void MoveLeft()
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
     }
 
     public IEnumerator MoveArea(Vector2Int moveIndex)
@@ -224,12 +255,12 @@ public class PlayerController : MonoBehaviour
 
     public void RotateCameraInputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !m_isRotatingCamera)
+        if (Input.GetKeyDown(KeyCode.D) && !m_isRotatingCamera)
         {
             StartCoroutine(RotateCameraRoutine(new Vector3(0, 90, 0)));
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && !m_isRotatingCamera)
+        if (Input.GetKeyDown(KeyCode.A) && !m_isRotatingCamera)
         {
             StartCoroutine(RotateCameraRoutine(new Vector3(0, -90, 0)));
         }
