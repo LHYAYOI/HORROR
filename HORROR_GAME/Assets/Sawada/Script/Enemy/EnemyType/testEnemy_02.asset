@@ -18,3 +18,6 @@ MonoBehaviour:
   m_spawnPosition: {x: 4, y: 4}
   m_searchRange: 2
   m_searchMethod: 0
+  m_stateList:
+  - {fileID: 11400000, guid: b73ee62218777ad439b3223bc4ddeb3d, type: 2}
+  m_noAreaData: []

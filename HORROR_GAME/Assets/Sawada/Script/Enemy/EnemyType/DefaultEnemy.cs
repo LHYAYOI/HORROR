@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.Searcher;
 using UnityEngine;
 using static DefaultEnemy;
@@ -19,12 +20,17 @@ public class DefaultEnemy : ScriptableObject
     }
     public SearchMethod m_searchMethod;
 
+    [SerializeField] List<EnemyStateBase> m_stateList;
+
+    [SerializeField] List<AreaController> m_noAreaData;
 
     // ゲット
     public int GetSpeed() { return m_speed; }
     public Vector2 GetSize() { return m_size; }
     public Sprite GetImage() { return m_image; }
     public Vector2Int GetSpawnPosition() { return m_spawnPosition; }
+    public List<EnemyStateBase> GetStateList() { return m_stateList; }
+    public List<AreaController> GetNoAreaData() { return m_noAreaData; }
 
 
     // atargetを追いかけるか判定
