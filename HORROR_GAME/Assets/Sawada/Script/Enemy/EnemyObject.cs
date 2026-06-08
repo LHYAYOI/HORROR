@@ -90,6 +90,14 @@ public class EnemyObject : MonoBehaviour
         m_currentAreaIndex.y += Math.Sign(diff.y) * move.y;
 
         transform.position = new Vector3Int(m_currentAreaIndex.x, 0, m_currentAreaIndex.y) * 10;
+
+
+
+        /*
+         * 新しい最短経路 A*
+         */
+        // 現在地の周囲のマスから、一番Goalまで近いマスを選ぶ
+
     }
 
 
