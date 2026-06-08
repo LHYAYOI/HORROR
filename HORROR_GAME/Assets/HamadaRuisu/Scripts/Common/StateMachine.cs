@@ -39,6 +39,16 @@ public class StateMachine : MonoBehaviour
         }
     }
 
+    // ステート追加   // 変更 追加
+    public void AddState(StateBase state)
+    {
+        state.SetStateMachine(this);
+        state.SetStateOwner(this.gameObject);
+        state.Awake();
+        state.Start();
+        m_stateList.Add(state);
+    }
+
     //ステート切り替え
     public void ChangeState(string stateName)
     {

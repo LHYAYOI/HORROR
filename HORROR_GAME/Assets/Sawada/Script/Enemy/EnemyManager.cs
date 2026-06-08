@@ -38,7 +38,9 @@ public class EnemyManager : MonoBehaviour
         // 自動
         foreach (GameObject enemy in m_spawnedEnemyList)
         {
-            enemy.GetComponent<EnemyObject>().AutoMove();
+            //enemy.GetComponent<EnemyObject>().AutoMove();
+            EnemyStateBase currentState = (EnemyStateBase)enemy.GetComponent<StateMachine>().GetCurrentState();
+            currentState.AutoMove();
         }
     }
 
@@ -48,9 +50,21 @@ public class EnemyManager : MonoBehaviour
         // スポーン
         foreach (DefaultEnemy enemy in m_spawnEnemyList)
         {
+            // prefabからInstantiate
             GameObject instantEnemy = Instantiate(m_enemyPrefab);
             instantEnemy.transform.SetParent(m_enemyParent.transform);
+
+            // 初期化
             instantEnemy.GetComponent<EnemyObject>().Init(enemy);
+            StateMachine stateMachine = instantEnemy.GetComponent<StateMachine>();
+            foreach (EnemyStateBase state in enemy.GetStateList())
+            {
+                state.InitEnemyState(instantEnemy);
+                stateMachine.AddState(state);
+            }
+            stateMachine.ChangeState(0);
+
+            // 追加
             m_spawnedEnemyList.Add(instantEnemy);
         }
     }

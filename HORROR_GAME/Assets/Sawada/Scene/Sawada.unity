@@ -430,7 +430,7 @@ PrefabInstance:
       objectReference: {fileID: 603362626}
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: m_spawnEnemyList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: 'm_spawnEnemyList.Array.data[0]'
@@ -713,6 +713,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6117780980979082119, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
   m_PrefabInstance: {fileID: 337933037}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1033600479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
+  m_PrefabInstance: {fileID: 337933037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337933038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea203c41086c8304b881d15399f33249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
 --- !u!1 &1160686538 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1428558864570215828, guid: 02f891e93651f0b45a37956af01eb7b6, type: 3}
@@ -1324,18 +1335,6 @@ MonoBehaviour:
   m_stateList:
   - {fileID: 11400000, guid: 67be8ec8a917baf4d9c92532d919ae2d, type: 2}
   - {fileID: 11400000, guid: d5234ac1180705344a58da4d2b29fc2b, type: 2}
---- !u!114 &1954086060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954086053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7097b1ad3937b624da8fb34ec4d75358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHide
 --- !u!114 &2074026103 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3035869119240300729, guid: ae905e7a220c2e4488da84cd22ea5beb, type: 3}
@@ -1405,6 +1404,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1954086057}
     - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
+      propertyPath: m_enemyManager
+      value: 
+      objectReference: {fileID: 1033600479}
+    - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_hideAnimator
       value: 
       objectReference: {fileID: 1166420704}
@@ -1459,9 +1462,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3398113880443019906, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1954086057}
-    - targetCorrespondingSourceObject: {fileID: 3398113880443019906, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1954086060}
   m_SourcePrefab: {fileID: 100100000, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
 --- !u!1001 &4687645325328267992
 PrefabInstance:
@@ -1518,7 +1518,7 @@ PrefabInstance:
     - target: {fileID: 3592641143922480264, guid: ae905e7a220c2e4488da84cd22ea5beb, type: 3}
       propertyPath: 'm_areaData.Array.data[0]'
       value: 
-      objectReference: {fileID: 887045729}
+      objectReference: {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
     - target: {fileID: 3592641143922480264, guid: ae905e7a220c2e4488da84cd22ea5beb, type: 3}
       propertyPath: 'm_areaData.Array.data[1]'
       value: 
@@ -1538,7 +1538,7 @@ PrefabInstance:
     - target: {fileID: 3592641143922480264, guid: ae905e7a220c2e4488da84cd22ea5beb, type: 3}
       propertyPath: 'm_areaData.Array.data[5]'
       value: 
-      objectReference: {fileID: 533057868}
+      objectReference: {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
     - target: {fileID: 3592641143922480264, guid: ae905e7a220c2e4488da84cd22ea5beb, type: 3}
       propertyPath: 'm_areaData.Array.data[9]'
       value: 
