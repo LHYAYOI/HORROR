@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements.Experimental;
 
 public enum MoveDirection
 {
@@ -13,6 +14,7 @@ public class MoveButtonController : MonoBehaviour, IPressable
 {
 
     [SerializeField] MoveDirection m_moveDirectionType;
+    [SerializeField] MoveButtonView m_moveButtonView;
     [SerializeField] PlayerController m_playerController;
     [SerializeField] float m_concludeChargeTime = 0.5f;
 
@@ -34,15 +36,35 @@ public class MoveButtonController : MonoBehaviour, IPressable
     {
         if (m_canCharge == false)
         {
-            return;
+            if (m_currentConcludeChargeTime > 0)
+            {
+                //ゲージを減衰
+                m_currentConcludeChargeTime -= Time.deltaTime;
+
+                float rate = m_currentConcludeChargeTime / m_concludeChargeTime;
+
+                rate = Mathf.Clamp01(rate);
+
+                m_moveButtonView.UpdateGauge(Easing.OutCubic(rate));
+            }
         }
-
-        m_currentConcludeChargeTime += Time.deltaTime;
-
-        if (m_currentConcludeChargeTime >= m_concludeChargeTime)
+        else
         {
-            MakePlayerMove();
-            ResetValues();
+            m_currentConcludeChargeTime += Time.deltaTime;
+
+            // ゲージを減衰を増幅
+            float rate = m_currentConcludeChargeTime / m_concludeChargeTime;
+
+            rate = Mathf.Clamp01(rate);
+
+            m_moveButtonView.UpdateGauge(Easing.OutCubic(rate));
+
+            // 移動の実行
+            if (m_currentConcludeChargeTime >= m_concludeChargeTime)
+            {
+                MakePlayerMove();
+                ResetValues();
+            }
         }
     }
 
@@ -71,7 +93,7 @@ public class MoveButtonController : MonoBehaviour, IPressable
     private void ResetValues()
     {
         m_canCharge = false;
-        m_currentConcludeChargeTime = 0.0f;
+        m_moveButtonView.UpdateGauge(0);
     }
 
     public void OnPressed()

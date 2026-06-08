@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
+    [SerializeField] Texture2D m_defaultCursorTex;
+    [SerializeField] Texture2D m_interactionCursorTex;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] AreaManager m_AreaManager;
     [SerializeField] EnemyManager m_enemyManager;
@@ -89,6 +91,9 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            //カーソルの変更
+            Cursor.SetCursor(m_interactionCursorTex, Vector2.zero, CursorMode.Auto);
+
             //インタラクト可能なオブジェクトを押したときの処理
             if (Input.GetMouseButtonDown(0)) 
             {
@@ -105,6 +110,11 @@ public class PlayerController : MonoBehaviour
             {
                 interactableTarget.OnReleased();
             }
+        }
+        else
+        {
+            //カーソルの変更
+             Cursor.SetCursor(m_defaultCursorTex, Vector2.zero, CursorMode.Auto);
         }
     }
 

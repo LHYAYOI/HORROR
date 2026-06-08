@@ -123,13 +123,22 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Fullscreen_DepthWrite: 0
+    - _Fullscreen_AlphaBlendOperation: 0
+    - _Fullscreen_BlendMode: 1
+    - _Fullscreen_ColorBlendOperation: 0
+    - _Fullscreen_DepthWrite: 1
+    - _Fullscreen_DstAlphaBlend: 10
+    - _Fullscreen_DstColorBlend: 10
+    - _Fullscreen_SrcAlphaBlend: 1
+    - _Fullscreen_SrcColorBlend: 5
     - _GlitchDisplay: 1
     - _GlitchStrength: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _HSV: 0
+    - _MaskIntensity: 0
+    - _MaskPower: 0
     - _Metallic: 0
     - _NoiseAmount: 0
     - _NoiseScale: 0
@@ -145,6 +154,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _VignetteIntensity: 0
+    - _VignettePower: 1
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
@@ -152,6 +163,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MaskPower: {r: 1, g: 0.5, b: 0, a: 0}
+    - _ScanLineAmount: {r: 1, g: 600, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Test_Color: {r: 1, g: 0.3809318, b: 0.3226415, a: 1}
   m_BuildTextureStacks: []

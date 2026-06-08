@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7062695727188928488}
   - component: {fileID: 6346061657805310696}
   - component: {fileID: 804131447548711776}
+  - component: {fileID: 6119072971538894324}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -48,9 +49,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   m_PlayerModel: {fileID: 6346061657805310696}
   m_PlayerView: {fileID: 804131447548711776}
+  m_StateMachine: {fileID: 6119072971538894324}
+  m_hideAnimator: {fileID: 0}
   m_AreaManager: {fileID: 0}
+  m_enemyManager: {fileID: 0}
+  m_cameraPostEffectFeature: {fileID: 7810560219541223584, guid: f288ae1f4751b564a96ac7587541f7a2, type: 2}
+  m_transition: {fileID: 0}
   m_camera: {fileID: 0}
   m_rotationDuration: 0.3
+  m_layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_startPosition: {x: 0, y: 0}
 --- !u!114 &6346061657805310696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,3 +93,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &6119072971538894324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3398113880443019906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91dd0ed3915a5c448358da048649cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateMachine
+  m_stateList:
+  - {fileID: 11400000, guid: 67be8ec8a917baf4d9c92532d919ae2d, type: 2}
+  - {fileID: 11400000, guid: d5234ac1180705344a58da4d2b29fc2b, type: 2}
