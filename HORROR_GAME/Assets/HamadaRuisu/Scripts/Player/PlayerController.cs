@@ -170,6 +170,11 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y)));
+        }
     }
 
     public IEnumerator MoveArea(Vector2Int moveIndex)
@@ -199,9 +204,6 @@ public class PlayerController : MonoBehaviour
 
         m_skyBoxMaterial.mainTexture = nextAreaTexture;
         m_currentAreaIndex = moveIndex;
-
-        Debug.Log(currentAreaTexture);
-        Debug.Log(nextAreaTexture);
 
         m_transition.SetNextTexture(nextAreaTexture);
 

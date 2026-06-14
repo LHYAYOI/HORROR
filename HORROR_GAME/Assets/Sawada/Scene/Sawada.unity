@@ -435,7 +435,7 @@ PrefabInstance:
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: 'm_spawnEnemyList.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: c38edc89af3ec224a89ef608985d042a, type: 2}
+      objectReference: {fileID: 11400000, guid: 4915aa07c64d0cb4e8e94badce5f02cc, type: 2}
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: 'm_spawnEnemyList.Array.data[1]'
       value: 
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bffd880a8f453c45b63e1df60c4cc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::testInspexViw
-  m_settingType: 1
+  m_settingType: 0
   m_aValue: 2
   m_aSpeed: 3
   m_bValue: 1

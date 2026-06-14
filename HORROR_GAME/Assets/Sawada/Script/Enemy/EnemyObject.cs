@@ -19,19 +19,70 @@ public class EnemyObject : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3Int(m_currentAreaIndex.x, 0, m_currentAreaIndex.y) * 10;
-        m_areaManager = FindFirstObjectByType<AreaManager>();
-        m_playerState = GameObject.Find("Player").GetComponent<StateMachine>();
-        m_playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     public void Init(DefaultEnemy date)
     {
+        m_playerState = GameObject.Find("Player").GetComponent<StateMachine>();
+        m_playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        m_areaManager = FindFirstObjectByType<AreaManager>();
+
         m_defaultEnemy = date;
         name = date.name;
-        GetComponent<BoxCollider>().size = new(date.GetSize().x, date.GetSize().y, 1);
-        transform.Find("Visual").GetComponent<SpriteRenderer>().sprite = date.GetImage();
         m_currentAreaIndex = date.GetSpawnPosition();
+
+        SetPositionFromPlayer();
+
+        transform.Find("Visual").GetComponent<SpriteRenderer>().sprite = date.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Sprite;
+    }
+
+    Vector3 GetAdjustmentFromPlayer()
+    {
+        Vector3 difference = transform.position - m_playerController.gameObject.transform.position;
+        difference.y = 0f;
+
+        if (difference.sqrMagnitude <= Mathf.Epsilon)
+        {
+            return Vector3.zero;
+        }
+
+        Vector3 forward;
+
+        if (Mathf.Abs(difference.x) > Mathf.Abs(difference.z))
+        {
+            forward = difference.x > 0f
+                ? Vector3.right
+                : Vector3.left;
+        }
+        else
+        {
+            forward = difference.z > 0f
+                ? Vector3.forward
+                : Vector3.back;
+        }
+
+        Vector3 right = new Vector3(
+            forward.z,
+            0f,
+            -forward.x
+        );
+
+        return right * m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Adjustment.x
+             + forward * m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Adjustment.y;
+    }
+    // Playerから見た出現場所
+    private void SetPositionFromPlayer()
+    {
+        Vector2Int distance = new(Mathf.Abs(m_playerController.GetCurrentIndex().x - m_currentAreaIndex.x), Mathf.Abs(m_playerController.GetCurrentIndex().y - m_currentAreaIndex.y));
+
+        // 位置
+        transform.position = new Vector3Int(distance.x, 0, distance.y) * 10;
+        transform.position += GetAdjustmentFromPlayer();
+        // 回転
+        Vector3 direction = m_playerController.gameObject.transform.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(direction);
+        // 大きさ
+        GetComponent<BoxCollider>().size = new(m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Size.x, m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Size.y, 1);
     }
 
     public void MoveEnemy(Vector2Int target)
@@ -60,7 +111,7 @@ public class EnemyObject : MonoBehaviour
         // y方向に近づく
         m_currentAreaIndex.y += Math.Sign(diff.y) * move.y;
 
-        transform.position = new Vector3Int(m_currentAreaIndex.x, 0, m_currentAreaIndex.y) * 10;
+        SetPositionFromPlayer();
     }
 
     public void MoveEnemy_02()
@@ -73,11 +124,20 @@ public class EnemyObject : MonoBehaviour
             Vector2Int diff_ = diff - move;
             if (diff_ == new Vector2Int(0, 0))
             {
-                m_checkHidePositionFlag = true;
-                // 当たってるのか
-                if (m_playerState.GetCurrentState().name != "HideState")
-                    Debug.Log("hit : " + name);
-                break;
+                // m_targetPositionは現在のPlayerの位置なのか
+                if (m_playerController.GetCurrentIndex() == m_targetPosition)
+                {
+                    m_checkHidePositionFlag = true;
+                    // 当たってるのか
+                    if (m_playerState.GetCurrentState().name != "HideState")
+                        Debug.Log("hit : " + name);
+                    break;
+                }
+                else
+                {
+                    // 更新
+                    NextPositionDecide();
+                }
             }
 
             move += Mathf.Abs(diff_.y) <= Mathf.Abs(diff_.x) ? new Vector2Int(1, 0) : new Vector2Int(0, 1);
@@ -89,9 +149,10 @@ public class EnemyObject : MonoBehaviour
         // y方向に近づく
         m_currentAreaIndex.y += Math.Sign(diff.y) * move.y;
 
-        transform.position = new Vector3Int(m_currentAreaIndex.x, 0, m_currentAreaIndex.y) * 10;
+        SetPositionFromPlayer();
 
 
+        transform.Find("Visual").GetComponent<SpriteRenderer>().sprite = m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Sprite;
 
         /*
          * 新しい最短経路 A*

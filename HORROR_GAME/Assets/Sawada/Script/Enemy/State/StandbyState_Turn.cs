@@ -54,4 +54,9 @@ public class StandbyState_Turn : EnemyStateBase
             m_enemyObject.GetComponent<StateMachine>().ChangeState("WanderState");
         }
     }
+
+    public override void QuickMove()
+    {
+
+    }
 }

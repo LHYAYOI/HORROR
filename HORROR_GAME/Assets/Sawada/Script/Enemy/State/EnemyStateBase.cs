@@ -6,4 +6,6 @@ public class EnemyStateBase : StateBase
     public virtual void InitEnemyState(GameObject enemyObject) { }
 
     public virtual void AutoMove() { }
+
+    public virtual void QuickMove() { }
 }

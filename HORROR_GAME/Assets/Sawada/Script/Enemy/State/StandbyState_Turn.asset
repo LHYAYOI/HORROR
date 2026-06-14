@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597467fac84b62b4f966c6c33d368e97, type: 3}
   m_Name: StandbyState_Turn
   m_EditorClassIdentifier: Assembly-CSharp::StandbyState_Turn
-  m_turn: 2
+  m_turn: 1

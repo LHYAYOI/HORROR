@@ -22,5 +22,6 @@ public class EnemyController : MonoBehaviour
         {
             m_enemyView.Hide();
         }
+        m_enemyView.Show();
     }
 }
