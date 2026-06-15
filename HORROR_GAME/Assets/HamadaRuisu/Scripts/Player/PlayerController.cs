@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] EnemyManager m_enemyManager;
     [SerializeField] Material m_skyBoxMaterial;
     [SerializeField] SkyboxTransition_2 m_transition;
+    [SerializeField] FullScreenPassRendererFeature m_cameraPostEffectFeature;
 
     [Header("ƒJƒƒ‰Žü‚è‚ÌÝ’è")]
     [SerializeField] CinemachineCamera m_camera;
@@ -174,12 +175,16 @@ public class PlayerController : MonoBehaviour
                 m_PlayerModel.DrainBattery(1);
 
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
+
+                SetCameraPostEffectFlag(false);
             }
 
             //ƒJƒƒ‰ƒIƒ“
             else if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF && m_PlayerModel.GetCurrentBatteryValue() > 0)
             {
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.ON);
+
+                SetCameraPostEffectFlag(true);
             }
         }
     }
@@ -192,6 +197,11 @@ public class PlayerController : MonoBehaviour
     public PLAYER_STATE GetPlayerState()
     {
         return m_playerState;
+    }
+
+    private void SetCameraPostEffectFlag(bool flag)
+    {
+        m_cameraPostEffectFeature.SetActive(flag);
     }
 
     public void ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE state)
