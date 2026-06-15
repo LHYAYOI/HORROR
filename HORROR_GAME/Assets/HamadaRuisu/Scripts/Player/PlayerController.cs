@@ -201,6 +201,8 @@ public class PlayerController : MonoBehaviour
 
     private void SetCameraPostEffectFlag(bool flag)
     {
+
+
         m_cameraPostEffectFeature.SetActive(flag);
     }
 
