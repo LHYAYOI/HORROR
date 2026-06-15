@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaManager
   m_MapData: {fileID: 3592641143922480264}
+  m_PlayerController: {fileID: 0}
 --- !u!114 &3592641143922480264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,17 +68,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
+  - {fileID: 0}
+  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
+  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
+  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
   - {fileID: 0}

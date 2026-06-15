@@ -43,7 +43,6 @@ public class WanderState : EnemyStateBase
     public override void AutoMove()
     {
         // 移動
-        Debug.Log("動くよ");
         m_enemyObject.GetComponent<EnemyObject>().MoveEnemy_02();
     }
 }
