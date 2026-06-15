@@ -140,7 +140,7 @@ Material:
     - _MaskIntensity: 0
     - _MaskPower: 0
     - _Metallic: 0
-    - _NoiseAmount: 0
+    - _NoiseAmount: 0.64
     - _NoiseScale: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
