@@ -24,13 +24,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
+    [SerializeField] Texture2D m_defaultCursorTex;
+    [SerializeField] Texture2D m_interactionCursorTex;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] AreaManager m_AreaManager;
     [SerializeField] EnemyManager m_enemyManager;
-    [SerializeField] Material m_skyBoxMaterial;
     [SerializeField] SkyboxTransition_2 m_transition;
     [SerializeField] FullScreenPassRendererFeature m_cameraPostEffectFeature;
-
+    [SerializeField] Animator m_gameOverAnimation;
+ 
     [Header("カメラ周りの設定")]
     [SerializeField] CinemachineCamera m_camera;
     [SerializeField] float m_rotationDuration;
@@ -45,6 +47,11 @@ public class PlayerController : MonoBehaviour
 
     bool m_interactedKai = false;
 
+    bool m_isDead = false;
+
+    float m_currentFindRate = 1.0f;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -54,6 +61,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         ChangeSate("NormalState");
+        ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
+        SetCameraPostEffectFlag(false);
     }
 
     // Update is called once per frame
@@ -61,6 +70,11 @@ public class PlayerController : MonoBehaviour
     {
         MoveRayHandler();
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
+
+        if (Input.GetKeyDown(KeyCode.P)) 
+        {
+            KillPlayer();
+        }
     }
 
     public bool InteractedWithKai()
@@ -75,11 +89,22 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity,m_layerMask))
         {
+            Debug.DrawRay(ray.origin, (hit.point - ray.origin) * 1000, Color.red);
+
             GameObject interactedObject = hit.collider.gameObject;
 
             IPressable interactableTarget = interactedObject.GetComponent<IPressable>();
 
-            if (interactableTarget != null && Input.GetMouseButtonDown(0))
+            if (interactableTarget == null) 
+            {
+                return;
+            }
+
+            Vector2 hotSpot = new Vector2(m_interactionCursorTex.width / 2.0f, m_interactionCursorTex.height / 2.0f);
+
+            Cursor.SetCursor(m_interactionCursorTex, hotSpot, CursorMode.Auto);
+
+            if (Input.GetMouseButtonDown(0))
             {
                 interactableTarget.OnPressed();
 
@@ -94,6 +119,12 @@ public class PlayerController : MonoBehaviour
                     interactableTarget.OnReleased();
                 }
             }
+        }
+        else
+        {
+            //カーソルを元に戻す
+            Vector2 hotSpot = new Vector2(m_defaultCursorTex.width / 2.0f, m_defaultCursorTex.height / 2.0f);
+            Cursor.SetCursor(m_defaultCursorTex, hotSpot, CursorMode.Auto);
         }
     }
 
@@ -126,22 +157,41 @@ public class PlayerController : MonoBehaviour
 
     public void MoveUp()
     {
+        if (m_isDead) 
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
     }
 
-
     public void MoveDown()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
     }
 
     public void MoveRight()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
     }
 
     public void MoveLeft()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
     }
 
@@ -158,11 +208,6 @@ public class PlayerController : MonoBehaviour
     public Vector2Int GetCurrentIndex()
     {
         return m_currentAreaIndex;
-    }
-
-    public Animator GetHideAnimator()
-    {
-        return m_hideAnimator;
     }
 
     public void CameraInputHandler()
@@ -199,9 +244,29 @@ public class PlayerController : MonoBehaviour
         return m_playerState;
     }
 
+    public Animator GetHideAnimator() 
+    {
+        return m_hideAnimator;
+    }
+
+    public void SetFindRate(float rate)
+    {
+        m_currentFindRate = rate;
+    }
+
+    public float GetFindRate()
+    {
+        return m_currentFindRate;
+    }
+
+    public bool IsDead() 
+    {
+        return m_isDead;
+    }
+
     private void SetCameraPostEffectFlag(bool flag)
     {
-
+        //スキャンライン値を上げる
 
         m_cameraPostEffectFeature.SetActive(flag);
     }
@@ -246,10 +311,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //テクスチャの取得
-        Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
         Texture nextAreaTexture = m_MapData.GetArea(moveIndex).GetAreaSkyBoxTexture();
 
-        m_skyBoxMaterial.mainTexture = nextAreaTexture;
         m_currentAreaIndex = moveIndex;
 
         m_transition.SetNextTexture(nextAreaTexture);
@@ -286,5 +349,20 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void KillPlayer() 
+    {
+        PlayerDeathRoutine();
+    }
+
+    public void PlayerDeathRoutine() 
+    {
+        m_isDead = true;
+
+        //お化けのアニメーション再生
+        m_gameOverAnimation.Play("GameOverAnimation");
+
+        //ゲームオーバー
     }
 }
