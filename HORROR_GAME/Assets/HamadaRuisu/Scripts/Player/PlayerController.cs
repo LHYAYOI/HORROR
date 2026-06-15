@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements.Experimental;
+using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] SkyboxTransition_2 m_transition;
 
     [Header("ÉJÉÅÉâé¸ÇËÇÃê›íË")]
-    [SerializeField] Camera m_camera;
+    [SerializeField] CinemachineCamera m_camera;
     [SerializeField] float m_rotationDuration;
 
     [SerializeField] LayerMask m_layerMask;
@@ -60,23 +61,23 @@ public class PlayerController : MonoBehaviour
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
     }
 
-    public bool InteractedWithKai() 
+    public bool InteractedWithKai()
     {
         return m_interactedKai;
     }
 
-    public void InteractionHandler() 
+    public void InteractionHandler()
     {
-        Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) 
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity,m_layerMask))
         {
             GameObject interactedObject = hit.collider.gameObject;
 
             IPressable interactableTarget = interactedObject.GetComponent<IPressable>();
 
-            if (interactableTarget != null && Input.GetMouseButtonDown(0)) 
+            if (interactableTarget != null && Input.GetMouseButtonDown(0))
             {
                 interactableTarget.OnPressed();
 
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
                     m_interactedKai = true;
                 }
 
-                if (Input.GetMouseButtonUp(0)) 
+                if (Input.GetMouseButtonUp(0))
                 {
                     interactableTarget.OnReleased();
                 }
@@ -94,12 +95,60 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ChangeSate(string stateName) 
+    public void MoveRayHandler() 
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+
+        Debug.DrawRay(ray.origin, ray.direction, Color.red);
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            GameObject interactedObject = hit.collider.gameObject;
+
+            if (interactedObject.tag != "MoveCollider") 
+            {
+                return;
+            }
+
+            Debug.Log("ikeruyooooooooo");
+
+            IPressable interactableTarget = interactedObject.GetComponent<IPressable>();
+
+            if (interactableTarget != null && Input.GetKeyDown(KeyCode.W))
+            {
+                interactableTarget.OnPressed();
+            }
+        }
+    }
+
+    public void MoveUp()
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
+    }
+
+
+    public void MoveDown()
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
+    }
+
+    public void MoveRight()
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
+    }
+
+    public void MoveLeft()
+    {
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
+    }
+
+    public void ChangeSate(string stateName)
     {
         m_StateMachine.ChangeState(stateName);
     }
 
-    public StateMachine GetStateMachine() 
+    public StateMachine GetStateMachine()
     {
         return m_StateMachine;
     }
@@ -109,7 +158,7 @@ public class PlayerController : MonoBehaviour
         return m_currentAreaIndex;
     }
 
-    public Animator GetHideAnimator() 
+    public Animator GetHideAnimator()
     {
         return m_hideAnimator;
     }
@@ -139,7 +188,7 @@ public class PlayerController : MonoBehaviour
         return m_cameraOnOffState;
     }
 
-    public PLAYER_STATE GetPlayerState() 
+    public PLAYER_STATE GetPlayerState()
     {
         return m_playerState;
     }
@@ -149,33 +198,13 @@ public class PlayerController : MonoBehaviour
         m_cameraOnOffState = state;
     }
 
-    public void ChangePlayerState(PLAYER_STATE state) 
+    public void ChangePlayerState(PLAYER_STATE state)
     {
         m_playerState = state;
     }
 
     public void MoveAreaInputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y)));

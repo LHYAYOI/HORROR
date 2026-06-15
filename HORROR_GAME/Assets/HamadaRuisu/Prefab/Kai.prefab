@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1653431896807063715}
   - component: {fileID: 295703197698151385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 1712897804255607557}
   - component: {fileID: 7325830454094356998}
   - component: {fileID: 5875647623426940101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Kai
   m_TagString: Kai
   m_Icon: {fileID: 0}
