@@ -7,6 +7,8 @@ public class HideSpotController : MonoBehaviour, IPressable
     Animator m_animator;
     PlayerController m_player;
 
+    float m_findRate = 0.0f;
+
     private void Start()
     {
         m_player = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -19,9 +21,16 @@ public class HideSpotController : MonoBehaviour, IPressable
         m_player.ChangeSate("HideState");
 
         m_animator.SetTrigger("StartFade");
+
+
     }
 
     public void OnReleased()
     {
+    }
+
+    public void IncreaseFindRate(float IncreaseRate) 
+    {
+        m_findRate += IncreaseRate;
     }
 }

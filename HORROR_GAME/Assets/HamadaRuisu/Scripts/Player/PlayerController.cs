@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveRayHandler();
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
     }
 
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
-        Debug.DrawRay(ray.origin, ray.direction, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red);
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -246,12 +247,12 @@ public class PlayerController : MonoBehaviour
 
     public void RotateCameraInputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             StartCoroutine(RotateCameraRoutine(new Vector3(0, 90, 0)));
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             StartCoroutine(RotateCameraRoutine(new Vector3(0, -90, 0)));
         }

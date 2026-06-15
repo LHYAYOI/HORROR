@@ -137,8 +137,8 @@ GameObject:
   - component: {fileID: 6882275611376630439}
   - component: {fileID: 8638074111496810188}
   m_Layer: 0
-  m_Name: MoveButton
-  m_TagString: Untagged
+  m_Name: MoveCollider
+  m_TagString: MoveCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,7 +195,6 @@ MonoBehaviour:
   m_moveDirectionType: 1
   m_moveButtonView: {fileID: 8638074111496810188}
   m_playerController: {fileID: 0}
-  m_concludeChargeTime: 0.5
 --- !u!114 &8638074111496810188
 MonoBehaviour:
   m_ObjectHideFlags: 0

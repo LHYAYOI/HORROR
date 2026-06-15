@@ -215,7 +215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 93781527187336321, guid: 4e082b0ebd693634488b73766bacd4ce, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6967343429805573550, guid: 4e082b0ebd693634488b73766bacd4ce, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1672,7 +1672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 93781527187336321, guid: 607ed19229570fb47b266b7f538e958e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6967343429805573550, guid: 607ed19229570fb47b266b7f538e958e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2376,7 +2376,7 @@ PrefabInstance:
     - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_camera
       value: 
-      objectReference: {fileID: 1356138179}
+      objectReference: {fileID: 1213692683}
     - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_transition
       value: 
