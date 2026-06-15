@@ -74,16 +74,21 @@ public class PlayerController : MonoBehaviour
         {
             GameObject interactedObject = hit.collider.gameObject;
 
-            IIntaractable interactableTarget = interactedObject.GetComponent<IIntaractable>();
+            IPressable interactableTarget = interactedObject.GetComponent<IPressable>();
 
             if (interactableTarget != null && Input.GetMouseButtonDown(0)) 
             {
-                interactableTarget.OnInteracted();
+                interactableTarget.OnPressed();
 
                 if (interactedObject.tag == "Kai")
                 {
                     if (!m_interactedKai) m_enemyManager.FarstEncount();
                     m_interactedKai = true;
+                }
+
+                if (Input.GetMouseButtonUp(0)) 
+                {
+                    interactableTarget.OnReleased();
                 }
             }
         }
