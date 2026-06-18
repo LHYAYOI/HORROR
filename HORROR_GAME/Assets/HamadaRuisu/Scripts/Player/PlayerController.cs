@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         ChangeSate("NormalState");
+
+        ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
+
+        SetCameraPostEffectFlag(false);
     }
 
     // Update is called once per frame
@@ -78,6 +82,11 @@ public class PlayerController : MonoBehaviour
             GameObject interactedObject = hit.collider.gameObject;
 
             IPressable interactableTarget = interactedObject.GetComponent<IPressable>();
+
+            if (interactableTarget == null) 
+            {
+                interactableTarget = interactedObject.transform.parent.GetComponent<IPressable>();
+            }
 
             if (interactableTarget != null && Input.GetMouseButtonDown(0))
             {
@@ -112,8 +121,6 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
-
-            Debug.Log("ikeruyooooooooo");
 
             IPressable interactableTarget = interactedObject.GetComponent<IPressable>();
 
