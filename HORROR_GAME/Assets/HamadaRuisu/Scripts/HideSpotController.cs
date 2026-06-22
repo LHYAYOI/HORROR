@@ -14,6 +14,7 @@ public class HideSpotController : MonoBehaviour, IPressable
         m_player = GameObject.Find("Player").GetComponent<PlayerController>();
 
         m_animator = GameObject.Find("FadeImage").GetComponent<Animator>();
+
     }
 
     public void OnPressed()
@@ -22,7 +23,9 @@ public class HideSpotController : MonoBehaviour, IPressable
 
         m_animator.SetTrigger("StartFade");
 
+        IncreaseFindRate(0.2f);
 
+        m_player.SetFindRate(m_findRate);
     }
 
     public void OnReleased()
@@ -32,5 +35,16 @@ public class HideSpotController : MonoBehaviour, IPressable
     public void IncreaseFindRate(float IncreaseRate) 
     {
         m_findRate += IncreaseRate;
+
+        if (m_findRate > 1) 
+        {
+            m_findRate = 1;
+        }
+    }
+
+    //Œ©‚Â‚©‚éŠm—¦Žæ“¾
+    public float GetFindRate() 
+    {
+        return m_findRate;
     }
 }
