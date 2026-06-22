@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
         ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
 
         SetCameraPostEffectFlag(false);
+
+        //テクスチャの取得
+        MapData m_MapData = m_AreaManager.GetMapData();
+        Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
+        m_transition.SetNextTexture(currentAreaTexture);
     }
 
     // Update is called once per frame
