@@ -858,6 +858,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6967343429805573550, guid: 607ed19229570fb47b266b7f538e958e, type: 3}
   m_PrefabInstance: {fileID: 1569435384}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1012593474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012593476}
+  - component: {fileID: 1012593475}
+  m_Layer: 0
+  m_Name: SceneLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1012593475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012593474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fe07b51646ba84bbd1ceaca10090ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  m_nextSceneReference:
+    m_sceneGuid: 9c53bbeb5f6f55f4284e339cb5020f72
+    m_scenePath: Assets/Fukushima/Scene/Title_Test.unity
+--- !u!4 &1012593476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012593474}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4969, y: -0, z: -0.28791}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1014171422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2587,6 +2634,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2074026103}
     - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
+      propertyPath: m_sceneLoader
+      value: 
+      objectReference: {fileID: 1012593475}
+    - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_enemyManager
       value: 
       objectReference: {fileID: 1957167240}
@@ -3228,3 +3279,4 @@ SceneRoots:
   - {fileID: 5393155113916497951}
   - {fileID: 1314491635}
   - {fileID: 1104170632}
+  - {fileID: 1012593476}

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -24,14 +24,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
+    [SerializeField] Texture2D m_defaultCursorTex;
+    [SerializeField] Texture2D m_interactionCursorTex;
     [SerializeField] Animator m_hideAnimator;
+    [SerializeField] Animator m_gameOverAnimation;
+    [SerializeField] SceneLoader m_sceneLoader;
     [SerializeField] AreaManager m_AreaManager;
     [SerializeField] EnemyManager m_enemyManager;
     [SerializeField] Material m_skyBoxMaterial;
     [SerializeField] SkyboxTransition_2 m_transition;
     [SerializeField] FullScreenPassRendererFeature m_cameraPostEffectFeature;
 
-    [Header("ƒJƒƒ‰ü‚è‚Ìİ’è")]
+    [Header("ã‚«ãƒ¡ãƒ©å‘¨ã‚Šã®è¨­å®š")]
     [SerializeField] CinemachineCamera m_camera;
     [SerializeField] float m_rotationDuration;
 
@@ -44,6 +48,10 @@ public class PlayerController : MonoBehaviour
     PLAYER_STATE m_playerState = PLAYER_STATE.NORMAL;
 
     bool m_interactedKai = false;
+
+    bool m_isDead = false;
+
+    float m_currentFindRate = 1.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -59,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
         SetCameraPostEffectFlag(false);
 
-        //ƒeƒNƒXƒ`ƒƒ‚Ìæ“¾
+        //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å–å¾—
         MapData m_MapData = m_AreaManager.GetMapData();
         Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
         m_transition.SetNextTexture(currentAreaTexture);
@@ -70,6 +78,12 @@ public class PlayerController : MonoBehaviour
     {
         MoveRayHandler();
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
+
+        if (Input.GetKeyDown(KeyCode.P)) 
+        {
+            KillPlayer();
+        }
+
     }
 
     public bool InteractedWithKai()
@@ -93,7 +107,11 @@ public class PlayerController : MonoBehaviour
                 interactableTarget = interactedObject.transform.parent.GetComponent<IPressable>();
             }
 
-            if (interactableTarget != null && Input.GetMouseButtonDown(0))
+            Vector2 hotSpot = new Vector2(m_interactionCursorTex.width / 2.0f, m_interactionCursorTex.height / 2.0f);
+
+            Cursor.SetCursor(m_interactionCursorTex, hotSpot, CursorMode.Auto);
+
+            if (Input.GetMouseButtonDown(0))
             {
                 interactableTarget.OnPressed();
 
@@ -108,6 +126,12 @@ public class PlayerController : MonoBehaviour
                     interactableTarget.OnReleased();
                 }
             }
+        }
+        else
+        {
+            
+            Vector2 hotSpot = new Vector2(m_defaultCursorTex.width / 2.0f, m_defaultCursorTex.height / 2.0f);
+            Cursor.SetCursor(m_defaultCursorTex, hotSpot, CursorMode.Auto);
         }
     }
 
@@ -138,22 +162,42 @@ public class PlayerController : MonoBehaviour
 
     public void MoveUp()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
     }
 
 
     public void MoveDown()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
     }
 
     public void MoveRight()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
     }
 
     public void MoveLeft()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
     }
 
@@ -177,11 +221,26 @@ public class PlayerController : MonoBehaviour
         return m_hideAnimator;
     }
 
+    public void SetFindRate(float rate)
+    {
+        m_currentFindRate = rate;
+    }
+
+    public float GetFindRate()
+    {
+        return m_currentFindRate;
+    }
+
+    public bool IsDead()
+    {
+        return m_isDead;
+    }
+
     public void CameraInputHandler()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            //ƒJƒƒ‰ƒIƒt
+            //ã‚«ãƒ¡ãƒ©ã‚ªãƒ•
             if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.ON)
             {
                 m_PlayerModel.DrainBattery(1);
@@ -191,7 +250,7 @@ public class PlayerController : MonoBehaviour
                 SetCameraPostEffectFlag(false);
             }
 
-            //ƒJƒƒ‰ƒIƒ“
+            //ã‚«ãƒ¡ãƒ©ã‚ªãƒ³
             else if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF && m_PlayerModel.GetCurrentBatteryValue() > 0)
             {
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.ON);
@@ -251,13 +310,13 @@ public class PlayerController : MonoBehaviour
         currentArea.gameObject.SetActive(false);
         nextArea.gameObject.SetActive(true);
 
-        //ƒoƒbƒeƒŠ[‰ñ•œ
+        //ãƒãƒƒãƒ†ãƒªãƒ¼å›å¾©
         if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF)
         {
             m_PlayerModel.AddBattery(1);
         }
 
-        //ƒeƒNƒXƒ`ƒƒ‚Ìæ“¾
+        //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å–å¾—
         Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
         Texture nextAreaTexture = m_MapData.GetArea(moveIndex).GetAreaSkyBoxTexture();
 
@@ -298,5 +357,29 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void KillPlayer()
+    {
+        StartCoroutine(PlayerDeathRoutine());
+    }
+
+    public IEnumerator PlayerDeathRoutine()
+    {
+        m_isDead = true;
+        
+        m_gameOverAnimation.Play("GameOverAnimation");
+
+        yield return null;
+
+        AnimatorStateInfo stateInfo = m_gameOverAnimation.GetCurrentAnimatorStateInfo(0);
+
+        while(stateInfo.normalizedTime < 1.0f)
+        {
+            stateInfo = m_gameOverAnimation.GetCurrentAnimatorStateInfo(0);
+            yield return null;
+        }
+
+        m_sceneLoader.LoadScene();
     }
 }
