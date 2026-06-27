@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [Header("遷移先")]
-    [SerializeField]
-    private SceneReference m_nextSceneReference = new SceneReference();
+
+    [SerializeField] private SceneReference m_GameOverSceneReference = new SceneReference();
+    [SerializeField] private SceneReference m_GameClearSceneReference = new SceneReference();
 
     bool m_loadingFlag = false;
 
@@ -21,15 +22,15 @@ public class SceneLoader : MonoBehaviour
         
     }
 
-    public void LoadScene() 
+    public void LoadGameOverScene() 
     {
         if (m_loadingFlag)
         {
             return;
         }
 
-        if (m_nextSceneReference == null ||
-            !m_nextSceneReference.HasSceneFlag())
+        if (m_GameOverSceneReference == null ||
+            !m_GameOverSceneReference.HasSceneFlag())
         {
             Debug.LogError(
                 "TitleController：遷移先シーンが設定されていません。");
@@ -39,6 +40,27 @@ public class SceneLoader : MonoBehaviour
 
         m_loadingFlag = true;
 
-        SceneManager.LoadScene(m_nextSceneReference.GetScenePath());
+        SceneManager.LoadScene(m_GameOverSceneReference.GetScenePath());
+    }
+
+    public void LoadGameClearScene()
+    {
+        if (m_loadingFlag)
+        {
+            return;
+        }
+
+        if (m_GameClearSceneReference == null ||
+            !m_GameClearSceneReference.HasSceneFlag())
+        {
+            Debug.LogError(
+                "TitleController：遷移先シーンが設定されていません。");
+
+            return;
+        }
+
+        m_loadingFlag = true;
+
+        SceneManager.LoadScene(m_GameClearSceneReference.GetScenePath());
     }
 }

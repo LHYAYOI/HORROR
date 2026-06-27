@@ -16,7 +16,7 @@ public class KaiControler : MonoBehaviour,IPressable
     // Update is called once per frame
     void Update()
     {
-        if (IsOnCamera())
+        if (IsOnCamera() && !m_wasShoted)
         {
             m_kaiView.Show();
         }
@@ -29,6 +29,12 @@ public class KaiControler : MonoBehaviour,IPressable
     public void OnPressed()
     {
         m_wasShoted = true;
+
+        m_playerController.DraiCameraBattery(1);
+
+        m_kaiView.Hide();
+
+        GameManager.instance.CheckIfClearedGame();
 
         Debug.Log("‰Ÿ‚³‚ê‚½");
     }

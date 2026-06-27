@@ -5,16 +5,6 @@ public class kaiiManager : MonoBehaviour
 {
     [SerializeField] List<KaiControler> m_kaiiList;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public bool IsAllCaptured() 
     {
         foreach (KaiControler kaii in m_kaiiList) 

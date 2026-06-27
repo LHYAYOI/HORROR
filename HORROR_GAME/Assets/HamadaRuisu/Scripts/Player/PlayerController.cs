@@ -15,12 +15,6 @@ public class PlayerController : MonoBehaviour
         OFF
     };
 
-    public enum PLAYER_STATE
-    {
-        NORMAL,
-        HIDE
-    }
-
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
@@ -34,6 +28,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Material m_skyBoxMaterial;
     [SerializeField] SkyboxTransition_2 m_transition;
     [SerializeField] FullScreenPassRendererFeature m_cameraPostEffectFeature;
+    [SerializeField] Volume m_volume;
+    Tonemapping m_tonemap;
+    Bloom m_bloom;
+    ColorAdjustments m_colorAdjustments;
+    ChromaticAberration m_chromaticAberration;
 
     [Header("カメラ周りの設定")]
     [SerializeField] CinemachineCamera m_camera;
@@ -45,7 +44,6 @@ public class PlayerController : MonoBehaviour
     Vector2Int m_currentAreaIndex;
 
     CAMERA_ON_OFF_ATATE m_cameraOnOffState = CAMERA_ON_OFF_ATATE.OFF;
-    PLAYER_STATE m_playerState = PLAYER_STATE.NORMAL;
 
     bool m_interactedKai = false;
 
@@ -61,11 +59,15 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
+        m_volume.profile.TryGet(out m_tonemap);
+        m_volume.profile.TryGet(out m_bloom);
+        m_volume.profile.TryGet(out m_colorAdjustments);
+        m_volume.profile.TryGet(out m_chromaticAberration);
+
         ChangeSate("NormalState");
 
         ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
-
-        SetCameraPostEffectFlag(false);
 
         //テクスチャの取得
         MapData m_MapData = m_AreaManager.GetMapData();
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MoveRayHandler();
+
         m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
 
         if (Input.GetKeyDown(KeyCode.P)) 
@@ -93,6 +96,11 @@ public class PlayerController : MonoBehaviour
 
     public void InteractionHandler()
     {
+        if (m_isDead) 
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -243,21 +251,20 @@ public class PlayerController : MonoBehaviour
             //カメラオフ
             if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.ON)
             {
-                m_PlayerModel.DrainBattery(1);
-
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
-
-                SetCameraPostEffectFlag(false);
             }
 
             //カメラオン
             else if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF && m_PlayerModel.GetCurrentBatteryValue() > 0)
             {
                 ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.ON);
-
-                SetCameraPostEffectFlag(true);
             }
         }
+    }
+
+    public void DraiCameraBattery(int amount) 
+    {
+        m_PlayerModel.DrainBattery(amount);
     }
 
     public CAMERA_ON_OFF_ATATE GetCameraOnOffState()
@@ -265,26 +272,36 @@ public class PlayerController : MonoBehaviour
         return m_cameraOnOffState;
     }
 
-    public PLAYER_STATE GetPlayerState()
-    {
-        return m_playerState;
-    }
-
     private void SetCameraPostEffectFlag(bool flag)
     {
-
-
         m_cameraPostEffectFeature.SetActive(flag);
+
+        m_tonemap.active = flag;
+        m_bloom.active = flag;
+        m_colorAdjustments.active = flag;
+        m_chromaticAberration.active = flag;
     }
 
     public void ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE state)
     {
         m_cameraOnOffState = state;
-    }
 
-    public void ChangePlayerState(PLAYER_STATE state)
-    {
-        m_playerState = state;
+        switch (m_cameraOnOffState) 
+        {
+            case CAMERA_ON_OFF_ATATE.ON:
+
+                SetCameraPostEffectFlag(true);
+
+                break;
+
+            case CAMERA_ON_OFF_ATATE.OFF:
+
+                DraiCameraBattery(1);
+
+                SetCameraPostEffectFlag(false);
+
+                break;
+        }
     }
 
     public void MoveAreaInputHandler()
@@ -330,6 +347,11 @@ public class PlayerController : MonoBehaviour
 
     public void RotateCameraInputHandler()
     {
+        if (m_isDead) 
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             StartCoroutine(RotateCameraRoutine(new Vector3(0, 90, 0)));
@@ -367,11 +389,20 @@ public class PlayerController : MonoBehaviour
     public IEnumerator PlayerDeathRoutine()
     {
         m_isDead = true;
-        
-        m_gameOverAnimation.Play("GameOverAnimation");
+
+        //カメラをオフにする
+        ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
+
+        //カーソルをデフォルトに
+        Vector2 hotSpot = new Vector2(m_defaultCursorTex.width / 2.0f, m_defaultCursorTex.height / 2.0f);
+        Cursor.SetCursor(m_defaultCursorTex, hotSpot, CursorMode.Auto);
+
+        //死亡アニメーション再生
+        m_gameOverAnimation.Play("GameOver");
 
         yield return null;
 
+        //アニメーションが終わるまでシーンを切り替えない
         AnimatorStateInfo stateInfo = m_gameOverAnimation.GetCurrentAnimatorStateInfo(0);
 
         while(stateInfo.normalizedTime < 1.0f)
@@ -380,6 +411,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        m_sceneLoader.LoadScene();
+        m_sceneLoader.LoadGameOverScene();
     }
 }
