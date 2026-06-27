@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 5942238761415012561}
   - component: {fileID: 5223421365443156140}
   - component: {fileID: 9035455193798877605}
-  - component: {fileID: 5475094648829927013}
+  - component: {fileID: 6322378324161283724}
   m_Layer: 5
   m_Name: FadeImage
   m_TagString: Untagged
@@ -324,7 +324,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5475094648829927013
+--- !u!114 &6322378324161283724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

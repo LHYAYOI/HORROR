@@ -5,6 +5,8 @@ public class KaiControler : MonoBehaviour,IPressable
     [SerializeField] KaiView m_kaiView;
     PlayerController m_playerController;
 
+    bool m_wasShoted = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,7 +16,7 @@ public class KaiControler : MonoBehaviour,IPressable
     // Update is called once per frame
     void Update()
     {
-        if (m_playerController.GetCameraOnOffState() == PlayerController.CAMERA_ON_OFF_ATATE.ON)
+        if (IsOnCamera() && !m_wasShoted)
         {
             m_kaiView.Show();
         }
@@ -26,12 +28,30 @@ public class KaiControler : MonoBehaviour,IPressable
 
     public void OnPressed()
     {
+        m_wasShoted = true;
+
+        m_playerController.DraiCameraBattery(1);
+
+        m_kaiView.Hide();
+
+        GameManager.instance.CheckIfClearedGame();
+
         Debug.Log("‰Ÿ‚³‚ê‚½");
     }
 
     public void OnReleased()
     {
         Debug.Log("—£‚µ‚½");
+    }
+
+    public bool WasShot() 
+    {
+        return m_wasShoted;
+    }
+
+    public bool IsOnCamera() 
+    {
+        return m_playerController.GetCameraOnOffState() == PlayerController.CAMERA_ON_OFF_ATATE.ON;
     }
 
 }

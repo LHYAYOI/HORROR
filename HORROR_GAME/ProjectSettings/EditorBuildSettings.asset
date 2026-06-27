@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Fukushima/Scene/Title_Test.unity
+    guid: 9c53bbeb5f6f55f4284e339cb5020f72
+  - enabled: 1
+    path: Assets/Fukushima/Scene/Prologue_Test.unity
+    guid: 5fefafd9a4df76b47879176ff1fae772
+  - enabled: 1
+    path: Assets/HamadaRuisu/Scene/HamadaRuisu.unity
+    guid: 22611488602383d46abb26c8351453be
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
