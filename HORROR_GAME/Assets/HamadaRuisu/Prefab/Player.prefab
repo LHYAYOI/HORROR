@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6119072971538894324}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,13 +53,14 @@ MonoBehaviour:
   m_hideAnimator: {fileID: 0}
   m_AreaManager: {fileID: 0}
   m_enemyManager: {fileID: 0}
-  m_cameraPostEffectFeature: {fileID: 7810560219541223584, guid: f288ae1f4751b564a96ac7587541f7a2, type: 2}
+  m_skyBoxMaterial: {fileID: 2100000, guid: 7c271fe763c81f54ca4c63711e7c7191, type: 2}
   m_transition: {fileID: 0}
+  m_cameraPostEffectFeature: {fileID: 7810560219541223584, guid: f288ae1f4751b564a96ac7587541f7a2, type: 2}
   m_camera: {fileID: 0}
   m_rotationDuration: 0.3
   m_layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_startPosition: {x: 0, y: 0}
 --- !u!114 &6346061657805310696
 MonoBehaviour:
