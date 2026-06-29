@@ -5,7 +5,6 @@ public enum CURSOR_TYPE
 {
     DEFAULT,
     INTERACTION,
-    SHOW,
     NONE
 };
 
@@ -21,7 +20,6 @@ public class CursorManager : MonoBehaviour
     [SerializeField] Image m_cursorImage;
     [SerializeField] Sprite m_defaultImage;
     [SerializeField] Sprite m_interactImage;
-    [SerializeField] Sprite m_interactShowImage;
 
     [Header("クロスヘア用項目")]
     [SerializeField] Image m_crossHairImage;
@@ -100,11 +98,6 @@ public class CursorManager : MonoBehaviour
             case CURSOR_TYPE.INTERACTION:
                 {
                     m_cursorImage.sprite = m_interactImage;
-                    break;
-                }
-            case CURSOR_TYPE.SHOW:
-                {
-                    m_cursorImage.sprite = m_interactShowImage;
                     break;
                 }
         }

@@ -56,10 +56,10 @@ public class CameraController : MonoBehaviour
 
     public void CameraInputHandler()
     {
-        //if (m_playerController.IsDead()) 
-        //{
-        //    return;
-        //}
+        if (m_playerController.IsDead())
+        {
+            return;
+        }
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -96,6 +96,8 @@ public class CameraController : MonoBehaviour
 
                 EnableFreeCamera();
 
+                CursorManager.instance.EnableCrossHair();
+
                 break;
 
             case CAMERA_ON_OFF_STATE.OFF:
@@ -103,6 +105,8 @@ public class CameraController : MonoBehaviour
                 SetCurrentDrainTime(0);
 
                 m_effectManager.SetCameraPostEffectFlag(false);
+
+                CursorManager.instance.EnableCursor();
 
                 StartCoroutine(ResetToStartRotation());
 

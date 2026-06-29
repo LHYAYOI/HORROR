@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
-    [SerializeField] Texture2D m_defaultCursorTex;
-    [SerializeField] Texture2D m_interactionCursorTex;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] Animator m_gameOverAnimation;
     [SerializeField] SceneLoader m_sceneLoader;
@@ -96,9 +94,7 @@ public class PlayerController : MonoBehaviour
                 interactableTarget = interactedObject.transform.parent.GetComponent<IPressable>();
             }
 
-            Vector2 hotSpot = new Vector2(m_interactionCursorTex.width / 2.0f, m_interactionCursorTex.height / 2.0f);
-
-            Cursor.SetCursor(m_interactionCursorTex, hotSpot, CursorMode.Auto);
+            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.INTERACTION);
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -118,9 +114,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            
-            Vector2 hotSpot = new Vector2(m_defaultCursorTex.width / 2.0f, m_defaultCursorTex.height / 2.0f);
-            Cursor.SetCursor(m_defaultCursorTex, hotSpot, CursorMode.Auto);
+            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
         }
     }
 
@@ -279,8 +273,7 @@ public class PlayerController : MonoBehaviour
         m_cameraController.ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
 
         //カーソルをデフォルトに
-        Vector2 hotSpot = new Vector2(m_defaultCursorTex.width / 2.0f, m_defaultCursorTex.height / 2.0f);
-        Cursor.SetCursor(m_defaultCursorTex, hotSpot, CursorMode.Auto);
+        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
 
         //死亡アニメーション再生
         m_gameOverAnimation.Play("GameOver");
