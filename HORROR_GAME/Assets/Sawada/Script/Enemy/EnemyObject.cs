@@ -79,7 +79,7 @@ public class EnemyObject : MonoBehaviour
         // 大きさ
         GetComponent<BoxCollider>().size = new(m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Size.x, m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Size.y, 1);
         // 画像
-        transform.Find("Visual").GetComponent<SpriteRenderer>().sprite = m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Sprite;
+        //transform.Find("ghost").GetComponent<SpriteRenderer>().sprite = m_defaultEnemy.GetImage(m_playerController.GetCurrentIndex(), m_currentAreaIndex).Sprite;
 
         Debug.Log(m_playerController.GetCurrentIndex() + " - " + m_currentAreaIndex + " = " + distance + "  のポジション");
     }

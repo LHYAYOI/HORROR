@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        m_cameraController = GameObject.FindGameObjectWithTag("Camera").GetComponent<CameraController>();
     }
 
     // Update is called once per frame
