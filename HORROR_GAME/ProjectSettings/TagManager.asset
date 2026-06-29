@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 3
   tags:
   - Kai
-  - kai
   - MoveCollider
   layers:
   - Default
@@ -15,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Interactable
-  - 
+  - Enemy
   - 
   - 
   - 

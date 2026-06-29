@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -22,6 +22,5 @@ public class EnemyController : MonoBehaviour
         {
             m_enemyView.Hide();
         }
-        m_enemyView.Show();
     }
 }

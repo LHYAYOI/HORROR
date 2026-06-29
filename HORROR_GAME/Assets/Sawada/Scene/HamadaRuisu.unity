@@ -1079,7 +1079,7 @@ PrefabInstance:
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: m_enemyPrefab
       value: 
-      objectReference: {fileID: 1655822976}
+      objectReference: {fileID: 8225024576487716264, guid: 098b2f3049e833e44a3b0dd8330f9f2f, type: 3}
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: m_playerState
       value: 
@@ -1095,7 +1095,7 @@ PrefabInstance:
     - target: {fileID: 6016266461821035884, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: 'm_spawnEnemyList.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 4915aa07c64d0cb4e8e94badce5f02cc, type: 2}
+      objectReference: {fileID: 11400000, guid: cf2c6647a00b6e4458c54eb7aeb0b016, type: 2}
     - target: {fileID: 6117780980979082119, guid: 4b08d8828f7513f4ea0d84558e852115, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.31831
@@ -5577,11 +5577,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1283694739213771673, guid: 1f79e2a41e93167499b6d16f640f20c3, type: 3}
   m_PrefabInstance: {fileID: 1645258149}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1655822976 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8225024576487716264, guid: 098b2f3049e833e44a3b0dd8330f9f2f, type: 3}
-  m_PrefabInstance: {fileID: 24684054}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1656344172 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3244082309394504539, guid: 02f891e93651f0b45a37956af01eb7b6, type: 3}
@@ -7199,6 +7194,10 @@ PrefabInstance:
       propertyPath: m_hideAnimator
       value: 
       objectReference: {fileID: 1166420704}
+    - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
+      propertyPath: m_startPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7062695727188928488, guid: acad91b3fa6a4ee47bd9b055b898bcc8, type: 3}
       propertyPath: m_defaultCursorTex
       value: 

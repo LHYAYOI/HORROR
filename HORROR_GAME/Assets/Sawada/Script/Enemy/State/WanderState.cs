@@ -1,5 +1,4 @@
 using UnityEngine;
-using static PlayerController;
 
 /*
  * プレイヤーを視認していない場合
@@ -44,5 +43,6 @@ public class WanderState : EnemyStateBase
     {
         // 移動
         m_enemyObject.GetComponent<EnemyObject>().MoveEnemy_02();
+        m_enemyObject.GetComponent<EnemyObject>().CheckPlayerInSight();
     }
 }

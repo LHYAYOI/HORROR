@@ -26,7 +26,7 @@ MonoBehaviour:
     m_size: {x: 5, y: 5}
     m_adjustment: {x: 1, y: 0}
   m_speed: 1
-  m_spawnPosition: {x: 0, y: 5}
+  m_spawnPosition: {x: 0, y: 3}
   m_searchRange: 5
   m_searchMethod: 1
   m_stateList:
