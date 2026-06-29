@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
@@ -19,6 +19,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] float m_horizontalSensitivity;
     [SerializeField] float m_verticalSensitivity;
     [SerializeField] float m_smoothingSpeed;
+    [SerializeField] float m_limitBarMoveAmount;
+    [SerializeField] RectTransform m_limitBarRightTransform;
+    [SerializeField] RectTransform m_limitBarLeftTransform;
     [SerializeField] Vector2 m_minMaxHorizontalAngle;
     [SerializeField] Vector2 m_minMaxVerticalAngle;
     [SerializeField] EffectManager m_effectManager;
@@ -63,13 +66,13 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            //�J�����I�t
+            //カメラオフ
             if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.ON)
             {
                 ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
             }
 
-            //�J�����I��
+            //カメラオン
             else if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF && GetCurrentBatteryValue() > 0)
             {
                 ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.ON);
@@ -84,7 +87,7 @@ public class CameraController : MonoBehaviour
 
     public void ChangeCameraOnOffState(CAMERA_ON_OFF_STATE state)
     {
-        Debug.Log("�X�e�[�g�ς���");
+        Debug.Log("ステート変わるよ");
 
         m_cameraOnOffState = state;
 
@@ -199,6 +202,54 @@ public class CameraController : MonoBehaviour
         Quaternion endRotation = Quaternion.Euler(m_startRotation.x + m_rotationX, m_startRotation.y + m_rotationY, 0);
 
         transform.rotation = Quaternion.Slerp(transform.rotation, endRotation, Time.deltaTime * m_smoothingSpeed);
+
+        LimitBarProcess();
+    }
+
+    private void LimitBarProcess() 
+    {
+        // 右側の限界へのアプローチ
+        float rightLimit = m_minMaxHorizontalAngle.y;
+        float rightThreshold = rightLimit - 2;
+
+        // 前のステップで作った「初期位置からの変化量」m_rotationY と直接比べる
+        if (m_rotationY >= rightThreshold)
+        {
+            // 58度〜60度の間でのレート（0.0 〜 1.0）を計算
+            float rightRate = Mathf.InverseLerp(rightThreshold, rightLimit, m_rotationY);
+            rightRate = Mathf.Clamp01(rightRate); // 念のため0〜1にクランプ
+
+            // anchoredPosition.x を書き換えてスライドさせる
+            float targetX = Mathf.Lerp(590, 570, Easing.OutCubic(rightRate));
+            m_limitBarRightTransform.anchoredPosition = new Vector2(targetX, m_limitBarRightTransform.anchoredPosition.y);
+        }
+        else
+        {
+            // 閾値未満ならデフォルト位置（590）に戻す
+            m_limitBarRightTransform.anchoredPosition = new Vector2(590, m_limitBarRightTransform.anchoredPosition.y);
+        }
+
+        // 左側の限界へのアプローチ
+        float leftLimit = m_minMaxHorizontalAngle.x;
+        float leftThreshold = leftLimit + 2;
+
+        // 前のステップで作った「初期位置からの変化量」m_rotationY と直接比べる
+        if (m_rotationY <= leftThreshold)
+        {
+            // 58度〜60度の間でのレート（0.0 〜 1.0）を計算
+            float leftRate = Mathf.InverseLerp(leftThreshold, leftLimit, m_rotationY);
+            leftRate = Mathf.Clamp01(leftRate); // 念のため0〜1にクランプ
+
+            // anchoredPosition.x を書き換えてスライドさせる
+            float targetX = Mathf.Lerp(-590, -570, Easing.OutCubic(leftRate));
+            m_limitBarLeftTransform.anchoredPosition = new Vector2(targetX, m_limitBarLeftTransform.anchoredPosition.y);
+        }
+        else
+        {
+            // 閾値未満ならデフォルト位置（-590）に戻す
+            m_limitBarLeftTransform.anchoredPosition = new Vector2(-590, m_limitBarLeftTransform.anchoredPosition.y);
+        }
+
     }
 
     public IEnumerator RotateCameraRoutine(Vector3 rotationValue)
