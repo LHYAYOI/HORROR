@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6161157747612809588}
   - component: {fileID: 621173949973127638}
   - component: {fileID: 4949074516184806453}
+  - component: {fileID: 8172195968106168859}
   m_Layer: 0
   m_Name: PlayerCamera 1
-  m_TagString: Untagged
+  m_TagString: Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +59,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -94,6 +95,30 @@ MonoBehaviour:
   AmplitudeGain: 0.7
   FrequencyGain: 0.2
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &8172195968106168859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810798860128271435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739c52d9b975a244eaeeaf4daec42dcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  m_maxBatteryPercentage: 100
+  m_batteryDrainInterval: 0.5
+  m_batteryDrainAmount: 2
+  m_batteryRegenerateAmount: 5
+  m_rotationDuration: 0.3
+  m_horizontalSensitivity: 100
+  m_verticalSensitivity: 90
+  m_smoothingSpeed: 20
+  m_minMaxHorizontalAngle: {x: -45, y: 45}
+  m_minMaxVerticalAngle: {x: -30, y: 30}
+  m_effectManager: {fileID: 0}
+  m_playerController: {fileID: 0}
 --- !u!1 &7228279250738532458
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +277,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &6055031939398325322
 MonoBehaviour:

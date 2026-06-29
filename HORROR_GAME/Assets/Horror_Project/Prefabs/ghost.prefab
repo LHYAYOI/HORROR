@@ -1504,7 +1504,7 @@ ParticleSystem:
     startFrame:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.16666667
+      scalar: 0.12666667
       minScalar: 0
       maxCurve:
         serializedVersion: 2

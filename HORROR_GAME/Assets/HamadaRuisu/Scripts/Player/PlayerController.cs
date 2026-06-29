@@ -9,41 +9,28 @@ using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum CAMERA_ON_OFF_ATATE
-    {
-        ON,
-        OFF
-    };
 
     [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
-    [SerializeField] Texture2D m_defaultCursorTex;
-    [SerializeField] Texture2D m_interactionCursorTex;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] Animator m_gameOverAnimation;
     [SerializeField] SceneLoader m_sceneLoader;
     [SerializeField] AreaManager m_AreaManager;
     [SerializeField] EnemyManager m_enemyManager;
     [SerializeField] Material m_skyBoxMaterial;
+    [SerializeField] EffectManager m_effectManager;
     [SerializeField] SkyboxTransition_2 m_transition;
-    [SerializeField] FullScreenPassRendererFeature m_cameraPostEffectFeature;
-    [SerializeField] Volume m_volume;
-    Tonemapping m_tonemap;
-    Bloom m_bloom;
-    ColorAdjustments m_colorAdjustments;
-    ChromaticAberration m_chromaticAberration;
 
     [Header("カメラ周りの設定")]
-    [SerializeField] CinemachineCamera m_camera;
-    [SerializeField] float m_rotationDuration;
+    [SerializeField] CameraController m_cameraController;
 
     [SerializeField] LayerMask m_layerMask;
 
     [SerializeField] Vector2Int m_startPosition;
     Vector2Int m_currentAreaIndex;
 
-    CAMERA_ON_OFF_ATATE m_cameraOnOffState = CAMERA_ON_OFF_ATATE.OFF;
+    CAMERA_ON_OFF_STATE m_cameraOnOffState = CAMERA_ON_OFF_STATE.OFF;
 
     bool m_interactedKai = false;
 
@@ -59,15 +46,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
-        m_volume.profile.TryGet(out m_tonemap);
-        m_volume.profile.TryGet(out m_bloom);
-        m_volume.profile.TryGet(out m_colorAdjustments);
-        m_volume.profile.TryGet(out m_chromaticAberration);
-
         ChangeSate("NormalState");
-
-        ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
 
         //テクスチャの取得
         MapData m_MapData = m_AreaManager.GetMapData();
@@ -80,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         MoveRayHandler();
 
-        m_PlayerView.UpdateBatteryGages(m_PlayerModel.GetMaxBatteryValue(), m_PlayerModel.GetCurrentBatteryValue());
+        m_PlayerView.UpdateBatteryPercentage(m_cameraController.GetMaxBatteryValue(), m_cameraController.GetCurrentBatteryValue());
 
         if (Input.GetKeyDown(KeyCode.P)) 
         {
@@ -115,9 +94,7 @@ public class PlayerController : MonoBehaviour
                 interactableTarget = interactedObject.transform.parent.GetComponent<IPressable>();
             }
 
-            Vector2 hotSpot = new Vector2(m_interactionCursorTex.width / 2.0f, m_interactionCursorTex.height / 2.0f);
-
-            Cursor.SetCursor(m_interactionCursorTex, hotSpot, CursorMode.Auto);
+            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.INTERACTION);
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -137,9 +114,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            
-            Vector2 hotSpot = new Vector2(m_defaultCursorTex.width / 2.0f, m_defaultCursorTex.height / 2.0f);
-            Cursor.SetCursor(m_defaultCursorTex, hotSpot, CursorMode.Auto);
+            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
         }
     }
 
@@ -244,66 +219,6 @@ public class PlayerController : MonoBehaviour
         return m_isDead;
     }
 
-    public void CameraInputHandler()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            //カメラオフ
-            if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.ON)
-            {
-                ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
-            }
-
-            //カメラオン
-            else if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF && m_PlayerModel.GetCurrentBatteryValue() > 0)
-            {
-                ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.ON);
-            }
-        }
-    }
-
-    public void DraiCameraBattery(int amount) 
-    {
-        m_PlayerModel.DrainBattery(amount);
-    }
-
-    public CAMERA_ON_OFF_ATATE GetCameraOnOffState()
-    {
-        return m_cameraOnOffState;
-    }
-
-    private void SetCameraPostEffectFlag(bool flag)
-    {
-        m_cameraPostEffectFeature.SetActive(flag);
-
-        m_tonemap.active = flag;
-        m_bloom.active = flag;
-        m_colorAdjustments.active = flag;
-        m_chromaticAberration.active = flag;
-    }
-
-    public void ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE state)
-    {
-        m_cameraOnOffState = state;
-
-        switch (m_cameraOnOffState) 
-        {
-            case CAMERA_ON_OFF_ATATE.ON:
-
-                SetCameraPostEffectFlag(true);
-
-                break;
-
-            case CAMERA_ON_OFF_ATATE.OFF:
-
-                DraiCameraBattery(1);
-
-                SetCameraPostEffectFlag(false);
-
-                break;
-        }
-    }
-
     public void MoveAreaInputHandler()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -328,9 +243,9 @@ public class PlayerController : MonoBehaviour
         nextArea.gameObject.SetActive(true);
 
         //バッテリー回復
-        if (m_cameraOnOffState == CAMERA_ON_OFF_ATATE.OFF)
+        if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF)
         {
-            m_PlayerModel.AddBattery(1);
+            m_cameraController.AddBattery();
         }
 
         //テクスチャの取得
@@ -345,42 +260,6 @@ public class PlayerController : MonoBehaviour
         m_enemyManager.AutoMove();
     }
 
-    public void RotateCameraInputHandler()
-    {
-        if (m_isDead) 
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            StartCoroutine(RotateCameraRoutine(new Vector3(0, 90, 0)));
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine(RotateCameraRoutine(new Vector3(0, -90, 0)));
-        }
-    }
-
-    IEnumerator RotateCameraRoutine(Vector3 rotationValue)
-    {
-        float elapsedTime = 0f;
-
-        Quaternion startRotation = m_camera.transform.rotation;
-
-        while (elapsedTime < m_rotationDuration)
-        {
-            elapsedTime += Time.deltaTime;
-
-            float rate = Easing.InOutCubic(elapsedTime / m_rotationDuration);
-
-            m_camera.transform.rotation = startRotation * Quaternion.Euler(rotationValue.x * rate, rotationValue.y * rate, rotationValue.z * rate);
-
-            yield return null;
-        }
-    }
-
     public void KillPlayer()
     {
         StartCoroutine(PlayerDeathRoutine());
@@ -391,11 +270,10 @@ public class PlayerController : MonoBehaviour
         m_isDead = true;
 
         //カメラをオフにする
-        ChangeCameraOnOffState(CAMERA_ON_OFF_ATATE.OFF);
+        m_cameraController.ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
 
         //カーソルをデフォルトに
-        Vector2 hotSpot = new Vector2(m_defaultCursorTex.width / 2.0f, m_defaultCursorTex.height / 2.0f);
-        Cursor.SetCursor(m_defaultCursorTex, hotSpot, CursorMode.Auto);
+        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
 
         //死亡アニメーション再生
         m_gameOverAnimation.Play("GameOver");

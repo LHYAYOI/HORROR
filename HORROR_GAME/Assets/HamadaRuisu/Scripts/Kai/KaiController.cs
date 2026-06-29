@@ -3,14 +3,14 @@ using UnityEngine;
 public class KaiControler : MonoBehaviour,IPressable
 {
     [SerializeField] KaiView m_kaiView;
-    PlayerController m_playerController;
+    CameraController m_cameraController;
 
     bool m_wasShoted = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        m_cameraController = GameObject.FindGameObjectWithTag("Camera").GetComponent<CameraController>();
     }
 
     // Update is called once per frame
@@ -29,8 +29,6 @@ public class KaiControler : MonoBehaviour,IPressable
     public void OnPressed()
     {
         m_wasShoted = true;
-
-        m_playerController.DraiCameraBattery(1);
 
         m_kaiView.Hide();
 
@@ -51,7 +49,7 @@ public class KaiControler : MonoBehaviour,IPressable
 
     public bool IsOnCamera() 
     {
-        return m_playerController.GetCameraOnOffState() == PlayerController.CAMERA_ON_OFF_ATATE.ON;
+        return m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.ON;
     }
 
 }

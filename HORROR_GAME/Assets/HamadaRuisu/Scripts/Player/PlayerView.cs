@@ -1,22 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class PlayerView : MonoBehaviour
 {
     [SerializeField] GameObject m_batteryUI;
-    [SerializeField] List<GameObject> m_batteryGages;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [SerializeField] TextMeshProUGUI m_batteryPercentage;
 
     public void ShowBatteryUI() 
     {
@@ -28,20 +17,8 @@ public class PlayerView : MonoBehaviour
         m_batteryUI.SetActive(false);
     }
 
-    public void UpdateBatteryGages(int maxBattery, int currentBatteryAmount)
+    public void UpdateBatteryPercentage(float maxBattery, float currentBatteryAmount)
     {
-        int updateBatteryAmount = maxBattery - currentBatteryAmount;
-
-        for (int i = 0; i < maxBattery; i++)
-        {
-            if (i < updateBatteryAmount)
-            {
-                m_batteryGages[i].SetActive(false);
-            }
-            else
-            {
-                m_batteryGages[i].SetActive(true);
-            }
-        }
+        m_batteryPercentage.text = currentBatteryAmount.ToString() + "%";
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Kai
   - MoveCollider
+  - Camera
   layers:
   - Default
   - TransparentFX
