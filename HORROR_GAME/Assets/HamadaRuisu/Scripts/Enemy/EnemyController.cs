@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] EnemyView m_enemyView;
-    [SerializeField] PlayerController m_playerController;
+    [SerializeField] CameraController m_cameraController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_playerController.GetCameraOnOffState() == PlayerController.CAMERA_ON_OFF_ATATE.ON) 
+        if (m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.ON) 
         {
             m_enemyView.Show();
         }
