@@ -18,6 +18,8 @@ Shader "Custom/SkyboxBlend"
         _SeamU ("Seam U", Range(0, 1)) = 0
         _ViewCenterU ("View Center U", Range(0, 1)) = 0.5
         _ViewCenterV ("View Center V", Range(0, 1)) = 0.5
+
+        _Rotation ("Rotation", Range(0, 360)) = 0
     }
 
     SubShader
@@ -49,6 +51,8 @@ Shader "Custom/SkyboxBlend"
             float _SeamU;
             float _ViewCenterU;
             float _ViewCenterV;
+
+            float _Rotation;
 
             struct APP_DATA
             {
@@ -109,7 +113,9 @@ Shader "Custom/SkyboxBlend"
                 // ----------------------------------------
                 // カメラ後方へ移動
                 // ----------------------------------------
-                baseUV.x = frac(baseUV.x - _SeamU);
+                //baseUV.x = frac(baseUV.x - _SeamU);
+                float rotationU = _Rotation / 360.0;
+                baseUV.x = frac(baseUV.x - _SeamU + rotationU);
 
                 // 今見ている中心UV
                 float2 viewCenterUV;
@@ -119,7 +125,7 @@ Shader "Custom/SkyboxBlend"
                 float transition = _Blend;
                 float blendValue = smoothstep(0.0, 1.0, _Blend);
 
-                float2 focusUV = float2(frac(_FocusU - _SeamU), _FocusV);
+                float2 focusUV = float2(frac(_FocusU - _SeamU + rotationU), _FocusV);
                 // -------------------------
                 // 画像1
                 // viewCenterUV 基準でズーム

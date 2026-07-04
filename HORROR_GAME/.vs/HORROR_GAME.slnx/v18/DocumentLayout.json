@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\skybox\\skyboxtransition_2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\skybox\\skyboxtransition_2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\shader\\skyboxblend.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\shader\\skyboxblend.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemyobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemyobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\enemy\\enemyview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\enemy\\enemyview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\enemy\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\enemy\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemytype\\defaultenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,46 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemytype\\defaultenemyeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemytype\\defaultenemyeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\state\\wanderstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\state\\wanderstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\state\\standbystate_turn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\state\\standbystate_turn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\state\\enemystatebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\state\\enemystatebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\common\\statemachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\common\\statemachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemytype\\spriteintdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemytype\\spriteintdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemytype\\spriteintdataeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemytype\\spriteintdataeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\area\\mapeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\area\\mapeditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\area\\mapdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\area\\mapdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\map\\vector2griddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\map\\vector2griddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,173 +38,94 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SkyboxBlend.shader",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Shader\\SkyboxBlend.shader",
+              "RelativeDocumentMoniker": "Assets\\Sawada\\Shader\\SkyboxBlend.shader",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Shader\\SkyboxBlend.shader",
+              "RelativeToolTip": "Assets\\Sawada\\Shader\\SkyboxBlend.shader",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAH8AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2026-07-04T09:46:59.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EnemyObject.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAUwDkAAAAJAAAAAAAAAA==",
+              "Title": "SkyboxTransition_2.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Skybox\\SkyboxTransition_2.cs",
+              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Skybox\\SkyboxTransition_2.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Skybox\\SkyboxTransition_2.cs",
+              "RelativeToolTip": "Assets\\Sawada\\Script\\Skybox\\SkyboxTransition_2.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAUwMEAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T09:52:31.969Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "EnemyStateBase.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\EnemyStateBase.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\State\\EnemyStateBase.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\EnemyStateBase.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\State\\EnemyStateBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T08:30:48.889Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "StandbyState_Turn.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\StandbyState_Turn.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\State\\StandbyState_Turn.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\StandbyState_Turn.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\State\\StandbyState_Turn.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAQwDIAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T08:25:27.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "StateMachine.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Common\\StateMachine.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAApwDQAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T08:14:41.842Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "WanderState.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAswCwAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T07:46:05.91Z",
+              "WhenOpened": "2026-07-04T09:43:41.047Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAArwGUAAAAWAAAAAAAAAA==",
+              "Title": "EnemyView.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T07:03:05.121Z",
+              "WhenOpened": "2026-06-29T09:57:59.795Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EnemyObject.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
+              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAIwMMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T09:57:57.24Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
+              "Title": "EnemyController.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T09:53:12.184Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "DefaultEnemy.cs",
               "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
               "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
               "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
               "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAqwBQAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T07:02:53.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-29T09:45:05.279Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "DefaultEnemyEditor.cs",
               "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemyEditor.cs",
               "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemyEditor.cs",
               "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemyEditor.cs",
               "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemyEditor.cs",
-              "ViewState": "AgIAAMQBAAAAAAAAAAAkwNYBAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T07:12:10.902Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SpriteIntData.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntData.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntData.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntData.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T07:08:22.852Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SpriteIntDataEditor.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntDataEditor.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntDataEditor.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntDataEditor.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\SpriteIntDataEditor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T07:09:37.933Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Vector2GridData.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\Map\\Vector2GridData.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\Map\\Vector2GridData.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\Map\\Vector2GridData.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\Map\\Vector2GridData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-13T12:50:18.821Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MapData.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\MapData.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Area\\MapData.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\MapData.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Area\\MapData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-13T12:59:24.987Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MapEditor.cs",
-              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\MapEditor.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Area\\MapEditor.cs",
-              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\MapEditor.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Area\\MapEditor.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAADwvwsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-13T13:01:08.837Z"
+              "WhenOpened": "2026-06-29T09:46:01.411Z"
             }
           ]
         }

@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -24,15 +21,6 @@ public class EnemyManager : MonoBehaviour
     {
     }
 
-    // Targetが移動したらEnemysも移動処理
-    public void MoveTarget(Vector2Int target)
-    {
-        // 自動
-        foreach (GameObject enemy in m_spawnedEnemyList)
-        {
-            enemy.GetComponent<EnemyObject>().AutoMove();
-        }
-    }
     public void AutoMove()
     {
         // 自動
@@ -41,6 +29,7 @@ public class EnemyManager : MonoBehaviour
             //enemy.GetComponent<EnemyObject>().AutoMove();
             EnemyStateBase currentState = (EnemyStateBase)enemy.GetComponent<StateMachine>().GetCurrentState();
             currentState.AutoMove();
+            enemy.GetComponent<EnemyObject>().SetPositionFromPlayer();
         }
     }
 
@@ -52,6 +41,7 @@ public class EnemyManager : MonoBehaviour
         {
             // prefabからInstantiate
             GameObject instantEnemy = Instantiate(m_enemyPrefab);
+
             instantEnemy.transform.SetParent(m_enemyParent.transform);
 
             // 初期化

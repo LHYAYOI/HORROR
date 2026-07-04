@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SkyboxTransition_2 : MonoBehaviour
 {
@@ -78,6 +79,15 @@ public class SkyboxTransition_2 : MonoBehaviour
 
             // 反映
             ApplySkyboxTransition();
+        }
+
+        if (Keyboard.current.gKey.wasPressedThisFrame)
+        {
+            SetSkyboxRotation(90f);
+        }
+        if (Keyboard.current.hKey.wasPressedThisFrame)
+        {
+            SetSkyboxRotation(0f);
         }
     }
 
@@ -178,5 +188,18 @@ public class SkyboxTransition_2 : MonoBehaviour
 
         m_targetSkyboxMaterial.SetFloat(m_viewCenterUID, viewCenterU);
         m_targetSkyboxMaterial.SetFloat(m_viewCenterVID, viewCenterV);
+    }
+
+    // skyboxの回転を設定する
+    public void SetSkyboxRotation(float angle)
+    {
+        angle %= 360f;
+
+        if (angle < 0f)
+        {
+            angle += 360f;
+        }
+
+        RenderSettings.skybox.SetFloat("_Rotation", angle);
     }
 }
