@@ -136,7 +136,7 @@ public class CameraController : MonoBehaviour
 
             FreeCameraRotationProcess();
         }
-        else 
+        else
         {
             RotateCameraInputHandler();
         }
@@ -160,7 +160,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void EnableFreeCamera() 
+    public void EnableFreeCamera()
     {
         m_startRotation = new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y);
 
@@ -168,13 +168,13 @@ public class CameraController : MonoBehaviour
         m_rotationX = 0;
     }
 
-    private IEnumerator ResetToStartRotation() 
+    private IEnumerator ResetToStartRotation()
     {
         float elapsedTime = 0.0f;
 
         Quaternion rotation = transform.rotation;
 
-        while (elapsedTime < 0.3f) 
+        while (elapsedTime < 0.3f)
         {
             elapsedTime += Time.deltaTime;
 
@@ -188,7 +188,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void FreeCameraRotationProcess() 
+    public void FreeCameraRotationProcess()
     {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.unscaledDeltaTime * m_horizontalSensitivity;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.unscaledDeltaTime * m_verticalSensitivity;
@@ -206,7 +206,7 @@ public class CameraController : MonoBehaviour
         LimitBarProcess();
     }
 
-    private void LimitBarProcess() 
+    private void LimitBarProcess()
     {
         // 右側の限界へのアプローチ
         float rightLimit = m_minMaxHorizontalAngle.y;
@@ -274,7 +274,7 @@ public class CameraController : MonoBehaviour
         m_isRotating = false;
     }
 
-    public bool IsRotating() 
+    public bool IsRotating()
     {
         return m_isRotating;
     }

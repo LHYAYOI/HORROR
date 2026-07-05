@@ -28,11 +28,7 @@ public class KaiControler : MonoBehaviour,IPressable
 
     public void OnPressed()
     {
-        m_wasShoted = true;
-
-        m_kaiView.Hide();
-
-        GameManager.instance.CheckIfClearedGame();
+        Captured();
 
         Debug.Log("‰Ÿ‚³‚ê‚½");
     }
@@ -50,6 +46,15 @@ public class KaiControler : MonoBehaviour,IPressable
     public bool IsOnCamera() 
     {
         return m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.ON;
+    }
+
+    public void Captured() 
+    {
+        m_wasShoted = true;
+
+        m_kaiView.Hide();
+
+        GameManager.instance.CheckIfClearedGame();
     }
 
 }
