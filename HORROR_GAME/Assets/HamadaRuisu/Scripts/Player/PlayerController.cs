@@ -21,22 +21,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Material m_skyBoxMaterial;
     [SerializeField] EffectManager m_effectManager;
     [SerializeField] SkyboxTransition_2 m_transition;
+    [SerializeField] float m_captureDuration;
 
     [Header("カメラ周りの設定")]
     [SerializeField] CameraController m_cameraController;
 
     [SerializeField] LayerMask m_layerMask;
+    [SerializeField] LayerMask m_captureLayerMask;
 
     [SerializeField] Vector2Int m_startPosition;
     Vector2Int m_currentAreaIndex;
-
-    CAMERA_ON_OFF_STATE m_cameraOnOffState = CAMERA_ON_OFF_STATE.OFF;
 
     bool m_interactedKai = false;
 
     bool m_isDead = false;
 
     float m_currentFindRate = 1.0f;
+
+    float m_captureTimer = 0.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MoveRayHandler();
+
+        CaptureKaiProcess();
 
         m_PlayerView.UpdateBatteryPercentage(m_cameraController.GetMaxBatteryValue(), m_cameraController.GetCurrentBatteryValue());
 
@@ -116,6 +120,53 @@ public class PlayerController : MonoBehaviour
         {
             CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
         }
+    }
+
+    // カメラがオンの状態で、カメラに映っているカイを捕獲する処理
+    public void CaptureKaiProcess()
+    {
+        if (m_cameraController.GetCameraOnOffState() != CAMERA_ON_OFF_STATE.ON)
+        {
+            m_captureTimer = 0;
+            return;
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_captureLayerMask))
+        {
+            GameObject interactedObject = hit.collider.gameObject;
+
+            if (interactedObject.CompareTag("CaptureArea"))
+            {
+                CaptureAreaController captureAreaController = interactedObject.transform.parent.GetComponent<CaptureAreaController>();
+
+                if (!captureAreaController.IsCaptured())
+                {
+                    m_captureTimer += Time.deltaTime;
+
+                    if (m_captureTimer >= m_captureDuration)
+                    {
+                        captureAreaController.ConcludeCapture();
+                        m_captureTimer = m_captureDuration;
+                    }
+                }
+            }
+        }
+        else 
+        {
+            m_captureTimer -= Time.deltaTime * 2;
+
+            if (m_captureTimer < 0.0f)
+            {
+                m_captureTimer = 0.0f;
+            }
+        }
+
+        float rate = Mathf.Clamp01(m_captureTimer / m_captureDuration);
+
+        m_effectManager.SetDolyCameraEffectRate(Easing.OutCubic(rate));
     }
 
     public void MoveRayHandler() 
@@ -243,7 +294,7 @@ public class PlayerController : MonoBehaviour
         nextArea.gameObject.SetActive(true);
 
         //バッテリー回復
-        if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF)
+        if (m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.OFF)
         {
             m_cameraController.AddBattery();
         }
