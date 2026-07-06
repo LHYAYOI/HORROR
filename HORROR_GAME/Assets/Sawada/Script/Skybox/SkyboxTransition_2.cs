@@ -7,6 +7,8 @@ public class SkyboxTransition_2 : MonoBehaviour
     [Header("Panorama Textures")]
     [SerializeField] private Texture m_currentTexture;
     [SerializeField] private Texture m_nextTexture;
+    [Range(0, 360)]
+    [SerializeField] float m_currentAngle;
 
     [Header("Blend Settings")]
     [Range(0f, 1f)]
@@ -54,6 +56,7 @@ public class SkyboxTransition_2 : MonoBehaviour
 
     private void OnValidate()
     {
+        SetSkyboxRotation(m_currentAngle);
         ApplySkyboxTransition();
     }
 
@@ -102,8 +105,9 @@ public class SkyboxTransition_2 : MonoBehaviour
 
     private void ApplySkyboxTransition()
     {
-        if (m_targetSkyboxMaterial == null)
-            return;
+        if (m_targetSkyboxMaterial == null) return;
+
+        if (m_currentTexture == null) return;
 
         if (m_targetCamera == null)
             m_targetCamera = Camera.main;
@@ -189,6 +193,7 @@ public class SkyboxTransition_2 : MonoBehaviour
         m_targetSkyboxMaterial.SetFloat(m_viewCenterUID, viewCenterU);
         m_targetSkyboxMaterial.SetFloat(m_viewCenterVID, viewCenterV);
     }
+
 
     // skyboxの回転を設定する
     public void SetSkyboxRotation(float angle)
