@@ -57,8 +57,11 @@ public class EffectManager : MonoBehaviour
 
     public void SetDolyCameraEffectRate(float rate) 
     {
+        rate = Mathf.Clamp01(rate);
+
         Vector3 frontPosition = m_cameraStartPosition + m_camera.transform.forward * m_cameraMaxFrontDistance;
         m_camera.transform.position = Vector3.Lerp(m_cameraStartPosition, frontPosition, rate);
         m_camera.Lens.FieldOfView = Mathf.Lerp(m_startFOV, m_maxCameraFOV, rate);
+        CameraShake.Instanse.CaptureShake(rate);
     }
 }

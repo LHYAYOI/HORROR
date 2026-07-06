@@ -138,17 +138,17 @@ public class PlayerController : MonoBehaviour
         {
             GameObject interactedObject = hit.collider.gameObject;
 
-            if (interactedObject.CompareTag("CaptureArea"))
+            if (interactedObject.CompareTag("Kai"))
             {
-                CaptureAreaController captureAreaController = interactedObject.transform.parent.GetComponent<CaptureAreaController>();
+                KaiControler KaiController = interactedObject.transform.GetComponent<KaiControler>();
 
-                if (!captureAreaController.IsCaptured())
+                if (!KaiController.WasShot())
                 {
                     m_captureTimer += Time.deltaTime;
 
                     if (m_captureTimer >= m_captureDuration)
                     {
-                        captureAreaController.ConcludeCapture();
+                        KaiController.Captured();
                         m_captureTimer = m_captureDuration;
                     }
                 }
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
-            m_captureTimer -= Time.deltaTime * 2;
+            m_captureTimer -= Time.deltaTime * 4;
 
             if (m_captureTimer < 0.0f)
             {
