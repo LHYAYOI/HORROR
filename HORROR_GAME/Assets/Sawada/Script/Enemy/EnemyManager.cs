@@ -57,5 +57,23 @@ public class EnemyManager : MonoBehaviour
             // 追加
             m_spawnedEnemyList.Add(instantEnemy);
         }
+
+        SetView();
+    }
+
+    // 可視 不可視
+    public void SetView()
+    {
+        foreach (var enemy in m_spawnedEnemyList)
+        {
+            enemy.GetComponent<EnemyController>().ViewSet();
+        }
+    }
+    public void SetView(bool viewFlag)
+    {
+        foreach (var enemy in m_spawnedEnemyList)
+        {
+            enemy.GetComponent<EnemyController>().ViewSet(viewFlag);
+        }
     }
 }
