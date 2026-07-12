@@ -35,33 +35,44 @@ public class StorySequenceController : MonoBehaviour
     private SceneReference m_nextSceneReference =
         new SceneReference();
 
+    [Header("フェード")]
+    [SerializeField] private CanvasGroup m_fadeCanvasGroup;
+    [SerializeField, Min(0.0f)] private float m_fadeOutDuration = 1.0f;
+
     [Header("入力設定")]
     [SerializeField] private bool m_enableInputFlag = true;
+
+    [Header("開始設定")]
+    [SerializeField] private bool m_playOnStartFlag = true;
 
     private int m_currentMessageIndex;
     private bool m_typingFlag;
     private bool m_loadingFlag;
+    private bool m_sequenceStartedFlag;
     private Coroutine m_typingCoroutine;
 
     private void Start()
     {
-        if (!ValidateSettings())
+        if (!m_playOnStartFlag)
         {
-            enabled = false;
             return;
         }
 
-        ShowMessage(0);
+        BeginSequence();
     }
 
     private void Update()
     {
-        if (!m_enableInputFlag || m_loadingFlag)
+        if (!m_sequenceStartedFlag ||
+        !m_enableInputFlag ||
+        m_loadingFlag)
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0) ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetKeyDown(KeyCode.Return))
         {
             AdvanceMessage();
         }
@@ -168,10 +179,50 @@ public class StorySequenceController : MonoBehaviour
             return;
         }
 
+        if (m_loadingFlag)
+        {
+            return;
+        }
+
+
+        StartCoroutine(LoadNextSceneCoroutine());
+    }
+
+    private IEnumerator LoadNextSceneCoroutine()
+    {
         m_loadingFlag = true;
+        SetNextHintActive(false);
+
+        yield return FadeOut();
 
         SceneManager.LoadScene(
             m_nextSceneReference.GetScenePath());
+    }
+
+    private IEnumerator FadeOut()
+    {
+        if (m_fadeCanvasGroup == null ||
+            m_fadeOutDuration <= 0.0f)
+        {
+            yield break;
+        }
+
+        m_fadeCanvasGroup.gameObject.SetActive(true);
+        m_fadeCanvasGroup.blocksRaycasts = true;
+
+        float timer = 0.0f;
+
+        while (timer < m_fadeOutDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            float rate = Mathf.Clamp01(timer / m_fadeOutDuration);
+            m_fadeCanvasGroup.alpha = rate;
+
+            yield return null;
+        }
+
+        m_fadeCanvasGroup.alpha = 1.0f;
     }
 
     private void SetNextHintActive(bool activeFlag)
@@ -206,5 +257,24 @@ public class StorySequenceController : MonoBehaviour
         }
 
         return validFlag;
+    }
+
+
+
+    public void BeginSequence()
+    {
+        if (!ValidateSettings())
+        {
+            enabled = false;
+            return;
+        }
+
+        m_sequenceStartedFlag = true;
+
+        m_currentMessageIndex = 0;
+        m_typingFlag = false;
+        m_loadingFlag = false;
+
+        ShowMessage(0);
     }
 }
