@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         if (m_kaiManager.IsAllCaptured())
         {
-            m_sceneLoader.LoadGameClearScene();
+            //m_sceneLoader.LoadGameClearScene();
         }
     }
 
