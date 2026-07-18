@@ -131,7 +131,12 @@ public class EnemyObject : MonoBehaviour
     // Playerが視界にいるのか?
     public bool CheckPlayerInSight()
     {
-        if (!m_defaultEnemy.CanChaseTarget(m_currentAreaIndex, m_playerController.GetCurrentIndex())) return false;
+        // 見えない
+        if (!m_defaultEnemy.CanChaseTarget(m_currentAreaIndex, m_playerController.GetCurrentIndex(), m_areaManager.GetMapData()))
+        {
+            GetComponent<EnemyView>().Hide();
+            return false;
+        }
 
         // Areaが行動可能か 未定
         if (CheckEnemyMovePosition(m_playerController.GetCurrentIndex()))

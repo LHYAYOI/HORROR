@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Vector2 m_minMaxVerticalAngle;
     [SerializeField] EffectManager m_effectManager;
     [SerializeField] PlayerController m_playerController;
+    [SerializeField] EnemyManager m_enemyManager;
 
     CAMERA_ON_OFF_STATE m_cameraOnOffState = CAMERA_ON_OFF_STATE.OFF;
 
@@ -115,6 +116,9 @@ public class CameraController : MonoBehaviour
 
                 break;
         }
+
+        // 変更
+        m_enemyManager.SetView();
     }
 
     private void CameraStateProcess()

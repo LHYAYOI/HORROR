@@ -107,7 +107,7 @@ public class DefaultEnemy : ScriptableObject
     }
 
     // targetを追いかけるか判定
-    public bool CanChaseTarget(Vector2Int current, Vector2Int target)
+    public bool CanChaseTarget(Vector2Int current, Vector2Int target, MapData mapData)
     {
         switch (m_searchMethod)
         {
@@ -126,24 +126,58 @@ public class DefaultEnemy : ScriptableObject
 
             case SearchMethod.line:
                 {
-                    int differenceX = Mathf.Abs(current.x - target.x);
-                    int differenceY = Mathf.Abs(current.y - target.y);
+                    Vector2Int difference = current - target;
+                    Vector2Int differenceAbs = new(Math.Abs(difference.x), Math.Abs(difference.y));
+                    int diff = 0;
 
                     bool sameColumn =
-                        differenceX == 0 &&
-                        differenceY <= m_searchRange;
+                        differenceAbs.x == 0 &&
+                        differenceAbs.y <= m_searchRange;
 
                     bool sameRow =
-                        differenceY == 0 &&
-                        differenceX <= m_searchRange;
+                        differenceAbs.y == 0 &&
+                        differenceAbs.x <= m_searchRange;
 
-                    if (sameColumn || sameRow)
+                    if (!sameColumn && !sameRow) return false;
+
+                    if (sameColumn)
                     {
-                        //Debug.Log("line");
+                        diff = differenceAbs.y;
+                    }
+                    else if (sameRow)
+                    {
+                        diff = differenceAbs.x;
+                    }
+                    /*if (sameColumn || sameRow)
+                    {
                         return true;
+                    }:*/
+
+                    // 一マスずつ確認
+                    for (int i = 0; i < differenceAbs.x; i++)
+                    {
+                        for (int j = 0; j < m_noAreaData.Count; j++)
+                        {
+                            if (mapData.GetArea(current + new Vector2Int(i, 0)).GetAreaName() == m_noAreaData[j].GetAreaName())
+                            {
+                                Debug.Log("障害物あり x");
+                                return false;
+                            }
+                        }
+                    }
+                    for (int i = 0; i < differenceAbs.y; i++)
+                    {
+                        for (int j = 0; j < m_noAreaData.Count; j++)
+                        {
+                            if (mapData.GetArea(current + new Vector2Int(0, i)).GetAreaName() == m_noAreaData[j].GetAreaName())
+                            {
+                                Debug.Log("障害物あり y");
+                                return false;
+                            }
+                        }
                     }
 
-                    break;
+                    return true;
                 }
         }
 

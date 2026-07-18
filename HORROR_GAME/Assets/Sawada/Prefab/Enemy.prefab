@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 4888164912630154047}
   - component: {fileID: 6892785503774537832}
   - component: {fileID: -2251294918977676570}
+  - component: {fileID: 8388731930784738949}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Kai
@@ -318,6 +319,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateMachine
   m_stateList: []
+--- !u!114 &8388731930784738949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8225024576487716264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259d6ea2b212a2f4c895793749e492ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::testAstar
 --- !u!1001 &7321621611815815632
 PrefabInstance:
   m_ObjectHideFlags: 0

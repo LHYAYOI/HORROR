@@ -14,7 +14,23 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.ON) 
+    }
+
+    public void ViewSet()
+    {
+        Debug.Log(m_cameraController.GetCameraOnOffState());
+        if (m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.ON)
+        {
+            m_enemyView.Show();
+        }
+        else
+        {
+            m_enemyView.Hide();
+        }
+    }
+    public void ViewSet(bool viewFlag)
+    {
+        if (viewFlag)
         {
             m_enemyView.Show();
         }
