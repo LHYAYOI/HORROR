@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] EffectManager m_effectManager;
     [SerializeField] SkyboxTransition_2 m_transition;
     [SerializeField] float m_captureDuration;
+    [SerializeField] float m_captureCoolDownDuration;
 
     [Header("カメラ周りの設定")]
     [SerializeField] CameraController m_cameraController;
@@ -35,6 +36,10 @@ public class PlayerController : MonoBehaviour
     bool m_interactedKai = false;
 
     bool m_isDead = false;
+
+    bool m_captureCoolDown = false;
+
+    float m_cooldownTime = 0;
 
     float m_currentFindRate = 1.0f;
 
@@ -62,6 +67,8 @@ public class PlayerController : MonoBehaviour
         MoveRayHandler();
 
         CaptureKaiProcess();
+
+        CoolDownCaptureProcess();
 
         m_PlayerView.UpdateBatteryPercentage(m_cameraController.GetMaxBatteryValue(), m_cameraController.GetCurrentBatteryValue());
 
@@ -125,7 +132,7 @@ public class PlayerController : MonoBehaviour
     // カメラがオンの状態で、カメラに映っているカイを捕獲する処理
     public void CaptureKaiProcess()
     {
-        if (m_cameraController.GetCameraOnOffState() != CAMERA_ON_OFF_STATE.ON)
+        if (m_cameraController.GetCameraOnOffState() != CAMERA_ON_OFF_STATE.ON || m_captureCoolDown)
         {
             m_captureTimer = 0;
             return;
@@ -138,17 +145,17 @@ public class PlayerController : MonoBehaviour
         {
             GameObject interactedObject = hit.collider.gameObject;
 
-            if (interactedObject.CompareTag("CaptureArea"))
+            if (interactedObject.CompareTag("Kai"))
             {
-                CaptureAreaController captureAreaController = interactedObject.transform.parent.GetComponent<CaptureAreaController>();
+                KaiControler KaiController = interactedObject.transform.GetComponent<KaiControler>();
 
-                if (!captureAreaController.IsCaptured())
+                if (!KaiController.WasShot())
                 {
                     m_captureTimer += Time.deltaTime;
 
                     if (m_captureTimer >= m_captureDuration)
                     {
-                        captureAreaController.ConcludeCapture();
+                        KaiController.Captured();
                         m_captureTimer = m_captureDuration;
                     }
                 }
@@ -156,7 +163,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
-            m_captureTimer -= Time.deltaTime * 2;
+            m_captureTimer -= Time.deltaTime * 4;
 
             if (m_captureTimer < 0.0f)
             {
@@ -167,6 +174,33 @@ public class PlayerController : MonoBehaviour
         float rate = Mathf.Clamp01(m_captureTimer / m_captureDuration);
 
         m_effectManager.SetDolyCameraEffectRate(Easing.OutCubic(rate));
+
+        //クールダウン開始
+        if (rate >= 1) 
+        {
+            m_captureCoolDown = true;
+            m_effectManager.ResetFromCaptureEffect();
+        }
+    }
+
+    private void CoolDownCaptureProcess() 
+    {
+        if (!m_captureCoolDown) 
+        {
+            return;
+        }
+
+        m_cooldownTime += Time.deltaTime;
+
+        float rate = Mathf.Clamp01(m_cooldownTime / m_captureCoolDownDuration);
+
+        m_effectManager.SnowNoiseEffect(Easing.OutCubic(1 - rate));
+
+        if (rate >= 1) 
+        {
+            m_captureCoolDown = false;
+            m_cooldownTime = 0.0f;
+        }
     }
 
     public void MoveRayHandler() 

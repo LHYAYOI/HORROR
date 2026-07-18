@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class KaiControler : MonoBehaviour,IPressable
+public class KaiControler : MonoBehaviour
 {
     [SerializeField] KaiView m_kaiView;
+    [SerializeField] Collider m_collider;
     CameraController m_cameraController;
 
     bool m_wasShoted = false;
@@ -19,23 +20,13 @@ public class KaiControler : MonoBehaviour,IPressable
         if (IsOnCamera() && !m_wasShoted)
         {
             m_kaiView.Show();
+            m_collider.enabled = true;
         }
         else
         {
             m_kaiView.Hide();
+            m_collider.enabled = false;
         }
-    }
-
-    public void OnPressed()
-    {
-        Captured();
-
-        Debug.Log("‰Ÿ‚³‚ê‚½");
-    }
-
-    public void OnReleased()
-    {
-        Debug.Log("—£‚µ‚½");
     }
 
     public bool WasShot() 
@@ -51,6 +42,8 @@ public class KaiControler : MonoBehaviour,IPressable
     public void Captured() 
     {
         m_wasShoted = true;
+
+        m_collider.enabled = false;
 
         m_kaiView.Hide();
 

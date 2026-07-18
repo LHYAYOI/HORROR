@@ -7,6 +7,7 @@ public class EffectManager : MonoBehaviour
 {
     [Header("画面のエフェクト")]
     [SerializeField] FullScreenPassRendererFeature m_cameraPostEffectFeature;
+    [SerializeField] Material m_materialPostEffectMaterial;
     [SerializeField] Volume m_volume;
 
     [Header("ドリーカメラエフェクト")]
@@ -43,6 +44,13 @@ public class EffectManager : MonoBehaviour
     void Update()
     {
         SetDolyCameraEffectRate(0);
+
+        if (Input.GetKeyDown(KeyCode.U)) 
+        {
+            
+        }
+
+ 
     }
 
     public void SetCameraPostEffectFlag(bool flag)
@@ -57,8 +65,30 @@ public class EffectManager : MonoBehaviour
 
     public void SetDolyCameraEffectRate(float rate) 
     {
+        rate = Mathf.Clamp01(rate);
+
         Vector3 frontPosition = m_cameraStartPosition + m_camera.transform.forward * m_cameraMaxFrontDistance;
         m_camera.transform.position = Vector3.Lerp(m_cameraStartPosition, frontPosition, rate);
         m_camera.Lens.FieldOfView = Mathf.Lerp(m_startFOV, m_maxCameraFOV, rate);
+        CameraShake.Instanse.CaptureShake(rate);
+
+        SnowNoiseEffect(rate);
+    }
+
+    public void SnowNoiseEffect(float rate) 
+    {
+        float maskIntensity = Mathf.Abs(rate - 0.5f) * 2f * 1.1f;
+        int isSnowActive = rate >= 0.5f ? 1 : 0;
+
+        m_materialPostEffectMaterial.SetFloat("_MaskIntensity", maskIntensity);
+
+        m_materialPostEffectMaterial.SetInt("_SnowNoise_On_Off", isSnowActive);
+    }
+
+    public void ResetFromCaptureEffect()
+    {
+        m_camera.transform.position = m_cameraStartPosition;
+        m_camera.Lens.FieldOfView = m_startFOV;
+        CameraShake.Instanse.CaptureShake(0);
     }
 }
