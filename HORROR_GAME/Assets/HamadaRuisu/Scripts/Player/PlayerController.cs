@@ -56,9 +56,11 @@ public class PlayerController : MonoBehaviour
         ChangeSate("NormalState");
 
         //テクスチャの取得
-        MapData m_MapData = m_AreaManager.GetMapData();
-        Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
-        m_transition.SetNextTexture(currentAreaTexture);
+        //MapData m_MapData = m_AreaManager.GetMapData();
+        //Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
+        //m_transition.SetNextTexture(currentAreaTexture);
+
+        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y)));
     }
 
     // Update is called once per frame
@@ -235,7 +237,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y - 1)));
+        TryMove(Vector2Int.up);
     }
 
 
@@ -246,7 +248,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y + 1)));
+        TryMove(Vector2Int.down);
     }
 
     public void MoveRight()
@@ -256,7 +258,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x + 1, m_currentAreaIndex.y)));
+        TryMove(Vector2Int.right);
     }
 
     public void MoveLeft()
@@ -266,7 +268,34 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x - 1, m_currentAreaIndex.y)));
+        TryMove(Vector2Int.left);
+    }
+
+    private void TryMove(Vector2Int direction)
+    {
+        if (m_isDead) return;
+
+        //配列用に方向修正
+        Vector2Int adjustedDirection = new Vector2Int(direction.x, -direction.y);
+
+        int moveAmount = 1;
+        Vector2Int moveIndex = m_currentAreaIndex + (adjustedDirection * moveAmount);
+
+        MapData m_MapData = m_AreaManager.GetMapData();
+        AreaController nextArea = m_MapData.GetArea(moveIndex);
+
+        // スキップタイプじゃないエリアに当たるまで、方向に向かって進み続ける
+        while (nextArea != null && nextArea.GetAreaType() == AREA_TYPE.SKIPPABLE)
+        {
+            moveAmount++;
+            moveIndex = m_currentAreaIndex + (adjustedDirection * moveAmount);
+            nextArea = m_MapData.GetArea(moveIndex);
+        }
+
+        if (nextArea != null)
+        {
+            StartCoroutine(MoveArea(moveIndex));
+        }
     }
 
     public void ChangeSate(string stateName)
@@ -314,6 +343,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator MoveArea(Vector2Int moveIndex)
     {
+        Debug.Log("移動");
+
         MapData m_MapData = m_AreaManager.GetMapData();
 
         AreaController currentArea = m_MapData.GetArea(m_currentAreaIndex);
@@ -341,6 +372,8 @@ public class PlayerController : MonoBehaviour
         m_currentAreaIndex = moveIndex;
 
         m_transition.SetNextTexture(nextAreaTexture);
+
+        m_transition.SetSkyboxRotation(nextArea.GetAreaRotation());
 
         m_enemyManager.AutoMove();
     }

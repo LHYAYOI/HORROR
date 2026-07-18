@@ -24,6 +24,11 @@ public class MapData : MonoBehaviour
             return null;
         }
 
+        if (m_areaData == null) 
+        {
+            return null;
+        }
+
         int targetIndex = index.y * m_width + index.x;
 
         if (targetIndex >= m_areaData.Count) 

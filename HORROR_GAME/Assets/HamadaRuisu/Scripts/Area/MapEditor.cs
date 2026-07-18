@@ -30,55 +30,102 @@ public class MapDataEditor : Editor
         {
             Resize(map, newWidth, newHeight);
             EditorUtility.SetDirty(map);
+            // サイズ変更後はすぐにインスペクターを再描画させてバグを防ぐ
+            AssetDatabase.SaveAssets();
+            return;
         }
 
         // 選択タイプ
         EditorGUILayout.Space();
-
         selectedType = (AreaController)EditorGUILayout.ObjectField("PaintArea", selectedType, typeof(AreaController), true);
-
         EditorGUILayout.Space();
 
+        // ★デフォルトの色を保存しておく（これがないと他のUIまで全部変な色になる）
+        Color defaultColor = GUI.backgroundColor;
+
         // グリッド描画
-        for (int y = 0; y < map.GetHeight(); y++)
+        // 現在のマップの最新のサイズを変数に入れておく
+        int currentHeight = map.GetHeight();
+        int currentWidth = map.GetWidth();
+
+        for (int y = 0; y < currentHeight; y++)
         {
             EditorGUILayout.BeginHorizontal();
 
-            for (int x = 0; x < map.GetWidth(); x++)
+            for (int x = 0; x < currentWidth; x++)
             {
-                // 色分け(テクスチャの方がいいかも？)
-                if (map.GetArea(new Vector2Int(x, y)) != null)  
-                {
-                    GUI.backgroundColor = Color.red;
-                }
-                else
+                Vector2Int pos = new Vector2Int(x, y);
+                AreaController area = map.GetArea(pos);
+
+                // もしデータが空（null）なら白にする
+                if (area == null)
                 {
                     GUI.backgroundColor = Color.white;
                 }
-
-                if (GUILayout.Button("", GUILayout.Width(25), GUILayout.Height(25)))
+                else
                 {
-                    map.SetArea(new Vector2Int(x, y), selectedType);
-                    map.GetArea(new Vector2Int(x, y)).SetAreaPosition(new Vector2Int(x, y));
-                    EditorUtility.SetDirty(map);
+                    // タイプによって色分け
+                    switch (area.GetAreaType())
+                    {
+                        case AREA_TYPE.PASSABLE: GUI.backgroundColor = Color.red; break;
+                        case AREA_TYPE.SKIPPABLE: GUI.backgroundColor = Color.blue; break;
+                        case AREA_TYPE.WALL: GUI.backgroundColor = Color.purple; break;
+                        default: GUI.backgroundColor = Color.white; break;
+                    }
+                }
+
+                // ボタンのテキストに「空なら●、あれば頭文字」などを出すと分かりやすいよ
+                string btnText = area != null ? area.GetAreaName() : "?";
+
+                if (GUILayout.Button(btnText, GUILayout.Width(30), GUILayout.Height(30)))
+                {
+                    if (selectedType != null)
+                    {
+                        map.SetArea(pos, selectedType);
+                        // インスタンス化されたコンポーネントがある場合のみ位置をセット
+                        if (map.GetArea(pos) != null)
+                        {
+                            map.GetArea(pos).SetAreaPosition(pos);
+                        }
+                        EditorUtility.SetDirty(map);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("PaintArea に AreaController がセットされていません！");
+                    }
                 }
             }
 
             EditorGUILayout.EndHorizontal();
         }
+
+        // ★変更したボタンの色を元に戻す
+        GUI.backgroundColor = defaultColor;
     }
 
     public void Resize(MapData map, int newWidth, int newHeight)
     {
-        // 新しいサイズのリストを作成
-        List<AreaController> newData = new List<AreaController>(new AreaController[newWidth * newHeight]);
+        if (map == null) return;
+        if (newHeight < 0 || newWidth < 0) return;
 
-        // 既にあるデータを新しいリストにコピー（既に作ってたものを消さないため）
-        for (int y = 0; y < Mathf.Min(map.GetHeight(), newHeight); y++)
+        // 新しいサイズのリストを作成
+        List<AreaController> newData = new List<AreaController>(newWidth * newHeight);
+
+        // 1次元配列（リスト）を正しく初期化（nullで埋める）
+        for (int i = 0; i < newWidth * newHeight; i++)
         {
-            for (int x = 0; x < Mathf.Min(map.GetWidth(), newWidth); x++)
+            newData.Add(null);
+        }
+
+        // 既にあるデータを新しいリストにコピー（インデックス計算を厳密に！）
+        int oldWidth = map.GetWidth();
+        int oldHeight = map.GetHeight();
+
+        for (int y = 0; y < Mathf.Min(oldHeight, newHeight); y++)
+        {
+            for (int x = 0; x < Mathf.Min(oldWidth, newWidth); x++)
             {
-                newData[y * newWidth + x] = map.GetArea(new Vector2Int(x, y)); ;
+                newData[y * newWidth + x] = map.GetArea(new Vector2Int(x, y));
             }
         }
 
@@ -86,19 +133,6 @@ public class MapDataEditor : Editor
         map.SetWidth(newWidth);
         map.SetHeight(newHeight);
         map.SetAreaData(newData);
-    }
-
-    public void DebugArea(MapData map, Vector2Int index)
-    {
-        AreaController data = map.GetArea(index);
-
-        if (data == null)
-        {
-            Debug.Log("この要素には何もありません");
-            return;
-        }
-
-        Debug.Log($"Area at ({index.x}, {index.y}): {data.GetAreaName()}");
     }
 }
 #endif

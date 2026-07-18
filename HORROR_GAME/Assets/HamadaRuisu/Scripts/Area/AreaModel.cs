@@ -3,13 +3,15 @@ using UnityEngine;
 public enum AREA_TYPE
 {
     PASSABLE,
-    WALL
+    WALL,
+    SKIPPABLE
 }
 
 public class AreaModel : MonoBehaviour
 {
     [SerializeField] AREA_TYPE m_areaType;
     [SerializeField] string m_areaName;
+    [SerializeField] float m_areaRotation;
     [SerializeField] Texture m_skyboxTexture;
 
     private Vector2Int m_areaPosition;
@@ -26,5 +28,10 @@ public class AreaModel : MonoBehaviour
     public void SetAreaPosition(Vector2Int position) 
     {
         m_areaPosition = position;
+    }
+
+    public float GetAreaRotation() 
+    {
+        return m_areaRotation;
     }
 }

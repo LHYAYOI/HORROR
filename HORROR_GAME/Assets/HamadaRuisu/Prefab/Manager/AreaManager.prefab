@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2832862442106668969}
   - component: {fileID: 3035869119240300729}
-  - component: {fileID: 3592641143922480264}
+  - component: {fileID: 3275170373725902316}
   m_Layer: 0
   m_Name: AreaManager
   m_TagString: Untagged
@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a2cf6797df5b1489bdf7f53f7b8faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaManager
-  m_MapData: {fileID: 3592641143922480264}
+  m_MapData: {fileID: 3275170373725902316}
   m_PlayerController: {fileID: 0}
---- !u!114 &3592641143922480264
+--- !u!114 &3275170373725902316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ad16b4adaae4f4cbb1b1e3c78f0511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapData
-  m_width: 5
+  m_width: 6
   m_height: 4
   m_areaData:
   - {fileID: 0}
@@ -68,17 +68,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
-  - {fileID: 0}
-  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
-  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
-  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 4142723487628541978, guid: b4ce1ac9681a25b4cac74781e6bca9f3, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}

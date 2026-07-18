@@ -20,4 +20,9 @@ public class AreaController : MonoBehaviour
     {
         m_model.SetAreaPosition(position);
     } 
+
+    public float GetAreaRotation()
+    {
+        return m_model.GetAreaRotation();
+    }
 }
