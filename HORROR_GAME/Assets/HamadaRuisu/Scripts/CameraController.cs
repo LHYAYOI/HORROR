@@ -260,6 +260,8 @@ public class CameraController : MonoBehaviour
     {
         m_isRotating = true;
 
+        AudioManagerHamada.instance.Play("Rotate");
+
         float elapsedTime = 0f;
 
         Quaternion startRotation = transform.rotation;
