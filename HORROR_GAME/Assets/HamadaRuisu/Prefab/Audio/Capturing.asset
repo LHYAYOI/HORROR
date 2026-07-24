@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioData
   m_audioName: Capturing
   m_audioClip: {fileID: 8300000, guid: e96d551bd3038714e9d60f2afa007b8c, type: 3}
-  m_loop: 0
-  m_volume: 1
+  m_loop: 1
+  m_volume: 0.2

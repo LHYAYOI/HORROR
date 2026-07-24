@@ -60,6 +60,7 @@ public class AudioManagerHamada : MonoBehaviour
 
         availableSource.volume = playAudio.GetVolume();
         availableSource.clip = playAudio.GetAudioClip();
+        availableSource.loop = playAudio.IsLoop();
         availableSource.Play();
 
         playAudio.BindAudioSource(availableSource);

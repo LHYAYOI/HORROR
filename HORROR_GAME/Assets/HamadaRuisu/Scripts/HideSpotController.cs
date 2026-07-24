@@ -19,6 +19,8 @@ public class HideSpotController : MonoBehaviour, IPressable
 
     public void OnPressed()
     {
+        AudioManagerHamada.instance.Play("Hide");
+
         m_player.ChangeSate("HideState");
 
         m_animator.SetTrigger("StartFade");

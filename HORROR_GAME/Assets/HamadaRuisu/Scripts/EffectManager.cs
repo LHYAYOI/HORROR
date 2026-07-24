@@ -37,20 +37,13 @@ public class EffectManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      
+        AudioManagerHamada.instance.Play("SnowNoise");
     }
 
     // Update is called once per frame
     void Update()
     {
         SetDolyCameraEffectRate(0);
-
-        if (Input.GetKeyDown(KeyCode.U)) 
-        {
-            
-        }
-
- 
     }
 
     public void SetCameraPostEffectFlag(bool flag)
@@ -79,6 +72,8 @@ public class EffectManager : MonoBehaviour
     {
         float maskIntensity = Mathf.Abs(rate - 0.5f) * 2f * 1.1f;
         int isSnowActive = rate >= 0.5f ? 1 : 0;
+
+        AudioManagerHamada.instance.SetVolume("SnowNoise", rate);
 
         m_materialPostEffectMaterial.SetFloat("_MaskIntensity", maskIntensity);
 

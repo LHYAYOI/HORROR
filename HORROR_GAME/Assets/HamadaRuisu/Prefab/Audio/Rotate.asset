@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rotate
   m_EditorClassIdentifier: Assembly-CSharp::AudioData
   m_audioName: Rotate
-  m_audioClip: {fileID: 8300000, guid: 80d015c36a88d4e4faf98d2b67d1f4a5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 29a5a7006ea2de944b5c4a20c3a4056e, type: 3}
   m_loop: 0
   m_volume: 1

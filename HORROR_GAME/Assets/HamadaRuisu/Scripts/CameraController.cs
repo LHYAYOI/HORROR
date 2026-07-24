@@ -88,13 +88,16 @@ public class CameraController : MonoBehaviour
 
     public void ChangeCameraOnOffState(CAMERA_ON_OFF_STATE state)
     {
-        Debug.Log("ステート変わるよ");
-
         m_cameraOnOffState = state;
 
         switch (m_cameraOnOffState)
         {
             case CAMERA_ON_OFF_STATE.ON:
+
+                AudioManagerHamada.instance.Play("CameraOn");
+
+                AudioManagerHamada.instance.Play("Capturing");
+
 
                 m_effectManager.SetCameraPostEffectFlag(true);
 
@@ -105,6 +108,10 @@ public class CameraController : MonoBehaviour
                 break;
 
             case CAMERA_ON_OFF_STATE.OFF:
+
+                AudioManagerHamada.instance.Stop("Capturing");
+
+                AudioManagerHamada.instance.Play("CameraOff");
 
                 SetCurrentDrainTime(0);
 

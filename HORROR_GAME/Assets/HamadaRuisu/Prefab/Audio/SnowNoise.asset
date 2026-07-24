@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioData
   m_audioName: SnowNoise
   m_audioClip: {fileID: 8300000, guid: 7b8d8a575cae6354f8215a9da3fe36e2, type: 3}
-  m_loop: 0
-  m_volume: 1
+  m_loop: 1
+  m_volume: 0

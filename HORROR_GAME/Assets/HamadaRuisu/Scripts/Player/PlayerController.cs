@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     bool m_isDead = false;
 
+    bool m_isCapturing = false;
+
     bool m_captureCoolDown = false;
 
     float m_cooldownTime = 0;
@@ -182,7 +184,13 @@ public class PlayerController : MonoBehaviour
         {
             m_captureCoolDown = true;
             m_effectManager.ResetFromCaptureEffect();
+            Invoke("PlayCaptureCompletedAud", .5f);
         }
+    }
+
+    private void PlayCaptureCompletedAud() 
+    {
+        AudioManagerHamada.instance.Play("CaptureComplete");
     }
 
     private void CoolDownCaptureProcess() 
@@ -274,6 +282,8 @@ public class PlayerController : MonoBehaviour
     private void TryMove(Vector2Int direction)
     {
         if (m_isDead) return;
+
+        AudioManagerHamada.instance.Play("Move");
 
         //配列用に方向修正
         Vector2Int adjustedDirection = new Vector2Int(direction.x, -direction.y);

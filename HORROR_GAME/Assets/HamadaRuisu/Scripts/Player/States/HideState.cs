@@ -25,6 +25,8 @@ public class HideState:StateBase
     {
         if (Input.GetMouseButtonDown(0))
         {
+            AudioManagerHamada.instance.Play("Hide");
+
             m_controller.GetHideAnimator().SetTrigger("StartFade");
             m_controller.GetStateMachine().ChangeState("NormalState");
         }
