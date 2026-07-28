@@ -3,16 +3,20 @@ using UnityEngine;
 
 public class TesterController : MonoBehaviour
 {
-    
-    public CriAudioController audioController;
-
     bool isPause = false;
 
+    public CriAudioController audioController;
+    
     private float vol=0.5f;
 
+
+    private void Start()
+    {
+        // audioController.ChangeSourceVolume(5);
+        audioController.UpdateVolumeByDistance();
+    }
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             //Sourceを再生
@@ -22,29 +26,26 @@ public class TesterController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //Sourceを再生
-            audioController.ChangeVolume("カメラをしまう", vol);
+            audioController.ChangeVolume(2, vol);
 
-            audioController.PlaySound("カメラをしまう",false);
+            audioController.PlaySound(2,false);
         }
-
         // ==================================
         // 個別音量調整
         // ==================================
-
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             vol += 0.05f;
             if(vol > 1.0f) vol = 1.0f;
-            audioController.ChangeVolume("カメラをしまう", vol);
+            audioController.ChangeVolume(2, vol);
             Debug.Log("音量変更 vol=" + vol);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             vol -= 0.05f;
             if(vol < 0.0f) vol = 0.0f;
-            audioController.ChangeVolume("カメラをしまう", vol);
+            audioController.ChangeVolume(2, vol);
         }
-
         // ==================================
         // 音源との距離による音量調整のテスト
         // ==================================
@@ -92,15 +93,24 @@ public class TesterController : MonoBehaviour
             if(isPause == false) {
                 //Sourceを一時停止
                 audioController.PauseSound(10);
-                audioController.PauseSound(0);
+                // 再生停止
+                audioController.StopSound(2);
                 isPause = true;
+                Debug.Log("Pause");
             }
             else
             {
                 //Sourceを再生
                 audioController.ResumeSound(10);
                 isPause = false;
+                Debug.Log("Resume");
             }
+        }
+
+        // 再生停止
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            audioController.StopAllSound();
         }
 
 

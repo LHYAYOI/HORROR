@@ -2,6 +2,7 @@
 using CriWare.Assets;
 using System.Collections.Generic;
 using UnityEngine;
+using static CriWare.CriProfiler;
 
 
 [RequireComponent(typeof(CriAtomSourceForAsset))]
@@ -13,7 +14,8 @@ public class CriAudioController : MonoBehaviour
     public CriAtomSourceForAsset soundSource;
 
     // 再生中の音声の情報を保持する辞書（キュー名またはIDをキーとして、再生インスタンスを保持）
-    private Dictionary<string, CriAtomExPlayback> playbackDict = new Dictionary<string, CriAtomExPlayback>();
+    // 1つのキーに対して、複数のPlaybackを「リスト」で保持
+    private Dictionary<string, List<CriAtomExPlayback>> playbackDict = new Dictionary<string, List<CriAtomExPlayback>>();    
     // キュー名またはIDをキーとして、音量を保持する辞書（必要に応じて使用）
     private Dictionary<string, float> savedVolumeDict = new Dictionary<string, float>();
 
@@ -33,7 +35,7 @@ public class CriAudioController : MonoBehaviour
 
     // もともとのデフォルト音量を記憶する変数
     private float currentSourceVolumeMultiplier = 1.0f;
-
+    private bool isDynamicVolumeMode = true;
 
     [Header("Distance Attenuation Settings")]
     [Tooltip("最小距離（これより近いと音量最大）")]
@@ -57,7 +59,7 @@ public class CriAudioController : MonoBehaviour
     {
 
 
-        // リスナーとの距離に応じて音量を計算して変更する→何か変更が起きた場合にのみ音量を変更したいけど…('ω')
+        // リスナーとの距離に応じて音量を計算して変更する→何か変更が起きた場合にのみ音量を変更したい
         //UpdateVolumeByDistance();
 
 
@@ -65,7 +67,9 @@ public class CriAudioController : MonoBehaviour
         List<string> removeList = new List<string>();
         foreach (var kvp in playbackDict)
         {
-            if (kvp.Value.GetStatus() == CriAtomExPlayback.Status.Removed)
+            kvp.Value.RemoveAll(p => p.GetStatus() == CriAtomExPlayback.Status.Removed);
+
+            if (kvp.Value.Count == 0)
             {
                 removeList.Add(kvp.Key);
             }
@@ -86,7 +90,11 @@ public class CriAudioController : MonoBehaviour
     public void PlaySound(string cueName,bool loop=true)
     {
         if (soundSource == null || string.IsNullOrEmpty(cueName)) return;
-
+        if (isDynamicVolumeMode)
+        {
+            currentSourceVolumeMultiplier = CalculationVolume(listener);
+            soundSource.volume = currentSourceVolumeMultiplier; // Inspector表示も同期
+        }
         soundSource.loop = loop;
         if (soundSource.player != null)
         {
@@ -99,9 +107,12 @@ public class CriAudioController : MonoBehaviour
         CriAtomExPlayback playback = soundSource.Play(cueName);
 
 
-        // キュー名をキーとして保存
-        playbackDict[cueName] = playback;
-
+        // 辞書にリストがない場合は作成し、そこに再生情報を追加する
+        if (!playbackDict.ContainsKey(cueName))
+        {
+            playbackDict[cueName] = new List<CriAtomExPlayback>();
+        }
+        playbackDict[cueName].Add(playback);
         // 現在の再生情報を更新
         currentPlayback = playback;
         CurrentCueName = cueName;
@@ -114,7 +125,11 @@ public class CriAudioController : MonoBehaviour
     public void PlaySound(int cueID,bool loop = true)
     {
         if (soundSource == null) return;
-        
+        if (isDynamicVolumeMode)
+        {
+            currentSourceVolumeMultiplier = CalculationVolume(listener);
+            soundSource.volume = currentSourceVolumeMultiplier; // Inspector表示も同期
+        }
         soundSource.loop = loop;
         if (soundSource.player != null)
         {
@@ -125,8 +140,13 @@ public class CriAudioController : MonoBehaviour
         }
         CriAtomExPlayback playback = soundSource.Play(cueID);
 
-        // IDを文字列に変換してキーとして保存
-        playbackDict[cueID.ToString()] = playback;
+        // 辞書にリストがない場合は作成し、そこに再生情報を追加する
+        string key = cueID.ToString();
+        if (!playbackDict.ContainsKey(key))
+        {
+            playbackDict[key] = new List<CriAtomExPlayback>();
+        }
+        playbackDict[key].Add(playback);
 
         // 現在の再生情報を更新
         currentPlayback = playback;
@@ -139,9 +159,9 @@ public class CriAudioController : MonoBehaviour
     /// </summary>
     public void PauseSound(string cueName)
     {
-        if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
+        if (playbackDict.TryGetValue(cueName, out List<CriAtomExPlayback> playbacks))
         {
-            InternalPause(playback);
+            foreach (var playback in playbacks) InternalPause(playback);
         }
         else
         {
@@ -155,9 +175,9 @@ public class CriAudioController : MonoBehaviour
     public void PauseSound(int cueID)
     {
         // 辞書に指定されたCueIDの再生データが存在するか確認
-        if (playbackDict.TryGetValue(cueID.ToString(), out CriAtomExPlayback playback))
+        if (playbackDict.TryGetValue(cueID.ToString(), out List<CriAtomExPlayback> playbacks))
         {
-            InternalPause(playback);
+            foreach (var playback in playbacks) InternalPause(playback);
         }
         else
         {
@@ -182,9 +202,9 @@ public class CriAudioController : MonoBehaviour
     /// </summary>
     public void ResumeSound(string cueName)
     {
-        if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
+        if (playbackDict.TryGetValue(cueName, out List<CriAtomExPlayback> playbacks))
         {
-            InternalResume(playback);
+            foreach (var playback in playbacks) InternalResume(playback);
         }
     }
 
@@ -193,9 +213,9 @@ public class CriAudioController : MonoBehaviour
     /// </summary>
     public void ResumeSound(int cueID)
     {
-        if (playbackDict.TryGetValue(cueID.ToString(), out CriAtomExPlayback playback))
+        if (playbackDict.TryGetValue(cueID.ToString(), out List<CriAtomExPlayback> playbacks))
         {
-            InternalResume(playback);
+            foreach (var playback in playbacks) InternalResume(playback);
         }
     }
 
@@ -208,7 +228,10 @@ public class CriAudioController : MonoBehaviour
     }
 
 
-    public void StopSound()
+    /// <summary>
+    /// すべての音声を停止します。
+    /// </summary>
+    public void StopAllSound()
     {
         if (soundSource == null) return;
 
@@ -219,6 +242,48 @@ public class CriAudioController : MonoBehaviour
         CurrentCueName = string.Empty;
 
 
+    }
+
+    /// <summary>
+    /// キュー名(string)を指定して、その音声だけを停止します。
+    /// </summary>
+    public void StopSound(string cueName)
+    {
+        if (playbackDict.TryGetValue(cueName, out List<CriAtomExPlayback> playbacks))
+        {
+            // 同じ名前の音をすべて止める
+            foreach (var playback in playbacks) InternalStop(playback);
+        }
+        else
+        {
+            Debug.LogWarning($"Cue: {cueName} の再生情報が見つかりません。");
+        }
+    }
+
+    /// <summary>
+    /// 指定したCueIDの音声だけを停止します。
+    /// </summary>
+    public void StopSound(int cueID)
+    {
+        if (playbackDict.TryGetValue(cueID.ToString(), out List<CriAtomExPlayback> playbacks))
+        {
+            foreach (var playback in playbacks) InternalStop(playback);
+        }
+        else
+        {
+            Debug.LogWarning($"CueID: {cueID} の再生情報が見つかりません。");
+        }
+    }
+
+    /// <summary>
+    /// 停止処理の内部関数
+    /// </summary>
+    private void InternalStop(CriAtomExPlayback playback)
+    {
+        if (playback.GetStatus() != CriAtomExPlayback.Status.Removed)
+        {
+            playback.Stop();
+        }
     }
 
 
@@ -233,20 +298,28 @@ public class CriAudioController : MonoBehaviour
     /// </summary>
     public void UpdateVolumeByDistance()
     {
+        isDynamicVolumeMode = true; // 距離による動的モードをON
+
         // 距離から減衰割合を計算し、全体音量の乗数とする
         currentSourceVolumeMultiplier = CalculationVolume(listener);
 
+        // Inspector上でも変化がわかるように同期
+        if (soundSource != null) soundSource.volume = currentSourceVolumeMultiplier;
+
         // 再生中のすべての音に適用
         UpdateAllActivePlaybacks();
+
     }
 
     /// <summary>
     /// 全体の音量を直接数値（0-1）で固定します。
     /// </summary>
     public void ChangeSourceVolume(float vol)
-    {
+    {      
+
+        isDynamicVolumeMode = false; // 固定モードなので距離モードはOFF
         currentSourceVolumeMultiplier = vol;
-        if (soundSource != null) soundSource.volume = vol; // Inspectorと同期
+        if (soundSource != null) soundSource.volume = vol;// Inspectorと同期
 
         UpdateAllActivePlaybacks();
     }
@@ -256,11 +329,13 @@ public class CriAudioController : MonoBehaviour
     /// </summary>
     public void ChangeSourceVolume(int channel)
     {
+        
+
+        isDynamicVolumeMode = false; // 固定モードなので距離モードはOFF
         if (channel >= 0 && channel < volume.Length)
         {
-            float targetVol = volume[channel];
-            currentSourceVolumeMultiplier = targetVol;
-            if (soundSource != null) soundSource.volume = targetVol; // Inspectorと同期
+            currentSourceVolumeMultiplier = volume[channel];
+            if (soundSource != null) soundSource.volume = currentSourceVolumeMultiplier;
 
             UpdateAllActivePlaybacks();
         }
@@ -273,33 +348,36 @@ public class CriAudioController : MonoBehaviour
     public void ChangeVolume(string cueName, float vol)
     {
         savedVolumeDict[cueName] = vol; // 個別音量を上書き
-        if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
+        if (playbackDict.TryGetValue(cueName, out List<CriAtomExPlayback> playbacks))
         {
-            ApplyCurrentVolume(cueName, playback); // 全体設定と掛け合わせて適用
+            // 同じ名前で鳴っているすべての音量を変える
+            foreach (var playback in playbacks) ApplyCurrentVolume(cueName, playback);
         }
     }
 
     public void ChangeVolume(int cueID, float vol)
     {
         savedVolumeDict[cueID.ToString()] = vol;
-        if (playbackDict.TryGetValue(cueID.ToString(), out CriAtomExPlayback playback))
+        if (playbackDict.TryGetValue(cueID.ToString(), out List<CriAtomExPlayback> playbacks))
         {
-            ApplyCurrentVolume(cueID.ToString(), playback);
+            foreach (var playback in playbacks) ApplyCurrentVolume(cueID.ToString(), playback);
         }
     }
-
     // =======================================================
     // 音量適用の内部処理
     // =======================================================
 
-    /// <summary>
-    /// 辞書に登録されているすべての再生中音声に対して、現在の設定を適用する
-    /// </summary>
+        /// <summary>
+        /// 辞書に登録されているすべての再生中音声に対して、現在の設定を適用する
+        /// </summary>
     private void UpdateAllActivePlaybacks()
     {
         foreach (var kvp in playbackDict)
         {
-            ApplyCurrentVolume(kvp.Key, kvp.Value);
+            foreach (var playback in kvp.Value)
+            {
+                ApplyCurrentVolume(kvp.Key, playback);
+            }
         }
     }
 
@@ -310,16 +388,12 @@ public class CriAudioController : MonoBehaviour
     {
         if (soundSource == null || playback.GetStatus() == CriAtomExPlayback.Status.Removed) return;
 
-        // 個別のベース音量（辞書になければ1.0f）
         float individualVol = savedVolumeDict.TryGetValue(key, out float saved) ? saved : 1.0f;
-
-        // 最終音量 = 個別音量 × 全体音量（距離計算 or チャンネル固定設定）
         float finalVolume = individualVol * currentSourceVolumeMultiplier;
 
         soundSource.player.SetVolume(finalVolume);
         soundSource.player.Update(playback);
     }
-
     /// <summary>
     /// リスナーとの距離から、減衰の「割合(0.0〜1.0)」だけを計算して返す
     /// </summary>
