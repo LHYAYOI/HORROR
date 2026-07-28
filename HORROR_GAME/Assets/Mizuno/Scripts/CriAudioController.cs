@@ -2,7 +2,7 @@
 using CriWare.Assets;
 using System.Collections.Generic;
 using UnityEngine;
-using static CriWare.CriProfiler;
+
 
 [RequireComponent(typeof(CriAtomSourceForAsset))]
 public class CriAudioController : MonoBehaviour
@@ -12,7 +12,10 @@ public class CriAudioController : MonoBehaviour
     //Soundを再生するSource。Editorで設定する
     public CriAtomSourceForAsset soundSource;
 
+    // 再生中の音声の情報を保持する辞書（キュー名またはIDをキーとして、再生インスタンスを保持）
     private Dictionary<string, CriAtomExPlayback> playbackDict = new Dictionary<string, CriAtomExPlayback>();
+    // キュー名またはIDをキーとして、音量を保持する辞書（必要に応じて使用）
+    private Dictionary<string, float> savedVolumeDict = new Dictionary<string, float>();
 
     // 現在再生中のキュー情報（何も再生していない場合は ID: -1 / Name: "" とする）
     public int CurrentCueID { get; private set; } = -1;
@@ -26,19 +29,24 @@ public class CriAudioController : MonoBehaviour
 
     [SerializeField, Range(0.0f, 1.0f)]
     private float[] volume = new float[6];
+    
+    
+    // もともとのデフォルト音量を記憶する変数
+    private float defaultVolume = 1.0f;
 
     [Header("Distance Attenuation Settings")]
     [Tooltip("最小距離（これより近いと音量最大）")]
     [SerializeField] private float minDistance = 1f;
     [Tooltip("最大距離（これより遠いと音量0）")]
     [SerializeField] private float maxDistance = 100f;
-    [Tooltip("距離に対する音量の減衰カーブ（横軸:距離割合 0~1, 縦軸:音量 0~1）")]
+    [Tooltip("距離に対する音量の減衰カーブ（横軸:距離割合, 縦軸:音量）")]
     [SerializeField] private AnimationCurve volumeCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
 
     private void Awake()
     {
         // アタッチされているCriAtomSourceを取得
         soundSource = GetComponent<CriAtomSourceForAsset>();
+
     }
 
     private void Update()
@@ -46,20 +54,23 @@ public class CriAudioController : MonoBehaviour
 
 
         // リスナーとの距離に応じて音量を計算して変更する→何か変更が起きた場合にのみ音量を変更したいけど…('ω')
-        ChangeVolume(CalculationVolume(listener));
+        UpdateVolumeByDistance();
 
-        // 現在再生中のキューがあると記録されている場合のみ監視
-        if (CurrentCueID != -1 || !string.IsNullOrEmpty(CurrentCueName))
+
+        // すでに再生終了（Removed）した音声をplaybackDictから取り除く
+        List<string> removeList = new List<string>();
+        foreach (var kvp in playbackDict)
         {
-            CriAtomExPlayback.Status status = currentPlayback.GetStatus();
-
-            // 再生が終了、または破棄された場合
-            if ( status == CriAtomExPlayback.Status.Removed)
+            if (kvp.Value.GetStatus() == CriAtomExPlayback.Status.Removed)
             {
-                // 再生中ステータスをリセット
-                CurrentCueID = -1;
-                CurrentCueName = string.Empty;
+                removeList.Add(kvp.Key);
             }
+        }
+        foreach (var key in removeList)
+        {
+            playbackDict.Remove(key);
+            if (CurrentCueName == key) CurrentCueName = string.Empty;
+            if (CurrentCueID.ToString() == key) CurrentCueID = -1;
         }
     }
 
@@ -73,8 +84,15 @@ public class CriAudioController : MonoBehaviour
         if (soundSource == null || string.IsNullOrEmpty(cueName)) return;
 
         soundSource.loop = loop;
-
+        if (soundSource.player != null)
+        {
+            soundSource.player.Loop(loop);
+            float baseVol = savedVolumeDict.TryGetValue(cueName, out float saved) ? saved : defaultVolume;
+            float initAtt = CalculationVolume(listener);
+            soundSource.player.SetVolume(baseVol * initAtt);
+        }
         CriAtomExPlayback playback = soundSource.Play(cueName);
+
 
         // キュー名をキーとして保存
         playbackDict[cueName] = playback;
@@ -82,7 +100,7 @@ public class CriAudioController : MonoBehaviour
         // 現在の再生情報を更新
         currentPlayback = playback;
         CurrentCueName = cueName;
-        CurrentCueID = -1; // 名前再生時はIDが不明なため一旦リセット（※ACBからIDを引くことも可能ですが、簡易化のため）
+        CurrentCueID = -1; // 名前再生時はIDが不明なため一旦リセット
     }
 
     /// <summary>
@@ -93,6 +111,14 @@ public class CriAudioController : MonoBehaviour
         if (soundSource == null) return;
         
         soundSource.loop = loop;
+        if (soundSource.player != null)
+        {
+            soundSource.player.Loop(loop);
+            float baseVol = savedVolumeDict.TryGetValue(cueID.ToString(), out float saved) ? saved : defaultVolume;
+            float initAtt = CalculationVolume(listener);
+            soundSource.player.SetVolume(baseVol * initAtt);
+        }
+
         CriAtomExPlayback playback = soundSource.Play(cueID);
 
         // IDを文字列に変換してキーとして保存
@@ -112,6 +138,10 @@ public class CriAudioController : MonoBehaviour
         if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
         {
             InternalPause(playback);
+        }
+        else
+        {
+            Debug.LogWarning($"Cue: {cueName} の再生情報が見つかりません。");
         }
     }
 
@@ -176,7 +206,7 @@ public class CriAudioController : MonoBehaviour
 
     public void StopSound()
     {
-        if (soundSource != null) return;
+        if (soundSource == null) return;
 
         soundSource.Stop();
 
@@ -195,6 +225,7 @@ public class CriAudioController : MonoBehaviour
         if (soundSource != null)
         {
             soundSource.volume = vol;
+            soundSource.player.SetVolume(vol);
         }
     }
 
@@ -206,41 +237,84 @@ public class CriAudioController : MonoBehaviour
         if (soundSource != null)
         {
             soundSource.volume = volume[channel];
+            soundSource.player.SetVolume(volume[channel]);
+        }
+    }
+
+    public void ChangeVolume(string cueName, float vol)
+    {
+        savedVolumeDict[cueName] = vol; // まずベース音量を上書き
+        if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
+        {
+            ApplyVolumeWithDistance(cueName, playback); // 距離も加味して再適用
+        }
+    }
+
+    public void ChangeVolume(int cueID, float vol)
+    {
+        savedVolumeDict[cueID.ToString()] = vol;
+        if (playbackDict.TryGetValue(cueID.ToString(), out CriAtomExPlayback playback))
+        {
+            ApplyVolumeWithDistance(cueID.ToString(), playback);
         }
     }
 
     /// <summary>
-    /// 音源の3D位置を更新します (2D座標指定用)
+    /// 特定のPlaybackに対して音量を適用する内部処理
     /// </summary>
-    public void SetPosition(Vector2 newPosition)
+    private void InternalChangeVolume(CriAtomExPlayback playback, float vol)
     {
-        transform.position = new Vector3(newPosition.x, 0, newPosition.y);
+
+        if (soundSource != null && playback.GetStatus() != CriAtomExPlayback.Status.Removed)
+        {
+            soundSource.player.SetVolume(vol);
+            soundSource.player.Update(playback);
+        }
     }
 
     /// <summary>
-    /// 対象(プレイヤーやカメラなどリスナー)のTransformを受け取り、
-    /// このオブジェクトとの距離に応じてCriAtomSourceの音量を変更します。
+    /// 外部のスクリプト（移動時など）から呼び出し、鳴っているすべての音の距離減衰を更新する
+    /// </summary>
+    public void UpdateVolumeByDistance()
+    {
+        foreach (var kvp in playbackDict)
+        {
+            ApplyVolumeWithDistance(kvp.Key, kvp.Value);
+        }
+    }
+
+
+    /// <summary>
+    /// ベース音量 × 距離減衰を計算して特定のPlaybackに適用する
+    /// </summary>
+    private void ApplyVolumeWithDistance(string key, CriAtomExPlayback playback)
+    {
+        if (soundSource == null || playback.GetStatus() == CriAtomExPlayback.Status.Removed) return;
+
+        // 1. ベース音量の決定（辞書にあればそれ、無ければデフォルト）
+        float baseVol = savedVolumeDict.TryGetValue(key, out float saved) ? saved : defaultVolume;
+
+        // 2. 距離減衰の割合(0~1)を取得
+        float attenuation = CalculationVolume(listener);
+
+        // 3. 掛け合わせた最終音量を適用
+        soundSource.player.SetVolume(baseVol * attenuation);
+        soundSource.player.Update(playback);
+    }
+
+    /// <summary>
+    /// リスナーとの距離から、減衰の「割合(0.0〜1.0)」だけを計算して返す
     /// </summary>
     public float CalculationVolume(Transform targetTransform)
     {
-        if (soundSource == null || targetTransform == null) 
-        { 
-            Debug.LogWarning("CriAtomSource or targetTransform is null. Cannot calculate volume.");
-            return -1.0f;
+        if (soundSource == null || targetTransform == null)
+        {
+            Debug.LogWarning("SoundSourceまたはターゲットTransformが設定されていません。");
+            return 1.0f;
         }
 
-        // 音源（このオブジェクト）と対象（targetTransform）の距離を計算
         float distance = Vector3.Distance(transform.position, targetTransform.position);
-
-        // 距離を 0.0(minDistance) 〜 1.0(maxDistance) の割合に変換（自動クランプ）
         float normalizedDistance = Mathf.InverseLerp(minDistance, maxDistance, distance);
-
-        // AnimationCurve を使って、距離の割合から音量(0~1)を計算
-        float calculatedVolume = volumeCurve.Evaluate(normalizedDistance);
-
-        //// CriAtomSourceの音量に適用
-        //atomSource.volume = calculatedVolume;
-
-        return calculatedVolume;
+        return volumeCurve.Evaluate(normalizedDistance);
     }
 }
