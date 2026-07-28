@@ -29,10 +29,11 @@ public class CriAudioController : MonoBehaviour
 
     [SerializeField, Range(0.0f, 1.0f)]
     private float[] volume = new float[6];
-    
-    
+
+
     // もともとのデフォルト音量を記憶する変数
-    private float defaultVolume = 1.0f;
+    private float currentSourceVolumeMultiplier = 1.0f;
+
 
     [Header("Distance Attenuation Settings")]
     [Tooltip("最小距離（これより近いと音量最大）")]
@@ -47,6 +48,9 @@ public class CriAudioController : MonoBehaviour
         // アタッチされているCriAtomSourceを取得
         soundSource = GetComponent<CriAtomSourceForAsset>();
 
+        // 初期状態の全体音量として、InspectorのCriAtomSourceのvolumeをセット
+        currentSourceVolumeMultiplier = soundSource.volume;
+
     }
 
     private void Update()
@@ -54,7 +58,7 @@ public class CriAudioController : MonoBehaviour
 
 
         // リスナーとの距離に応じて音量を計算して変更する→何か変更が起きた場合にのみ音量を変更したいけど…('ω')
-        UpdateVolumeByDistance();
+        //UpdateVolumeByDistance();
 
 
         // すでに再生終了（Removed）した音声をplaybackDictから取り除く
@@ -87,9 +91,10 @@ public class CriAudioController : MonoBehaviour
         if (soundSource.player != null)
         {
             soundSource.player.Loop(loop);
-            float baseVol = savedVolumeDict.TryGetValue(cueName, out float saved) ? saved : defaultVolume;
-            float initAtt = CalculationVolume(listener);
-            soundSource.player.SetVolume(baseVol * initAtt);
+
+            // 再生直前に 個別音量 × 全体音量 をセット
+            float individualVol = savedVolumeDict.TryGetValue(cueName, out float saved) ? saved : 1.0f;
+            soundSource.player.SetVolume(individualVol * currentSourceVolumeMultiplier);
         }
         CriAtomExPlayback playback = soundSource.Play(cueName);
 
@@ -114,11 +119,10 @@ public class CriAudioController : MonoBehaviour
         if (soundSource.player != null)
         {
             soundSource.player.Loop(loop);
-            float baseVol = savedVolumeDict.TryGetValue(cueID.ToString(), out float saved) ? saved : defaultVolume;
-            float initAtt = CalculationVolume(listener);
-            soundSource.player.SetVolume(baseVol * initAtt);
-        }
 
+            float individualVol = savedVolumeDict.TryGetValue(cueID.ToString(), out float saved) ? saved : 1.0f;
+            soundSource.player.SetVolume(individualVol * currentSourceVolumeMultiplier);
+        }
         CriAtomExPlayback playback = soundSource.Play(cueID);
 
         // IDを文字列に変換してキーとして保存
@@ -217,36 +221,61 @@ public class CriAudioController : MonoBehaviour
 
     }
 
+
+
+
+    // =======================================================
+    // 全体音量の制御（動的距離減衰 / 段階設定）
+    // =======================================================
+
     /// <summary>
-    /// 音量を調整します。（0-1）
+    /// 動的移動時用：リスナーとの距離を計算し、全体音量を更新する
     /// </summary>
-    public void ChangeVolume(float vol)
+    public void UpdateVolumeByDistance()
     {
-        if (soundSource != null)
-        {
-            soundSource.volume = vol;
-            soundSource.player.SetVolume(vol);
-        }
+        // 距離から減衰割合を計算し、全体音量の乗数とする
+        currentSourceVolumeMultiplier = CalculationVolume(listener);
+
+        // 再生中のすべての音に適用
+        UpdateAllActivePlaybacks();
     }
 
     /// <summary>
-    /// あらかじめ設定した音量に調整します。
+    /// 全体の音量を直接数値（0-1）で固定します。
     /// </summary>
-    public void ChangeVolume(int channel)
+    public void ChangeSourceVolume(float vol)
     {
-        if (soundSource != null)
+        currentSourceVolumeMultiplier = vol;
+        if (soundSource != null) soundSource.volume = vol; // Inspectorと同期
+
+        UpdateAllActivePlaybacks();
+    }
+
+    /// <summary>
+    /// 一定距離の設定など、あらかじめ設定した配列(channel)の音量で全体を固定します。
+    /// </summary>
+    public void ChangeSourceVolume(int channel)
+    {
+        if (channel >= 0 && channel < volume.Length)
         {
-            soundSource.volume = volume[channel];
-            soundSource.player.SetVolume(volume[channel]);
+            float targetVol = volume[channel];
+            currentSourceVolumeMultiplier = targetVol;
+            if (soundSource != null) soundSource.volume = targetVol; // Inspectorと同期
+
+            UpdateAllActivePlaybacks();
         }
     }
+
+    // =======================================================
+    // 個別音量の制御（キューごとの手動調整用）
+    // =======================================================
 
     public void ChangeVolume(string cueName, float vol)
     {
-        savedVolumeDict[cueName] = vol; // まずベース音量を上書き
+        savedVolumeDict[cueName] = vol; // 個別音量を上書き
         if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
         {
-            ApplyVolumeWithDistance(cueName, playback); // 距離も加味して再適用
+            ApplyCurrentVolume(cueName, playback); // 全体設定と掛け合わせて適用
         }
     }
 
@@ -255,50 +284,39 @@ public class CriAudioController : MonoBehaviour
         savedVolumeDict[cueID.ToString()] = vol;
         if (playbackDict.TryGetValue(cueID.ToString(), out CriAtomExPlayback playback))
         {
-            ApplyVolumeWithDistance(cueID.ToString(), playback);
+            ApplyCurrentVolume(cueID.ToString(), playback);
         }
     }
 
-    /// <summary>
-    /// 特定のPlaybackに対して音量を適用する内部処理
-    /// </summary>
-    private void InternalChangeVolume(CriAtomExPlayback playback, float vol)
-    {
-
-        if (soundSource != null && playback.GetStatus() != CriAtomExPlayback.Status.Removed)
-        {
-            soundSource.player.SetVolume(vol);
-            soundSource.player.Update(playback);
-        }
-    }
+    // =======================================================
+    // 音量適用の内部処理
+    // =======================================================
 
     /// <summary>
-    /// 外部のスクリプト（移動時など）から呼び出し、鳴っているすべての音の距離減衰を更新する
+    /// 辞書に登録されているすべての再生中音声に対して、現在の設定を適用する
     /// </summary>
-    public void UpdateVolumeByDistance()
+    private void UpdateAllActivePlaybacks()
     {
         foreach (var kvp in playbackDict)
         {
-            ApplyVolumeWithDistance(kvp.Key, kvp.Value);
+            ApplyCurrentVolume(kvp.Key, kvp.Value);
         }
     }
 
-
     /// <summary>
-    /// ベース音量 × 距離減衰を計算して特定のPlaybackに適用する
+    /// 個別音量 × 全体音量 を計算して特定のPlaybackに適用する
     /// </summary>
-    private void ApplyVolumeWithDistance(string key, CriAtomExPlayback playback)
+    private void ApplyCurrentVolume(string key, CriAtomExPlayback playback)
     {
         if (soundSource == null || playback.GetStatus() == CriAtomExPlayback.Status.Removed) return;
 
-        // 1. ベース音量の決定（辞書にあればそれ、無ければデフォルト）
-        float baseVol = savedVolumeDict.TryGetValue(key, out float saved) ? saved : defaultVolume;
+        // 個別のベース音量（辞書になければ1.0f）
+        float individualVol = savedVolumeDict.TryGetValue(key, out float saved) ? saved : 1.0f;
 
-        // 2. 距離減衰の割合(0~1)を取得
-        float attenuation = CalculationVolume(listener);
+        // 最終音量 = 個別音量 × 全体音量（距離計算 or チャンネル固定設定）
+        float finalVolume = individualVol * currentSourceVolumeMultiplier;
 
-        // 3. 掛け合わせた最終音量を適用
-        soundSource.player.SetVolume(baseVol * attenuation);
+        soundSource.player.SetVolume(finalVolume);
         soundSource.player.Update(playback);
     }
 
@@ -307,11 +325,7 @@ public class CriAudioController : MonoBehaviour
     /// </summary>
     public float CalculationVolume(Transform targetTransform)
     {
-        if (soundSource == null || targetTransform == null)
-        {
-            Debug.LogWarning("SoundSourceまたはターゲットTransformが設定されていません。");
-            return 1.0f;
-        }
+        if (soundSource == null || targetTransform == null) return 1.0f;
 
         float distance = Vector3.Distance(transform.position, targetTransform.position);
         float normalizedDistance = Mathf.InverseLerp(minDistance, maxDistance, distance);

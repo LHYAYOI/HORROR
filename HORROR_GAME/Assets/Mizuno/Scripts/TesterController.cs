@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class TesterController : MonoBehaviour
@@ -11,6 +12,7 @@ public class TesterController : MonoBehaviour
 
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             //Sourceを再生
@@ -22,8 +24,12 @@ public class TesterController : MonoBehaviour
             //Sourceを再生
             audioController.ChangeVolume("カメラをしまう", vol);
 
-            audioController.PlaySound("カメラをしまう",true);
+            audioController.PlaySound("カメラをしまう",false);
         }
+
+        // ==================================
+        // 個別音量調整
+        // ==================================
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -39,8 +45,11 @@ public class TesterController : MonoBehaviour
             audioController.ChangeVolume("カメラをしまう", vol);
         }
 
-
+        // ==================================
         // 音源との距離による音量調整のテスト
+        // ==================================
+
+        // 音源が動き回るVer
         if (Input.GetKeyDown(KeyCode.W))
         {
            transform.position += new Vector3(0, 0, 1);
@@ -51,6 +60,28 @@ public class TesterController : MonoBehaviour
             transform.position += new Vector3(0, 0, -1);
             audioController.UpdateVolumeByDistance();
         }
+
+        // 音源がおとなしく、距離を段階で変えるVer
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            audioController.ChangeSourceVolume(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            audioController.ChangeSourceVolume(1);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            audioController.ChangeSourceVolume(2);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            audioController.ChangeSourceVolume(4);
+        }
+
+
+
+
 
 
 
