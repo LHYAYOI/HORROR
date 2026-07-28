@@ -2,6 +2,7 @@
 using CriWare.Assets;
 using System.Collections.Generic;
 using UnityEngine;
+using static CriWare.CriProfiler;
 
 [RequireComponent(typeof(CriAtomSourceForAsset))]
 public class CriAudioController : MonoBehaviour
@@ -11,7 +12,14 @@ public class CriAudioController : MonoBehaviour
     //Soundを再生するSource。Editorで設定する
     public CriAtomSourceForAsset soundSource;
 
-    private Dictionary<int, CriAtomExPlayback> playbackDict = new Dictionary<int, CriAtomExPlayback>();
+    private Dictionary<string, CriAtomExPlayback> playbackDict = new Dictionary<string, CriAtomExPlayback>();
+
+    // 現在再生中のキュー情報（何も再生していない場合は ID: -1 / Name: "" とする）
+    public int CurrentCueID { get; private set; } = -1;
+    public string CurrentCueName { get; private set; } = string.Empty;
+
+    // 現在再生中のものを追跡するための最新のPlayback
+    private CriAtomExPlayback currentPlayback;
 
     [SerializeField]
     private Transform listener;
@@ -35,26 +43,75 @@ public class CriAudioController : MonoBehaviour
 
     private void Update()
     {
-        // 毎フレーム、リスナーとの距離に応じて音量を計算して変更する
+
+
+        // リスナーとの距離に応じて音量を計算して変更する→何か変更が起きた場合にのみ音量を変更したいけど…('ω')
         ChangeVolume(CalculationVolume(listener));
+
+        // 現在再生中のキューがあると記録されている場合のみ監視
+        if (CurrentCueID != -1 || !string.IsNullOrEmpty(CurrentCueName))
+        {
+            CriAtomExPlayback.Status status = currentPlayback.GetStatus();
+
+            // 再生が終了、または破棄された場合
+            if ( status == CriAtomExPlayback.Status.Removed)
+            {
+                // 再生中ステータスをリセット
+                CurrentCueID = -1;
+                CurrentCueName = string.Empty;
+            }
+        }
     }
 
 
 
+    /// <summary>
+    /// キュー名(string)を指定して音声を再生します
+    /// </summary>
+    public void PlaySound(string cueName,bool loop=true)
+    {
+        if (soundSource == null || string.IsNullOrEmpty(cueName)) return;
 
+        soundSource.loop = loop;
+
+        CriAtomExPlayback playback = soundSource.Play(cueName);
+
+        // キュー名をキーとして保存
+        playbackDict[cueName] = playback;
+
+        // 現在の再生情報を更新
+        currentPlayback = playback;
+        CurrentCueName = cueName;
+        CurrentCueID = -1; // 名前再生時はIDが不明なため一旦リセット（※ACBからIDを引くことも可能ですが、簡易化のため）
+    }
 
     /// <summary>
-    /// 音声を再生し、そのPlayback参照を辞書に保存します
+    /// キューID(int)を指定して音声を再生します
     /// </summary>
-    public void PlaySound(int cueID,bool loop = false)
+    public void PlaySound(int cueID,bool loop = true)
     {
-        if (soundSource != null)
-        {
-            soundSource.loop = loop;
-            CriAtomExPlayback playback = soundSource.Play(cueID);
+        if (soundSource == null) return;
+        
+        soundSource.loop = loop;
+        CriAtomExPlayback playback = soundSource.Play(cueID);
 
-            // 辞書に保存する
-            playbackDict[cueID] = playback;
+        // IDを文字列に変換してキーとして保存
+        playbackDict[cueID.ToString()] = playback;
+
+        // 現在の再生情報を更新
+        currentPlayback = playback;
+        CurrentCueID = cueID;
+        CurrentCueName = string.Empty;
+    }
+
+    /// <summary>
+    /// キュー名(string)を指定して、その音声だけをポーズします
+    /// </summary>
+    public void PauseSound(string cueName)
+    {
+        if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
+        {
+            InternalPause(playback);
         }
     }
 
@@ -64,40 +121,70 @@ public class CriAudioController : MonoBehaviour
     public void PauseSound(int cueID)
     {
         // 辞書に指定されたCueIDの再生データが存在するか確認
-        if (playbackDict.TryGetValue(cueID, out CriAtomExPlayback playback))
+        if (playbackDict.TryGetValue(cueID.ToString(), out CriAtomExPlayback playback))
         {
-            // 現在のステータスを取得し、エラーや破棄済み（Removed）でなければポーズを実行
-            if (playback.GetStatus() != CriAtomExPlayback.Status.Removed)
-            {
-                playback.Pause();
-            }
+            InternalPause(playback);
         }
         else
         {
             Debug.LogWarning($"CueID: {cueID} の再生情報が見つかりません。");
         }
     }
+
     /// <summary>
-    /// 指定したCueIDのポーズを解除（再開）します
+    /// 現在のステータスを取得し、エラーや破棄済み（Removed）でなければポーズを実行
     /// </summary>
-    public void ResumeSound(int cueID)
+    private void InternalPause(CriAtomExPlayback playback)
     {
-        if (playbackDict.TryGetValue(cueID, out CriAtomExPlayback playback))
+        if (playback.GetStatus() != CriAtomExPlayback.Status.Removed)
         {
-            if (playback.GetStatus() != CriAtomExPlayback.Status.Removed)
-            {
-                // ポーズ専用のモード指定でレジューム（再開）する
-                playback.Resume(CriAtomEx.ResumeMode.PausedPlayback);
-            }
+            playback.Pause();
         }
     }
 
+
+    /// <summary>
+    /// キュー名(string)を指定して、その音声のポーズを解除します
+    /// </summary>
+    public void ResumeSound(string cueName)
+    {
+        if (playbackDict.TryGetValue(cueName, out CriAtomExPlayback playback))
+        {
+            InternalResume(playback);
+        }
+    }
+
+    /// <summary>
+    /// キューID(int)を指定して、その音声のポーズを解除します
+    /// </summary>
+    public void ResumeSound(int cueID)
+    {
+        if (playbackDict.TryGetValue(cueID.ToString(), out CriAtomExPlayback playback))
+        {
+            InternalResume(playback);
+        }
+    }
+
+    private void InternalResume(CriAtomExPlayback playback)
+    {
+        if (playback.GetStatus() != CriAtomExPlayback.Status.Removed)
+        {
+            playback.Resume(CriAtomEx.ResumeMode.PausedPlayback);
+        }
+    }
+
+
     public void StopSound()
     {
-        if (soundSource != null)
-        {
-            soundSource.Stop();
-        }
+        if (soundSource != null) return;
+
+        soundSource.Stop();
+
+        // 再生情報を更新
+        CurrentCueID = -1;
+        CurrentCueName = string.Empty;
+
+
     }
 
     /// <summary>
