@@ -27,6 +27,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] EffectManager m_effectManager;
     [SerializeField] PlayerController m_playerController;
     [SerializeField] EnemyManager m_enemyManager;
+    [SerializeField] Animator m_cameraAnimator;
+    [SerializeField] GameObject m_cameraUI;
+    [SerializeField] CameraView m_cameraView;
 
     CAMERA_ON_OFF_STATE m_cameraOnOffState = CAMERA_ON_OFF_STATE.OFF;
 
@@ -56,6 +59,8 @@ public class CameraController : MonoBehaviour
         CameraInputHandler();
 
         CameraStateProcess();
+
+        m_cameraView.UpdateBatteryPercentage(m_maxBatteryPercentage, m_currentBatteryPercentage);
     }
 
     public void CameraInputHandler()
@@ -76,7 +81,9 @@ public class CameraController : MonoBehaviour
             //カメラオン
             else if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF && GetCurrentBatteryValue() > 0)
             {
-                ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.ON);
+                InitFreeCamera();
+
+                m_cameraAnimator.SetTrigger("RollCamera");
             }
         }
     }
@@ -94,17 +101,6 @@ public class CameraController : MonoBehaviour
         {
             case CAMERA_ON_OFF_STATE.ON:
 
-                AudioManagerHamada.instance.Play("CameraOn");
-
-                AudioManagerHamada.instance.Play("Capturing");
-
-
-                m_effectManager.SetCameraPostEffectFlag(true);
-
-                EnableFreeCamera();
-
-                CursorManager.instance.EnableCrossHair();
-
                 break;
 
             case CAMERA_ON_OFF_STATE.OFF:
@@ -115,7 +111,13 @@ public class CameraController : MonoBehaviour
 
                 SetCurrentDrainTime(0);
 
+                m_cameraUI.SetActive(false);
+
+                m_cameraView.HideBatteryUI();
+
                 m_effectManager.SetCameraPostEffectFlag(false);
+
+                m_cameraAnimator.SetTrigger("ShutDownCamera");
 
                 CursorManager.instance.EnableCursor();
 
@@ -171,7 +173,16 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void EnableFreeCamera()
+    public void EnableFreeCamera() 
+    {
+        ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.ON);
+
+        m_cameraUI.SetActive(true);
+
+        m_cameraView.ShowBatteryUI();
+    }
+
+    public void InitFreeCamera()
     {
         m_startRotation = new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y);
 

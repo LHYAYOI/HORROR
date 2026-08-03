@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] PlayerModel m_PlayerModel;
-    [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] Animator m_gameOverAnimation;
@@ -73,8 +72,6 @@ public class PlayerController : MonoBehaviour
         CaptureKaiProcess();
 
         CoolDownCaptureProcess();
-
-        m_PlayerView.UpdateBatteryPercentage(m_cameraController.GetMaxBatteryValue(), m_cameraController.GetCurrentBatteryValue());
 
         if (Input.GetKeyDown(KeyCode.P)) 
         {

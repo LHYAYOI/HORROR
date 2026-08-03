@@ -12,6 +12,7 @@ public enum CROSSHAIR_TYPE
 {
     DEFAULT,
     INTERACTION,
+    NONE
 };
 
 public class CursorManager : MonoBehaviour
@@ -50,10 +51,10 @@ public class CursorManager : MonoBehaviour
 
     public void EnableCrossHair()
     {
-        m_crossHairImage.enabled = true;
+        //m_crossHairImage.enabled = true;
         m_cursorImage.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
-        ChangeCrossHairImage(CROSSHAIR_TYPE.DEFAULT);
+        //ChangeCrossHairImage(CROSSHAIR_TYPE.DEFAULT);
     }
 
     public void ChangeCrossHairImage(CROSSHAIR_TYPE type)
@@ -71,6 +72,12 @@ public class CursorManager : MonoBehaviour
             case CROSSHAIR_TYPE.INTERACTION:
                 {
                     m_crossHairImage.sprite = m_interactCrossHairSprite;
+                    break;
+                }
+
+            case CROSSHAIR_TYPE:
+                {
+                    m_crossHairImage.sprite = null;
                     break;
                 }
         }
