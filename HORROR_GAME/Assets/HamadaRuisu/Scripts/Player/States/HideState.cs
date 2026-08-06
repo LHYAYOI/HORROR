@@ -18,11 +18,13 @@ public class HideState:StateBase
 
     public override void EnterState()
     {
-
+        
     }
 
     public override void UpdateState()
     {
+        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
+
         if (Input.GetMouseButtonDown(0))
         {
             AudioManagerHamada.instance.Play("Hide");
