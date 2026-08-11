@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 interactableTarget = interactedObject.transform.parent.GetComponent<IPressable>();
             }
 
-            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.INTERACTION);
+            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.INTERACTION_HIDE_SPOT);
 
             if (Input.GetMouseButtonDown(0))
             {

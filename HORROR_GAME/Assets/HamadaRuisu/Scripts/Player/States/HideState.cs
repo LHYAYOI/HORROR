@@ -23,7 +23,7 @@ public class HideState:StateBase
 
     public override void UpdateState()
     {
-        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
+        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.EXIT_HIDE);
 
         if (Input.GetMouseButtonDown(0))
         {

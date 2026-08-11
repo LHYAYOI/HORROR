@@ -1,10 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public enum CURSOR_TYPE
 {
     DEFAULT,
-    INTERACTION,
+    INTERACTION_HIDE_SPOT,
+    EXIT_HIDE,
     NONE
 };
 
@@ -13,6 +15,7 @@ public class CursorManager : MonoBehaviour
     [Header("マウスカーソル用項目")]
     [SerializeField] Image m_cursorImage;
     [SerializeField] Animator m_cursorAnimator;
+    [SerializeField] TextMeshProUGUI m_cursorText;
     [SerializeField] Vector3 m_defaultCursorScale;
     [SerializeField] Vector3 m_interactCursorScale;
 
@@ -62,10 +65,19 @@ public class CursorManager : MonoBehaviour
                     m_cursorAnimator.SetTrigger("UnInteract");
                     break;
                 }
-            case CURSOR_TYPE.INTERACTION:
+            case CURSOR_TYPE.INTERACTION_HIDE_SPOT:
                 {
                     m_cursorImage.rectTransform.localScale = m_interactCursorScale;
                     m_cursorAnimator.SetTrigger("Interact");
+                    m_cursorText.text = "隠れる";
+                    break;
+                }
+
+            case CURSOR_TYPE.EXIT_HIDE:
+                {
+                    m_cursorImage.rectTransform.localScale = m_interactCursorScale;
+                    m_cursorAnimator.SetTrigger("Interact");
+                    m_cursorText.text = "出る";
                     break;
                 }
         }
