@@ -31,7 +31,7 @@ public class EnemyObject : MonoBehaviour
         SetPositionFromPlayer();
     }
 
-    Vector3 GetAdjustmentFromPlayer()
+    public Vector3 GetAdjustmentFromPlayer()
     {
         Vector3 difference = transform.position - m_playerController.gameObject.transform.position;
         difference.y = 0f;
