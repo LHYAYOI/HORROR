@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
-public class PlayerView : MonoBehaviour
+public class CameraView : MonoBehaviour
 {
     [SerializeField] GameObject m_batteryUI;
-    [SerializeField] TextMeshProUGUI m_batteryPercentage;
+    [SerializeField] Slider m_batterySlider;
 
     public void ShowBatteryUI() 
     {
@@ -19,6 +20,6 @@ public class PlayerView : MonoBehaviour
 
     public void UpdateBatteryPercentage(float maxBattery, float currentBatteryAmount)
     {
-        m_batteryPercentage.text = currentBatteryAmount.ToString() + "%";
+        m_batterySlider.value = currentBatteryAmount / maxBattery;
     }
 }

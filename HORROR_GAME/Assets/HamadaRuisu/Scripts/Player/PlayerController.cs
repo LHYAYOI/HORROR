@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] PlayerModel m_PlayerModel;
-    [SerializeField] PlayerView m_PlayerView;
     [SerializeField] StateMachine m_StateMachine;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] Animator m_gameOverAnimation;
@@ -74,8 +73,6 @@ public class PlayerController : MonoBehaviour
 
         CoolDownCaptureProcess();
 
-        m_PlayerView.UpdateBatteryPercentage(m_cameraController.GetMaxBatteryValue(), m_cameraController.GetCurrentBatteryValue());
-
         if (Input.GetKeyDown(KeyCode.P)) 
         {
             KillPlayer();
@@ -109,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 interactableTarget = interactedObject.transform.parent.GetComponent<IPressable>();
             }
 
-            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.INTERACTION);
+            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.INTERACTION_HIDE_SPOT);
 
             if (Input.GetMouseButtonDown(0))
             {

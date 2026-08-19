@@ -46,6 +46,7 @@ public class EffectManager : MonoBehaviour
         SetDolyCameraEffectRate(0);
     }
 
+    //カメラのポストエフェクト
     public void SetCameraPostEffectFlag(bool flag)
     {
         m_cameraPostEffectFeature.SetActive(flag);
