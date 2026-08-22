@@ -1,33 +1,25 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public enum CURSOR_TYPE
 {
     DEFAULT,
-    INTERACTION,
+    INTERACTION_HIDE_SPOT,
+    EXIT_HIDE,
     NONE
-};
-
-public enum CROSSHAIR_TYPE
-{
-    DEFAULT,
-    INTERACTION,
 };
 
 public class CursorManager : MonoBehaviour
 {
     [Header("マウスカーソル用項目")]
     [SerializeField] Image m_cursorImage;
-    [SerializeField] Sprite m_defaultImage;
-    [SerializeField] Sprite m_interactImage;
-
-    [Header("クロスヘア用項目")]
-    [SerializeField] Image m_crossHairImage;
-    [SerializeField] Sprite m_defaultCrossHairSprite;
-    [SerializeField] Sprite m_interactCrossHairSprite;
+    [SerializeField] Animator m_cursorAnimator;
+    [SerializeField] TextMeshProUGUI m_cursorText;
+    [SerializeField] Vector3 m_defaultCursorScale;
+    [SerializeField] Vector3 m_interactCursorScale;
 
     CURSOR_TYPE m_cursorType;
-    CROSSHAIR_TYPE m_crosshair;
 
     public static CursorManager instance;
 
@@ -50,36 +42,13 @@ public class CursorManager : MonoBehaviour
 
     public void EnableCrossHair()
     {
-        m_crossHairImage.enabled = true;
         m_cursorImage.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
-        ChangeCrossHairImage(CROSSHAIR_TYPE.DEFAULT);
-    }
-
-    public void ChangeCrossHairImage(CROSSHAIR_TYPE type)
-    {
-        m_crosshair = type;
-
-        switch (m_crosshair)
-        {
-            case CROSSHAIR_TYPE.DEFAULT:
-                {
-                    m_crossHairImage.sprite = m_defaultCrossHairSprite;
-                    break;
-                }
-
-            case CROSSHAIR_TYPE.INTERACTION:
-                {
-                    m_crossHairImage.sprite = m_interactCrossHairSprite;
-                    break;
-                }
-        }
     }
 
     public void EnableCursor()
     {
         m_cursorImage.enabled = true;
-        m_crossHairImage.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         ChangeCursorImage(CURSOR_TYPE.DEFAULT);
     }
@@ -92,12 +61,23 @@ public class CursorManager : MonoBehaviour
         {
             case CURSOR_TYPE.DEFAULT:
                 {
-                    m_cursorImage.sprite = m_defaultImage;
+                    m_cursorImage.rectTransform.localScale = m_defaultCursorScale;
+                    m_cursorAnimator.SetTrigger("UnInteract");
                     break;
                 }
-            case CURSOR_TYPE.INTERACTION:
+            case CURSOR_TYPE.INTERACTION_HIDE_SPOT:
                 {
-                    m_cursorImage.sprite = m_interactImage;
+                    m_cursorImage.rectTransform.localScale = m_interactCursorScale;
+                    m_cursorAnimator.SetTrigger("Interact");
+                    m_cursorText.text = "隠れる";
+                    break;
+                }
+
+            case CURSOR_TYPE.EXIT_HIDE:
+                {
+                    m_cursorImage.rectTransform.localScale = m_interactCursorScale;
+                    m_cursorAnimator.SetTrigger("Interact");
+                    m_cursorText.text = "出る";
                     break;
                 }
         }
