@@ -5279,7 +5279,7 @@ PrefabInstance:
     - target: {fileID: 1616828186772374943, guid: b9ac443e3caff8d4d81ade5ee17d24b9, type: 3}
       propertyPath: m_currentTexture
       value: 
-      objectReference: {fileID: 2800000, guid: be0f7959ea0a5c94dbf9783853225fd3, type: 3}
+      objectReference: {fileID: 2800000, guid: 5cff0cbb7ae0f734f971f5f208c65419, type: 3}
     - target: {fileID: 6566956733944102436, guid: b9ac443e3caff8d4d81ade5ee17d24b9, type: 3}
       propertyPath: m_Name
       value: SkyBoxManager
@@ -9901,19 +9901,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1061208534402133168, guid: fa025d9a384975048ba4702543a1b09c, type: 3}
       propertyPath: m_GameOverSceneReference.m_sceneGuid
-      value: 9c53bbeb5f6f55f4284e339cb5020f72
+      value: ef8d7fd9317255447a6ac4825986ce07
       objectReference: {fileID: 0}
     - target: {fileID: 1061208534402133168, guid: fa025d9a384975048ba4702543a1b09c, type: 3}
       propertyPath: m_GameOverSceneReference.m_scenePath
-      value: Assets/Fukushima/Scene/Title_Test.unity
+      value: Assets/Fukushima/Scene/Epilogue_GameOver.unity
       objectReference: {fileID: 0}
     - target: {fileID: 1061208534402133168, guid: fa025d9a384975048ba4702543a1b09c, type: 3}
       propertyPath: m_GameClearSceneReference.m_sceneGuid
-      value: 9c53bbeb5f6f55f4284e339cb5020f72
+      value: 572602ad2f8081c49ad64719cbc2c5e2
       objectReference: {fileID: 0}
     - target: {fileID: 1061208534402133168, guid: fa025d9a384975048ba4702543a1b09c, type: 3}
       propertyPath: m_GameClearSceneReference.m_scenePath
-      value: Assets/Fukushima/Scene/Title_Test.unity
+      value: Assets/Fukushima/Scene/Epilogue_Clear.unity
       objectReference: {fileID: 0}
     - target: {fileID: 3093059795910322468, guid: fa025d9a384975048ba4702543a1b09c, type: 3}
       propertyPath: m_Name
