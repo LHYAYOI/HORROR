@@ -112,12 +112,6 @@ public class PlayerController : MonoBehaviour
             {
                 interactableTarget.OnPressed();
 
-                if (interactedObject.tag == "Kai")
-                {
-                    if (!m_interactedKai) m_enemyManager.FarstEncount();
-                    m_interactedKai = true;
-                }
-
                 if (Input.GetMouseButtonUp(0))
                 {
                     interactableTarget.OnReleased();
@@ -156,6 +150,12 @@ public class PlayerController : MonoBehaviour
 
                     if (m_captureTimer >= m_captureDuration)
                     {
+                        if (!m_interactedKai) 
+                        {
+                            m_enemyManager.FarstEncount();
+                            m_interactedKai = true;
+                        }
+
                         KaiController.Captured();
                         m_captureTimer = m_captureDuration;
                     }
