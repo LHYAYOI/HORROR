@@ -29,6 +29,12 @@ public class ChatPrologueController : MonoBehaviour
     [SerializeField] private float m_slideDistance = 35.0f;
     [SerializeField] private float m_appearDuration = 0.18f;
 
+    [Header("画面切り替えフェード")]
+    [SerializeField] private CanvasGroup m_transitionFadeCanvasGroup;
+
+    [SerializeField, Min(0.0f)]
+    private float m_screenFadeDuration = 0.8f;
+
     [Header("入力設定")]
     [SerializeField] private bool m_enableInputFlag = true;
 
@@ -49,6 +55,13 @@ public class ChatPrologueController : MonoBehaviour
         if (m_storyRoot != null)
         {
             m_storyRoot.SetActive(false);
+        }
+
+        if (m_transitionFadeCanvasGroup != null)
+        {
+            m_transitionFadeCanvasGroup.gameObject.SetActive(false);
+            m_transitionFadeCanvasGroup.alpha = 0.0f;
+            m_transitionFadeCanvasGroup.blocksRaycasts = false;
         }
 
         SetupChatItems();
@@ -304,8 +317,46 @@ public class ChatPrologueController : MonoBehaviour
         m_scrollRect.verticalNormalizedPosition = 0.0f;
     }
 
+    //private void StartStory()
+    //{
+    //    if (m_chatRoot != null)
+    //    {
+    //        m_chatRoot.SetActive(false);
+    //    }
+
+    //    if (m_storyRoot != null)
+    //    {
+    //        m_storyRoot.SetActive(true);
+    //    }
+
+    //    if (m_storySequenceController != null)
+    //    {
+    //        m_storySequenceController.BeginSequence();
+    //    }
+
+    //    enabled = false;
+    //}
+
     private void StartStory()
     {
+        if (m_animatingFlag)
+        {
+            return;
+        }
+
+        StartCoroutine(StartStoryCoroutine());
+    }
+
+    private IEnumerator StartStoryCoroutine()
+    {
+        m_animatingFlag = true;
+
+        yield return FadeCanvasGroup(
+            m_transitionFadeCanvasGroup,
+            0.0f,
+            1.0f,
+            m_screenFadeDuration);
+
         if (m_chatRoot != null)
         {
             m_chatRoot.SetActive(false);
@@ -316,12 +367,70 @@ public class ChatPrologueController : MonoBehaviour
             m_storyRoot.SetActive(true);
         }
 
+        yield return FadeCanvasGroup(
+            m_transitionFadeCanvasGroup,
+            1.0f,
+            0.0f,
+            m_screenFadeDuration);
+
         if (m_storySequenceController != null)
         {
             m_storySequenceController.BeginSequence();
         }
 
         enabled = false;
+    }
+
+    private IEnumerator FadeCanvasGroup(
+    CanvasGroup canvasGroup,
+    float startAlpha,
+    float endAlpha,
+    float duration)
+    {
+        if (canvasGroup == null)
+        {
+            yield break;
+        }
+
+        canvasGroup.gameObject.SetActive(true);
+        canvasGroup.blocksRaycasts = true;
+
+        if (duration <= 0.0f)
+        {
+            canvasGroup.alpha = endAlpha;
+
+            if (Mathf.Approximately(endAlpha, 0.0f))
+            {
+                canvasGroup.blocksRaycasts = false;
+                canvasGroup.gameObject.SetActive(false);
+            }
+
+            yield break;
+        }
+
+        canvasGroup.alpha = startAlpha;
+
+        float timer = 0.0f;
+
+        while (timer < duration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            float rate = Mathf.Clamp01(timer / duration);
+
+            canvasGroup.alpha =
+                Mathf.Lerp(startAlpha, endAlpha, rate);
+
+            yield return null;
+        }
+
+        canvasGroup.alpha = endAlpha;
+
+        if (Mathf.Approximately(endAlpha, 0.0f))
+        {
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.gameObject.SetActive(false);
+        }
     }
 
     private float EaseOutBack(float rate)
