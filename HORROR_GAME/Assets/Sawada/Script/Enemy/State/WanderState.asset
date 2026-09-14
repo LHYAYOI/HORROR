@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bf79435c43b59448534e6b2a04e9f8, type: 3}
   m_Name: WanderState
   m_EditorClassIdentifier: Assembly-CSharp::WanderState
+  m_horrorAudio: {fileID: 11400000, guid: cb43955531958674d8f03e2419cd91cb, type: 2}
