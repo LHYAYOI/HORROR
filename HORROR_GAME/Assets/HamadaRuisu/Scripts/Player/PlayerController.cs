@@ -414,6 +414,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        m_sceneLoader.LoadGameOverScene();
+        m_sceneLoader.LoadGameOverSceneWithFade();
     }
 }
