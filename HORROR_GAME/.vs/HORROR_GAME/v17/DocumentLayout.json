@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\ths31379\\OneDrive - nkz.ac.jp\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|C:\\Users\\ths31379\\OneDrive - nkz.ac.jp\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\assets\\fukushima\\scripts\\scenefadeincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\users\\ths31379\\onedrive - nkz.ac.jp\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\github\\horror\\horror_game\\assets\\fukushima\\scripts\\scenefadeincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\fukushima\\scripts\\scenefadeincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\users\\ths31379\\onedrive - nkz.ac.jp\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\github\\horror\\horror_game\\assets\\fukushima\\scripts\\titlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|C:\\Users\\ths31379\\OneDrive - nkz.ac.jp\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\assets\\fukushima\\scripts\\titlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\fukushima\\scripts\\titlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -207,7 +207,7 @@
               "RelativeDocumentMoniker": "Assets\\Fukushima\\Scripts\\SceneFadeInController.cs",
               "ToolTip": "C:\\Users\\ths31379\\OneDrive - nkz.ac.jp\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Fukushima\\Scripts\\SceneFadeInController.cs",
               "RelativeToolTip": "Assets\\Fukushima\\Scripts\\SceneFadeInController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAIwCgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-13T09:21:37.667Z",
               "EditorCaption": ""
@@ -294,8 +294,7 @@
               "RelativeToolTip": "Assets\\Fukushima\\Scripts\\TitleController.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAowDoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T02:09:07.206Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-22T02:09:07.206Z"
             },
             {
               "$type": "Document",
