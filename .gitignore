@@ -11,6 +11,7 @@ UserSettings/
 .vscode/
 *.csproj
 *.sln
+*.slnx
 *.user
 *.unityproj
 
