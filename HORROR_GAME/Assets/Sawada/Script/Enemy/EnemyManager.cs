@@ -30,6 +30,8 @@ public class EnemyManager : MonoBehaviour
             EnemyStateBase currentState = (EnemyStateBase)enemy.GetComponent<StateMachine>().GetCurrentState();
             currentState.AutoMove();
             enemy.GetComponent<EnemyObject>().SetPositionFromPlayer();
+
+            Debug.Log("！！！！！行動！！！！！");
         }
     }
 
@@ -56,6 +58,8 @@ public class EnemyManager : MonoBehaviour
 
             // 追加
             m_spawnedEnemyList.Add(instantEnemy);
+
+            Debug.Log("！！！！！スポーン！！！！！");
         }
 
         SetView();
