@@ -74,19 +74,16 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             //カメラオフ
-            if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.ON)
+            if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.ON && !m_isSwitchingCamera)
             {
+                m_isSwitchingCamera = true;
+
                 ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
             }
 
             //カメラオン
-            else if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF && GetCurrentBatteryValue() > 0)
+            else if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF && !m_isSwitchingCamera && GetCurrentBatteryValue() > 0)
             {
-                if (m_isSwitchingCamera) 
-                {
-                    return;
-                }
-
                 m_isSwitchingCamera = true;
 
                 InitFreeCamera();
