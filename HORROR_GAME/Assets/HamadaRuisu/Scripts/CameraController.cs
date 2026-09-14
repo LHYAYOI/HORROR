@@ -42,6 +42,7 @@ public class CameraController : MonoBehaviour
     Vector2 m_startRotation;
 
     bool m_isRotating = false;
+    bool m_isSwitchingCamera = false;
 
     private void Awake()
     {
@@ -81,6 +82,13 @@ public class CameraController : MonoBehaviour
             //カメラオン
             else if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF && GetCurrentBatteryValue() > 0)
             {
+                if (m_isSwitchingCamera) 
+                {
+                    return;
+                }
+
+                m_isSwitchingCamera = true;
+
                 InitFreeCamera();
 
                 m_cameraAnimator.SetTrigger("RollCamera");
@@ -296,6 +304,11 @@ public class CameraController : MonoBehaviour
         }
 
         m_isRotating = false;
+    }
+
+    public void SetCameraSwitchingFlag(bool flag) 
+    {
+        m_isSwitchingCamera = flag;
     }
 
     public bool IsRotating()
