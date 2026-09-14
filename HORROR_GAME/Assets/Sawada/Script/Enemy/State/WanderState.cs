@@ -8,6 +8,7 @@ using UnityEngine;
 public class WanderState : EnemyStateBase
 {
     PlayerController m_controller;
+    //[SerializeField] AudioData m_horrorAudio;
 
     public override void Awake()
     {
@@ -44,5 +45,12 @@ public class WanderState : EnemyStateBase
         // 移動
         m_enemyObject.GetComponent<EnemyObject>().MoveEnemy_02();
         m_enemyObject.GetComponent<EnemyObject>().CheckPlayerInSight();
+
+        /*Vector3 adjust = m_enemyObject.GetComponent<EnemyObject>().GetAdjustmentFromPlayer();
+        if (adjust.x + adjust.z != 0)
+        {
+            
+        }
+        Debug.Log($"WanderState: adjust = {adjust}");*/
     }
 }

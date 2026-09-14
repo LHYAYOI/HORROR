@@ -272,6 +272,94 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
+--- !u!1 &31111215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 31111219}
+  - component: {fileID: 31111218}
+  - component: {fileID: 31111217}
+  - component: {fileID: 31111216}
+  m_Layer: 5
+  m_Name: TransitionFadePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!225 &31111216
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31111215}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &31111217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31111215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &31111218
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31111215}
+  m_CullTransparentMesh: 1
+--- !u!224 &31111219
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31111215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 665916497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &145688884
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,6 +795,7 @@ RectTransform:
   m_Children:
   - {fileID: 937460012}
   - {fileID: 1306014899}
+  - {fileID: 31111219}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -996,6 +1085,7 @@ GameObject:
   - component: {fileID: 937460012}
   - component: {fileID: 937460014}
   - component: {fileID: 937460013}
+  - component: {fileID: 937460015}
   m_Layer: 5
   m_Name: StoryRoot
   m_TagString: Untagged
@@ -1063,6 +1153,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937460011}
   m_CullTransparentMesh: 1
+--- !u!225 &937460015
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937460011}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &991930800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,6 +1355,8 @@ MonoBehaviour:
   m_nextSceneReference:
     m_sceneGuid: 22611488602383d46abb26c8351453be
     m_scenePath: Assets/HamadaRuisu/Scene/HamadaRuisu.unity
+  m_fadeCanvasGroup: {fileID: 0}
+  m_fadeOutDuration: 1
   m_enableInputFlag: 1
   m_playOnStartFlag: 0
 --- !u!4 &1034273029
@@ -1296,6 +1400,8 @@ MonoBehaviour:
   m_scrollRect: {fileID: 0}
   m_slideDistance: 35
   m_appearDuration: 0.18
+  m_transitionFadeCanvasGroup: {fileID: 31111216}
+  m_screenFadeDuration: 0.8
   m_enableInputFlag: 1
 --- !u!1 &1201596290
 GameObject:
@@ -1387,6 +1493,7 @@ GameObject:
   - component: {fileID: 1306014899}
   - component: {fileID: 1306014901}
   - component: {fileID: 1306014900}
+  - component: {fileID: 1306014902}
   m_Layer: 5
   m_Name: ChatRoot
   m_TagString: Untagged
@@ -1458,6 +1565,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306014898}
   m_CullTransparentMesh: 1
+--- !u!225 &1306014902
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306014898}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1347059196
 GameObject:
   m_ObjectHideFlags: 0

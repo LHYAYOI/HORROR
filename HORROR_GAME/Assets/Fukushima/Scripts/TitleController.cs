@@ -48,4 +48,13 @@ public class TitleController : MonoBehaviour
         SceneManager.LoadScene(
             m_nextSceneReference.GetScenePath());
     }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }

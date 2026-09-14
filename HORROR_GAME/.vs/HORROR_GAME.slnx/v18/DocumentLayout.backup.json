@@ -1,42 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\",
+  "WorkspaceRootPath": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\enemy\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\enemy\\enemycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemyobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemyobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemytype\\defaultenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemytype\\defaultenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\area\\areamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\area\\areamanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\sawada\\script\\enemy\\state\\wanderstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\state\\wanderstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\state\\wanderstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|c:\\users\\ths30612\\documents\\github\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\enemy\\enemyview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\enemy\\enemyview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\audio\\audiodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\audio\\audiodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\sawada\\script\\enemy\\enemyaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\sawada\\script\\enemy\\enemyaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|d:\\\u5236\u4F5C\\unity\\unityprojects\\horror\\horror_game\\assets\\hamadaruisu\\scripts\\audiomanagerhamada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4CD19DA-EE08-5225-FB19-1D0DFA4113DD}|Assembly-CSharp.csproj|solutionrelative:assets\\hamadaruisu\\scripts\\audiomanagerhamada.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,123 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CameraController.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\CameraController.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\CameraController.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\CameraController.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\CameraController.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAA0wGIAAAA+AAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "AudioManagerHamada.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\AudioManagerHamada.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\AudioManagerHamada.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\AudioManagerHamada.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\AudioManagerHamada.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAiwG8AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T03:28:27.048Z",
+              "WhenOpened": "2026-08-17T11:17:47.276Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AudioData.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Audio\\AudioData.cs",
+              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Audio\\AudioData.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Audio\\AudioData.cs",
+              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Audio\\AudioData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T11:17:35.859Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EnemyController.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "Title": "WanderState.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
+              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
+              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T01:10:07.756Z",
+              "WhenOpened": "2026-08-17T11:13:45.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAADgv38AAAAyAAAAAAAAAA==",
+              "Title": "EnemyAudio.cs",
+              "DocumentMoniker": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyAudio.cs",
+              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyAudio.cs",
+              "ToolTip": "D:\\\u5236\u4F5C\\Unity\\UnityProjects\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyAudio.cs",
+              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyAudio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T03:23:50.502Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AreaManager.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Area\\AreaManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T02:40:52.145Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DefaultEnemy.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyType\\DefaultEnemy.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAcwK0AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T01:27:40.649Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EnemyObject.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T01:06:59.204Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "EnemyView.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
-              "RelativeDocumentMoniker": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
-              "RelativeToolTip": "Assets\\HamadaRuisu\\Scripts\\Enemy\\EnemyView.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T01:09:08.387Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "WanderState.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\State\\WanderState.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAIwC0AAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T01:06:45.979Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EnemyManager.cs",
-              "DocumentMoniker": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Sawada\\Script\\Enemy\\EnemyManager.cs",
-              "ToolTip": "C:\\Users\\ths30612\\Documents\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Sawada\\Script\\Enemy\\EnemyManager.cs",
-              "RelativeToolTip": "Assets\\Sawada\\Script\\Enemy\\EnemyManager.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAIwDwAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T01:06:31.834Z",
+              "WhenOpened": "2026-08-17T11:13:36.914Z",
               "EditorCaption": ""
             }
           ]
