@@ -24,4 +24,18 @@ public class FadeEvents : MonoBehaviour
             m_vignette.active = true;
         }
     }
+
+    public void EnableDisablePlaceUI() 
+    {
+        HidePlaceUIController.instance.SetHideUIActive();
+
+        if (m_player.GetStateMachine().GetCurrentState().GetStateName() == "NormalState")
+        {
+            HidePlaceUIController.instance.SetHideUIInactive();
+        }
+        else if (m_player.GetStateMachine().GetCurrentState().GetStateName() == "HideState")
+        {
+            HidePlaceUIController.instance.SetHideUIActive();
+        }
+    }
 }

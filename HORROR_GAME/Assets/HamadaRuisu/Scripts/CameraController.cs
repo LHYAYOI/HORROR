@@ -73,23 +73,28 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            //カメラオフ
-            if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.ON && !m_isSwitchingCamera)
-            {
-                m_isSwitchingCamera = true;
+            CameraONOFFHandler();
+        }
+    }
 
-                ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
-            }
+    public void CameraONOFFHandler() 
+    {
+        //カメラオフ
+        if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.ON && !m_isSwitchingCamera)
+        {
+            m_isSwitchingCamera = true;
 
-            //カメラオン
-            else if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF && !m_isSwitchingCamera && GetCurrentBatteryValue() > 0)
-            {
-                m_isSwitchingCamera = true;
+            ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
+        }
 
-                InitFreeCamera();
+        //カメラオン
+        else if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.OFF && !m_isSwitchingCamera && GetCurrentBatteryValue() > 0)
+        {
+            m_isSwitchingCamera = true;
 
-                m_cameraAnimator.SetTrigger("RollCamera");
-            }
+            InitFreeCamera();
+
+            m_cameraAnimator.SetTrigger("RollCamera");
         }
     }
 

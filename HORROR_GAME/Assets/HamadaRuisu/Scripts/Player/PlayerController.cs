@@ -56,11 +56,6 @@ public class PlayerController : MonoBehaviour
     {
         ChangeSate("NormalState");
 
-        //テクスチャの取得
-        //MapData m_MapData = m_AreaManager.GetMapData();
-        //Texture currentAreaTexture = m_MapData.GetArea(m_currentAreaIndex).GetAreaSkyBoxTexture();
-        //m_transition.SetNextTexture(currentAreaTexture);
-
         StartCoroutine(MoveArea(new Vector2Int(m_currentAreaIndex.x, m_currentAreaIndex.y)));
     }
 

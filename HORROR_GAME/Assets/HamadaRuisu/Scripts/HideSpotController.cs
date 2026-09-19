@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class HideSpotController : MonoBehaviour, IPressable
 {
+    [SerializeField] HidePlaceType m_hidePlaceType;
     Animator m_animator;
     PlayerController m_player;
 
@@ -24,6 +25,8 @@ public class HideSpotController : MonoBehaviour, IPressable
         m_player.ChangeSate("HideState");
 
         m_animator.SetTrigger("StartFade");
+
+        HidePlaceUIController.instance.SetCurrentHidePlaceType(m_hidePlaceType);
 
         IncreaseFindRate(0.2f);
 
