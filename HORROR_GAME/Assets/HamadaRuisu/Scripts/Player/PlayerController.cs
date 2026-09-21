@@ -36,8 +36,6 @@ public class PlayerController : MonoBehaviour
 
     bool m_isDead = false;
 
-    bool m_isCapturing = false;
-
     bool m_captureCoolDown = false;
 
     float m_cooldownTime = 0;
@@ -80,6 +78,19 @@ public class PlayerController : MonoBehaviour
         return m_interactedKai;
     }
 
+    public void CameraInputHandler() 
+    {
+        if (IsDead())
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            m_cameraController.CameraONOFFHandler();
+        }
+    }
+
     public void InteractionHandler()
     {
         if (m_isDead) 
@@ -87,8 +98,15 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.ON)
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
+        Debug.Log("hi");
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity,m_layerMask))
         {
@@ -232,48 +250,35 @@ public class PlayerController : MonoBehaviour
 
     public void MoveUp()
     {
-        if (m_isDead)
-        {
-            return;
-        }
-
         TryMove(Vector2Int.up);
     }
 
-
     public void MoveDown()
     {
-        if (m_isDead)
-        {
-            return;
-        }
-
         TryMove(Vector2Int.down);
     }
 
     public void MoveRight()
     {
-        if (m_isDead)
-        {
-            return;
-        }
-
         TryMove(Vector2Int.right);
     }
 
     public void MoveLeft()
     {
-        if (m_isDead)
-        {
-            return;
-        }
-
         TryMove(Vector2Int.left);
     }
 
     private void TryMove(Vector2Int direction)
     {
-        if (m_isDead) return;
+        if (m_isDead) 
+        {
+            return;
+        }
+
+        if (m_cameraController.GetCameraOnOffState() == CAMERA_ON_OFF_STATE.ON)
+        {
+            return;
+        }
 
         AudioManagerHamada.instance.Play("Move");
 
@@ -333,6 +338,11 @@ public class PlayerController : MonoBehaviour
     public bool IsDead()
     {
         return m_isDead;
+    }
+
+    public void CameraStateProcess() 
+    {
+        m_cameraController.CameraStateProcess();
     }
 
     public void MoveAreaInputHandler()

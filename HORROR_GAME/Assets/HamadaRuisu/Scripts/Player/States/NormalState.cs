@@ -23,6 +23,8 @@ public class NormalState:StateBase
 
     public override void UpdateState()
     {
+        m_controller.CameraInputHandler();
+        m_controller.CameraStateProcess();
         m_controller.MoveAreaInputHandler();
         m_controller.InteractionHandler();
     }

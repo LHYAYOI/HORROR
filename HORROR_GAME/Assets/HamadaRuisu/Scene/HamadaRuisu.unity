@@ -11536,15 +11536,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[2].onAnimationEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
-      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
+      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[2].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -11561,11 +11565,11 @@ PrefabInstance:
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 336219307}
+      objectReference: {fileID: 2104064835}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 2104064835}
+      objectReference: {fileID: 336219307}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[1].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11583,16 +11587,28 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
-      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: EnableFreeCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
+      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
       value: SetCameraSwitchingFlag
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
+      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: EnableCrossHair
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[2].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetCameraSwitchingFlag
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
-      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: CameraController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
+      propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: CursorManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[2].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

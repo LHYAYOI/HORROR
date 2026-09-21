@@ -57,24 +57,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        CameraInputHandler();
-
-        CameraStateProcess();
-
         m_cameraView.UpdateBatteryPercentage(m_maxBatteryPercentage, m_currentBatteryPercentage);
-    }
-
-    public void CameraInputHandler()
-    {
-        if (m_playerController.IsDead())
-        {
-            return;
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            CameraONOFFHandler();
-        }
     }
 
     public void CameraONOFFHandler() 
@@ -92,7 +75,11 @@ public class CameraController : MonoBehaviour
         {
             m_isSwitchingCamera = true;
 
+            ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.ON);
+
             InitFreeCamera();
+
+            CursorManager.instance.EnableCrossHair();
 
             m_cameraAnimator.SetTrigger("RollCamera");
         }
@@ -140,7 +127,7 @@ public class CameraController : MonoBehaviour
         m_enemyManager.SetView();
     }
 
-    private void CameraStateProcess()
+    public void CameraStateProcess()
     {
         if (m_cameraOnOffState == CAMERA_ON_OFF_STATE.ON)
         {
@@ -156,6 +143,8 @@ public class CameraController : MonoBehaviour
                     ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
                 }
             }
+
+            CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
 
             FreeCameraRotationProcess();
         }
@@ -311,6 +300,11 @@ public class CameraController : MonoBehaviour
     public void SetCameraSwitchingFlag(bool flag) 
     {
         m_isSwitchingCamera = flag;
+    }
+
+    public bool IsCameraSwitching()
+    {
+        return m_isSwitchingCamera;
     }
 
     public bool IsRotating()
