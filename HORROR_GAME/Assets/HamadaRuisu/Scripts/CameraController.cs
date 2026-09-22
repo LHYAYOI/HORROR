@@ -75,8 +75,6 @@ public class CameraController : MonoBehaviour
         {
             m_isSwitchingCamera = true;
 
-            ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.ON);
-
             InitFreeCamera();
 
             CursorManager.instance.EnableCrossHair();
