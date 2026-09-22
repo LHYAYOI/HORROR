@@ -422,7 +422,7 @@ PrefabInstance:
     - target: {fileID: 9069331748854357196, guid: 4e082b0ebd693634488b73766bacd4ce, type: 3}
       propertyPath: m_skyboxTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 72b7d6c88f36e964b80d038bad482d89, type: 3}
+      objectReference: {fileID: 2800000, guid: 2800c80805f58164984f8ed33f72be10, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -551,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1283694739213771673, guid: 1f79e2a41e93167499b6d16f640f20c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1283694739213771673, guid: 1f79e2a41e93167499b6d16f640f20c3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1789,7 +1789,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1283694739213771673, guid: 1f79e2a41e93167499b6d16f640f20c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1283694739213771673, guid: 1f79e2a41e93167499b6d16f640f20c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1895,7 +1895,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1283694739213771673, guid: 1f79e2a41e93167499b6d16f640f20c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1283694739213771673, guid: 1f79e2a41e93167499b6d16f640f20c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2647,7 +2647,7 @@ PrefabInstance:
     - target: {fileID: 7015567593690981448, guid: f4aef14212e481c4599f3672f5636f17, type: 3}
       propertyPath: m_skyboxTexture
       value: 
-      objectReference: {fileID: 2800000, guid: f44b1a44027900f45bc92cc4a9c1b828, type: 3}
+      objectReference: {fileID: 2800000, guid: df6ee50888c7afc4180c2c5b51eb374d, type: 3}
     - target: {fileID: 7966912571156127079, guid: f4aef14212e481c4599f3672f5636f17, type: 3}
       propertyPath: m_Name
       value: Area_J
@@ -5130,7 +5130,7 @@ PrefabInstance:
     - target: {fileID: 7015567593690981448, guid: acf0873dd5e64944fac7c830a0bb18e5, type: 3}
       propertyPath: m_skyboxTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 510f3d7f2a7202143a913d8979e9eef5, type: 3}
+      objectReference: {fileID: 2800000, guid: fc22e12621bc685459ff98451d078512, type: 3}
     - target: {fileID: 7966912571156127079, guid: acf0873dd5e64944fac7c830a0bb18e5, type: 3}
       propertyPath: m_Name
       value: Area_M
@@ -5978,7 +5978,7 @@ PrefabInstance:
     - target: {fileID: 7015567593690981448, guid: b0904665fdd10374dbbf29251c4fdea4, type: 3}
       propertyPath: m_skyboxTexture
       value: 
-      objectReference: {fileID: 2800000, guid: af3fa0fdf89f59246888c068d2fc8b19, type: 3}
+      objectReference: {fileID: 2800000, guid: 0daa379fa85b0a24a8a1f2d3c847a10e, type: 3}
     - target: {fileID: 7966912571156127079, guid: b0904665fdd10374dbbf29251c4fdea4, type: 3}
       propertyPath: m_Name
       value: Area_C
@@ -6239,12 +6239,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1616828186772374943, guid: b9ac443e3caff8d4d81ade5ee17d24b9, type: 3}
       propertyPath: m_currentAngle
-      value: 155
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 1616828186772374943, guid: b9ac443e3caff8d4d81ade5ee17d24b9, type: 3}
       propertyPath: m_currentTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 5cff0cbb7ae0f734f971f5f208c65419, type: 3}
+      objectReference: {fileID: 2800000, guid: b0a583e7d11223c43ac582bd12fd09b7, type: 3}
     - target: {fileID: 6566956733944102436, guid: b9ac443e3caff8d4d81ade5ee17d24b9, type: 3}
       propertyPath: m_Name
       value: SkyBoxManager
@@ -8228,7 +8228,7 @@ PrefabInstance:
     - target: {fileID: 9069331748854357196, guid: 607ed19229570fb47b266b7f538e958e, type: 3}
       propertyPath: m_skyboxTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 5cff0cbb7ae0f734f971f5f208c65419, type: 3}
+      objectReference: {fileID: 2800000, guid: b0a583e7d11223c43ac582bd12fd09b7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -9133,7 +9133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7015567593690981448, guid: acf0873dd5e64944fac7c830a0bb18e5, type: 3}
       propertyPath: m_areaRotation
-      value: 264
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 7015567593690981448, guid: acf0873dd5e64944fac7c830a0bb18e5, type: 3}
       propertyPath: m_skyboxTexture
@@ -10773,7 +10773,7 @@ PrefabInstance:
     - target: {fileID: 7015567593690981448, guid: f96888f9fe0d81f4888b024195f59f5d, type: 3}
       propertyPath: m_skyboxTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 4548dfee2d2e7144dba6d011351159ef, type: 3}
+      objectReference: {fileID: 2800000, guid: ad6b03cbf23fac54d9c19b1988f79699, type: 3}
     - target: {fileID: 7966912571156127079, guid: f96888f9fe0d81f4888b024195f59f5d, type: 3}
       propertyPath: m_Name
       value: Area_D

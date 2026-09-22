@@ -61,12 +61,14 @@ public class CursorManager : MonoBehaviour
         {
             case CURSOR_TYPE.DEFAULT:
                 {
+                    m_cursorImage.enabled = false;
                     m_cursorImage.rectTransform.localScale = m_defaultCursorScale;
                     m_cursorAnimator.SetTrigger("UnInteract");
                     break;
                 }
             case CURSOR_TYPE.INTERACTION_HIDE_SPOT:
                 {
+                    m_cursorImage.enabled = false;
                     m_cursorImage.rectTransform.localScale = m_interactCursorScale;
                     m_cursorAnimator.SetTrigger("Interact");
                     m_cursorText.text = "‰B‚ê‚é";
@@ -81,5 +83,7 @@ public class CursorManager : MonoBehaviour
                     break;
                 }
         }
+
+        m_cursorImage.enabled = true;
     }
 }
