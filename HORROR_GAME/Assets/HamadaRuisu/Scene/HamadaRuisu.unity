@@ -3595,8 +3595,8 @@ RectTransform:
   m_GameObject: {fileID: 850950975}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.44, y: 0.132, z: 0.44}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.4, y: 0.15, z: 0.4}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1957529889}
   m_Father: {fileID: 1389978403}
@@ -11548,7 +11548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[2].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -11569,7 +11569,7 @@ PrefabInstance:
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 336219307}
+      objectReference: {fileID: 745928198}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[1].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11596,7 +11596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: EnableCrossHair
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[2].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -11608,7 +11608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[0].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
+      value: CameraController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8839757675095126522, guid: f0493e6e08fe4e84aa71d2a3620af230, type: 3}
       propertyPath: onAnimationEvent.Array.data[2].onAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -11902,7 +11902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6285329549913011678, guid: 380ab673c82f37b45aa2da5d4a20e5ff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
