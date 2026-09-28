@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,12 @@ public class TitleController : MonoBehaviour
     private bool m_enableKeyboardStartFlag = true;
 
     private bool m_loadingFlag;
+
+    private void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     private void Update()
     {

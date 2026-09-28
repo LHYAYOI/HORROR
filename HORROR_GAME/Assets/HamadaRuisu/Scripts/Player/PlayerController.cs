@@ -1,16 +1,9 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements.Experimental;
-using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-
-    [SerializeField] PlayerModel m_PlayerModel;
     [SerializeField] StateMachine m_StateMachine;
     [SerializeField] Animator m_hideAnimator;
     [SerializeField] Animator m_gameOverAnimation;
@@ -106,7 +99,6 @@ public class PlayerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        Debug.Log("hi");
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity,m_layerMask))
         {
@@ -165,7 +157,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (!m_interactedKai) 
                         {
-                            m_enemyManager.FarstEncount();
+                            //m_enemyManager.FarstEncount();
                             m_interactedKai = true;
                         }
 
