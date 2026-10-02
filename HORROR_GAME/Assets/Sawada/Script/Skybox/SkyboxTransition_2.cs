@@ -94,6 +94,20 @@ public class SkyboxTransition_2 : MonoBehaviour
         }
     }
 
+    public void SetAreaPreview(AreaController area) 
+    {
+        if (area == null)
+        {
+            return;
+        }
+
+        m_currentTexture = area.GetAreaSkyBoxTexture();
+        m_currentAngle = area.GetAreaRotation();
+
+        SetSkyboxRotation(m_currentAngle);
+        ApplySkyboxTransition();
+    }
+
     public void SetNextTexture(Texture next)
     {
         Debug.Log(next);

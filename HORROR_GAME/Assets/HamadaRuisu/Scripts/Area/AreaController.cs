@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[ExecuteAlways]
 public class AreaController : MonoBehaviour
 {
     [SerializeField] AreaModel m_model;
@@ -24,5 +25,21 @@ public class AreaController : MonoBehaviour
     public float GetAreaRotation()
     {
         return m_model.GetAreaRotation();
+    }
+
+    private void OnEnable()
+    {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+        {
+            SkyboxTransition_2 skybox =
+                FindFirstObjectByType<SkyboxTransition_2>();
+
+            if (skybox != null)
+            {
+                skybox.SetAreaPreview(this);
+            }
+        }
+#endif
     }
 }
