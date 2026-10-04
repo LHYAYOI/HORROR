@@ -24,6 +24,8 @@ public class testAstar : MonoBehaviour
 
     void Start()
     {
+        if (!m_areaManager) return;
+
         // Mapの大きさ
         m_testAstar = new testCell[m_areaManager.GetMapData().GetWidth()][];
         for (int i = 0; i < m_areaManager.GetMapData().GetWidth(); i++)
