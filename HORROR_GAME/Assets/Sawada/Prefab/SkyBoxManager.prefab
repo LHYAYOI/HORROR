@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkyboxTransition_2
   m_currentTexture: {fileID: 2800000, guid: 796d1cf6afc56714fa66d31a37af74dc, type: 3}
   m_nextTexture: {fileID: 2800000, guid: 9a297ccebe07cd74b9f8c4ed3bfaeaeb, type: 3}
+  m_currentAngle: 8
   m_blend: 0
   m_exposure: 1
   m_transitionSpeed: 0.05
