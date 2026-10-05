@@ -294,6 +294,8 @@ public class PlayerController : MonoBehaviour
         if (nextArea != null)
         {
             StartCoroutine(MoveArea(moveIndex));
+
+            m_enemyManager.AutoMove();
         }
     }
 
@@ -378,8 +380,6 @@ public class PlayerController : MonoBehaviour
         m_transition.SetNextTexture(nextAreaTexture);
 
         m_transition.SetSkyboxRotation(nextArea.GetAreaRotation());
-
-        m_enemyManager.AutoMove();
     }
 
     public void KillPlayer()

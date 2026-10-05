@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex1:
-        m_Texture: {fileID: 2800000, guid: 987b59066528b8d4aa5257001d1bfbf9, type: 3}
+        m_Texture: {fileID: 2800000, guid: b0a583e7d11223c43ac582bd12fd09b7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex2:
@@ -75,7 +75,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Exposure: 1
-    - _FocusU: 0.5
+    - _FocusU: 1
     - _FocusV: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -87,7 +87,7 @@ Material:
     - _MoveY: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rotation: 97
+    - _Rotation: 84
     - _SeamU: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
