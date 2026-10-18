@@ -242,21 +242,25 @@ public class PlayerController : MonoBehaviour
 
     public void MoveUp()
     {
+        Debug.Log("MoveUp");
         TryMove(Vector2Int.up);
     }
 
     public void MoveDown()
     {
+        Debug.Log("MoveDown");
         TryMove(Vector2Int.down);
     }
 
     public void MoveRight()
     {
+        Debug.Log("MoveRight");
         TryMove(Vector2Int.right);
     }
 
     public void MoveLeft()
     {
+        Debug.Log("MoveLeft");
         TryMove(Vector2Int.left);
     }
 
@@ -294,6 +298,7 @@ public class PlayerController : MonoBehaviour
         if (nextArea != null)
         {
             StartCoroutine(MoveArea(moveIndex));
+            Debug.Log(direction);
 
             m_enemyManager.AutoMove();
         }
@@ -376,6 +381,7 @@ public class PlayerController : MonoBehaviour
 
         m_skyBoxMaterial.mainTexture = nextAreaTexture;
         m_currentAreaIndex = moveIndex;
+        Debug.Log("moveIndex: " + moveIndex);
 
         m_transition.SetNextTexture(nextAreaTexture);
 

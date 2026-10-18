@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class EnemyObject : MonoBehaviour
 {
@@ -16,6 +18,15 @@ public class EnemyObject : MonoBehaviour
 
     void Start()
     {
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            Debug.Log("P : " + m_playerController.GetCurrentIndex());
+            Debug.Log("E : " + m_currentAreaIndex);
+        }
     }
 
     public void Init(DefaultEnemy date)
@@ -134,7 +145,7 @@ public class EnemyObject : MonoBehaviour
         // 見えない
         if (!m_defaultEnemy.CanChaseTarget(m_currentAreaIndex, m_playerController.GetCurrentIndex(), m_areaManager.GetMapData()))
         {
-            GetComponent<EnemyView>().Hide();
+            //ここ仮 GetComponent<EnemyView>().Hide();
             return false;
         }
 
