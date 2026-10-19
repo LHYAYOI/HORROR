@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -89,3 +90,4 @@ public class Vector2GridDataEditor : Editor
         return true;
     }
 }
+#endif

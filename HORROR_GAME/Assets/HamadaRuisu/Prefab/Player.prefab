@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7887013651728871417}
   - component: {fileID: 7062695727188928488}
-  - component: {fileID: 6346061657805310696}
-  - component: {fileID: 804131447548711776}
   - component: {fileID: 6119072971538894324}
   m_Layer: 0
   m_Name: Player
@@ -47,11 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c136c9de8602c74cb475c92c72f3ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  m_PlayerModel: {fileID: 6346061657805310696}
-  m_PlayerView: {fileID: 804131447548711776}
+  m_PlayerModel: {fileID: 0}
   m_StateMachine: {fileID: 6119072971538894324}
-  m_defaultCursorTex: {fileID: 2800000, guid: 054b951cbfa4c2f4882e98cbdfc345f9, type: 3}
-  m_interactionCursorTex: {fileID: 2800000, guid: 19afb7f0490a0204c972c19c832251dd, type: 3}
   m_hideAnimator: {fileID: 0}
   m_gameOverAnimation: {fileID: 0}
   m_sceneLoader: {fileID: 0}
@@ -60,48 +55,16 @@ MonoBehaviour:
   m_skyBoxMaterial: {fileID: 2100000, guid: 7c271fe763c81f54ca4c63711e7c7191, type: 2}
   m_effectManager: {fileID: 0}
   m_transition: {fileID: 0}
-  m_camera: {fileID: 0}
+  m_captureDuration: 3
+  m_captureCoolDownDuration: 0.2
+  m_cameraController: {fileID: 0}
   m_layerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_startPosition: {x: 0, y: 0}
---- !u!114 &6346061657805310696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3398113880443019906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cab3913d2f891464890235f5d5a185f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  m_maxBatteryPercentage: 100
-  m_rotationDuration: 0.3
-  m_batteryDrainInterval: 0.5
-  m_batteryDrainAmount: 2
-  m_batteryRegenerateAmount: 5
---- !u!114 &804131447548711776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3398113880443019906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d36563e2d608834aa81be47898d0e66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerView
-  m_batteryUI: {fileID: 0}
-  m_batteryPercentage: {fileID: 0}
-  m_batteryGages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_captureLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_startPosition: {x: 5, y: 3}
 --- !u!114 &6119072971538894324
 MonoBehaviour:
   m_ObjectHideFlags: 0

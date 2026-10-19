@@ -9,6 +9,11 @@ public class kaiiManager : MonoBehaviour
     {
         foreach (KaiControler kaii in m_kaiiList) 
         {
+            if (kaii == null)
+            {
+                continue;
+            }
+
             if (!kaii.WasShot()) 
             {
                 return false;

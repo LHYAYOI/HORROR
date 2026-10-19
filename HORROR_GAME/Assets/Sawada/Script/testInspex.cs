@@ -1,5 +1,5 @@
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(testInspexViw))]
 public class testInspex : Editor
@@ -27,3 +27,4 @@ public class testInspex : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

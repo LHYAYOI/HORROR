@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     {
         if (m_kaiManager.IsAllCaptured())
         {
-            //m_sceneLoader.LoadGameClearSceneWithFade();
+            m_sceneLoader.LoadGameClearSceneWithFade();
         }
     }
 

@@ -2,7 +2,6 @@
 using CriWare.Assets;
 using System.Collections.Generic;
 using UnityEngine;
-using static CriWare.CriProfiler;
 
 
 [RequireComponent(typeof(CriAtomSourceForAsset))]

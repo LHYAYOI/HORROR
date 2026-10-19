@@ -15,7 +15,12 @@ public class MoveButtonController : MonoBehaviour, IPressable
 
     [SerializeField] MoveDirection m_moveDirectionType;
     [SerializeField] MoveButtonView m_moveButtonView;
-    [SerializeField] PlayerController m_playerController;
+    PlayerController m_playerController;
+
+    private void Start()
+    {
+        m_playerController = FindAnyObjectByType<PlayerController>();
+    }
 
     private void MakePlayerMove()
     {
