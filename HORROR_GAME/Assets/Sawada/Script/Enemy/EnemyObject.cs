@@ -105,6 +105,7 @@ public class EnemyObject : MonoBehaviour
         for (int i = 0; i < m_defaultEnemy.GetSpeed(); i++)
         {
             // 移動
+            //move += Mathf.Abs(diff.x) >= Mathf.Abs(diff.y) ? new Vector2Int(1 * Math.Sign(diff.x), 0) : new Vector2Int(0, 1 * Math.Sign(diff.y));
             move += Mathf.Abs(diff.x) >= Mathf.Abs(diff.y) ? new Vector2Int(1 * Math.Sign(diff.x), 0) : new Vector2Int(0, 1 * Math.Sign(diff.y));
 
             if (m_currentAreaIndex + move == playerIndex || m_currentAreaIndex + move == m_targetPosition)
@@ -137,7 +138,14 @@ public class EnemyObject : MonoBehaviour
          */
         // 現在地の周囲のマスから、一番Goalまで近いマスを選ぶ
 
+        // 
+        Debug.Log("EnemyMove");
+
+        //Vector2Int.up
     }
+
+    // 現在地から上下左右のマスを順番に探索して
+
 
     // Playerが視界にいるのか?
     public bool CheckPlayerInSight()

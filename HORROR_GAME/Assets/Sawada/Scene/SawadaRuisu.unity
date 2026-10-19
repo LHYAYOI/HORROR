@@ -16847,6 +16847,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: test.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: test.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: suuji.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: suuji.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: m_areaManager
+      value: 
+      objectReference: {fileID: 7722633735213109857}
     - target: {fileID: 222780124660812430, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
       propertyPath: m_Name
       value: Enemy
