@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [CreateAssetMenu(
     fileName = "DefaultEnemy",
     menuName = "Scriptable Objects/Enemy/DefaultEnemy")]
 public class DefaultEnemy : ScriptableObject
 {
-    [Serializable] public class DistanceImageData
+    [Serializable]
+    public class DistanceImageData
     {
         [SerializeField] private Sprite m_sprite;
         [SerializeField] private int m_distance;
@@ -107,13 +110,13 @@ public class DefaultEnemy : ScriptableObject
     }
 
     // targetを追いかけるか判定
-    public bool CanChaseTarget(Vector2Int current, Vector2Int target, MapData mapData)
+    public bool CanChaseTarget(Vector2Int currentPosi, Vector2Int targetPosi, MapData mapData)
     {
         switch (m_searchMethod)
         {
             case SearchMethod.circle:
                 {
-                    float distance = Vector2Int.Distance(current, target);
+                    float distance = Vector2Int.Distance(currentPosi, targetPosi);
 
                     if (distance <= m_searchRange)
                     {
@@ -126,58 +129,36 @@ public class DefaultEnemy : ScriptableObject
 
             case SearchMethod.line:
                 {
-                    Vector2Int difference = current - target;
-                    Vector2Int differenceAbs = new(Math.Abs(difference.x), Math.Abs(difference.y));
-                    int diff = 0;
-
-                    bool sameColumn =
-                        differenceAbs.x == 0 &&
-                        differenceAbs.y <= m_searchRange;
-
-                    bool sameRow =
-                        differenceAbs.y == 0 &&
-                        differenceAbs.x <= m_searchRange;
-
-                    if (!sameColumn && !sameRow) return false;
-
-                    if (sameColumn)
+                    // 同じ縦横
+                    if (currentPosi.x == targetPosi.x || currentPosi.y == targetPosi.y)
                     {
-                        diff = differenceAbs.y;
-                    }
-                    else if (sameRow)
-                    {
-                        diff = differenceAbs.x;
-                    }
-                    /*if (sameColumn || sameRow)
-                    {
+                        List<AreaController> areaData = mapData.GetAreaData();
+
+                        // ターゲット方向
+                        Vector2Int diff = targetPosi - currentPosi;
+
+                        Vector2Int direction = new Vector2Int(Math.Sign(diff.x), Math.Sign(diff.y));
+
+                        // 現在位置の1マス先から確認
+                        Vector2Int checkPosi = currentPosi + direction;
+
+                        while (checkPosi != targetPosi)
+                        {
+                            // マップ範囲外
+                            if (checkPosi.x < 0 || checkPosi.x >= mapData.GetWidth() || checkPosi.y < 0 || checkPosi.y >= mapData.GetHeight()) return false;
+
+                            int targetIndex = checkPosi.y * mapData.GetWidth() + checkPosi.x;
+
+                            // 壁がある
+                            if (areaData[targetIndex] == null) return false;
+
+                            checkPosi += direction;
+                        }
+
                         return true;
-                    }:*/
-
-                    // 一マスずつ確認
-                    for (int i = 0; i < differenceAbs.x; i++)
-                    {
-                        for (int j = 0; j < m_noAreaData.Count; j++)
-                        {
-                            if (mapData.GetArea(current + new Vector2Int(i, 0)).GetAreaName() == m_noAreaData[j].GetAreaName())
-                            {
-                                Debug.Log("障害物あり x");
-                                return false;
-                            }
-                        }
-                    }
-                    for (int i = 0; i < differenceAbs.y; i++)
-                    {
-                        for (int j = 0; j < m_noAreaData.Count; j++)
-                        {
-                            if (mapData.GetArea(current + new Vector2Int(0, i)).GetAreaName() == m_noAreaData[j].GetAreaName())
-                            {
-                                Debug.Log("障害物あり y");
-                                return false;
-                            }
-                        }
                     }
 
-                    return true;
+                    break;
                 }
         }
 

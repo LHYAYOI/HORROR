@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            FarstEncount();
+            SetView(true);
+        }
     }
 
     public void AutoMove()

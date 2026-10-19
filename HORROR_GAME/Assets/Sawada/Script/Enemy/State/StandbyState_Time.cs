@@ -34,6 +34,7 @@ public class StandbyState_Time : EnemyStateBase
         {
             // 次の行先を決める
             m_enemyObject.GetComponent<EnemyObject>().NextPositionDecide();
+            //m_enemyObject.GetComponent<EnemyObject>().ChaseTarget();
 
             // state切り替え
             m_enemyObject.GetComponent<StateMachine>().ChangeState("WanderState");
