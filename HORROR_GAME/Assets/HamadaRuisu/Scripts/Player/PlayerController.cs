@@ -350,8 +350,6 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator MoveArea(Vector2Int moveIndex)
     {
-        Debug.Log("移動~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
         MapData m_MapData = m_AreaManager.GetMapData();
 
         AreaController currentArea = m_MapData.GetArea(m_currentAreaIndex);
