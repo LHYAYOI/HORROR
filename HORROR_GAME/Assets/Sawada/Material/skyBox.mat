@@ -87,7 +87,7 @@ Material:
     - _MoveY: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rotation: 84
+    - _Rotation: 341
     - _SeamU: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
