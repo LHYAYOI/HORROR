@@ -16610,6 +16610,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 222780124660812430, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
   m_PrefabInstance: {fileID: 6281266113378845165}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5382191120104368036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+  m_PrefabInstance: {fileID: 6281266113378845165}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382191120104368035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9718a3ec1d04c24594f323a33ef4e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMove
 --- !u!1001 &5856567698119922407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16864,6 +16875,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: m_goal.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: m_current.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6214999821821220398, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
       propertyPath: m_areaManager
       value: 
       objectReference: {fileID: 7722633735213109857}
@@ -16871,6 +16890,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4423634231246370283, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
+      propertyPath: m_enemyMove
+      value: 
+      objectReference: {fileID: 5382191120104368036}
     - target: {fileID: 6493666650112392110, guid: 0987ca687443cca4bbc59a13152ae27a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

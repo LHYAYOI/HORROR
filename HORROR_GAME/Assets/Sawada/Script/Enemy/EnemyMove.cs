@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,7 +6,9 @@ using UnityEngine.InputSystem;
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField] private AreaManager m_areaManager;
-    [SerializeField] private Vector2Int test;
+    [SerializeField] private Vector2Int m_start;
+    [SerializeField] private Vector2Int m_goal;
+    [SerializeField] private Vector2Int m_current;
     private List<AreaController> m_areaData;
 
     private void Start()
@@ -17,17 +20,12 @@ public class EnemyMove : MonoBehaviour
     {
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
-
-            //int targetIndex = test.y/*y*/ * m_areaManager.GetMapData().GetWidth() + test.x/*x*/;
-            //Debug.Log($"test: {m_areaData[targetIndex]}");
-
-            //Debug.Log("test : " + FindPath(new Vector2Int(0, 0), test));
-
-            // GetNextPositionのTest　ここから
-            List<Vector2Int> path = FindPath(new Vector2Int(0, 0), test);
-            Vector2Int nextPosition = GetNextPosition(new Vector2Int(0, 0), path, 3);
-            Debug.Log($"移動先: {nextPosition}");
         }
+    }
+
+    public void TestDebugLog(Vector2Int start, Vector2Int goal)
+    {
+        Debug.Log($"E: {m_areaManager.GetMapData().GetArea(start).name} {start}");
     }
 
     // 上下左右
@@ -103,7 +101,10 @@ public class EnemyMove : MonoBehaviour
                 Vector2Int nextPosition = currentNode.Position + direction;
 
                 // nextPositionが範囲外
-                if (nextPosition.x < 0 || nextPosition.y < 0)
+                if (nextPosition.x < 0 ||
+                    nextPosition.y < 0 ||
+                    m_areaManager.GetMapData().GetWidth() <= nextPosition.x ||
+                    m_areaManager.GetMapData().GetHeight() <= nextPosition.y)
                 {
                     continue;
                 }

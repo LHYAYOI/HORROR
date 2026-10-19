@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [CreateAssetMenu(
     fileName = "DefaultEnemy",
@@ -127,118 +129,36 @@ public class DefaultEnemy : ScriptableObject
 
             case SearchMethod.line:
                 {
-                    //Vector2Int difference = currentPosi - targetPosi;
-                    //Vector2Int differenceAbs = new(Math.Abs(difference.x), Math.Abs(difference.y));
-                    //int diff = 0;
-
-                    //bool sameColumn =
-                    //    differenceAbs.x == 0 &&
-                    //    differenceAbs.y <= m_searchRange;
-
-                    //bool sameRow =
-                    //    differenceAbs.y == 0 &&
-                    //    differenceAbs.x <= m_searchRange;
-
-                    //if (!sameColumn && !sameRow) return false;
-
-                    //if (sameColumn)
-                    //{
-                    //    diff = differenceAbs.y;
-                    //}
-                    //else if (sameRow)
-                    //{
-                    //    diff = differenceAbs.x;
-                    //}
-
-                    //// 一マスずつ確認
-                    //for (int i = 0; i < differenceAbs.x; i++)
-                    //{
-                    //    for (int j = 0; j < m_noAreaData.Count; j++)
-                    //    {
-                    //        if (mapData.GetArea(currentPosi + new Vector2Int(i, 0)).GetAreaName() == m_noAreaData[j].GetAreaName())
-                    //        {
-                    //            Debug.Log("障害物あり x");
-                    //            return false;
-                    //        }
-                    //    }
-                    //}
-                    //for (int i = 0; i < differenceAbs.y; i++)
-                    //{
-                    //    for (int j = 0; j < m_noAreaData.Count; j++)
-                    //    {
-                    //        if (mapData.GetArea(currentPosi + new Vector2Int(0, i)).GetAreaName() == m_noAreaData[j].GetAreaName())
-                    //        {
-                    //            Debug.Log("障害物あり y");
-                    //            return false;
-                    //        }
-                    //    }
-                    //}
-
-                    //return true;
-
-                    // 対象への方向
-                    Vector2Int difference = targetPosi - currentPosi;
-
-                    // 距離
-                    Vector2Int differenceAbs = new(
-                        Math.Abs(difference.x),
-                        Math.Abs(difference.y)
-                    );
-
-                    // 同じ列
-                    bool sameColumn =
-                        differenceAbs.x == 0 &&
-                        differenceAbs.y <= m_searchRange;
-
-                    // 同じ行
-                    bool sameRow =
-                        differenceAbs.y == 0 &&
-                        differenceAbs.x <= m_searchRange;
-
-                    if (!sameColumn && !sameRow)
+                    // 同じ縦横
+                    if (currentPosi.x == targetPosi.x || currentPosi.y == targetPosi.y)
                     {
-                        return false;
-                    }
+                        List<AreaController> areaData = mapData.GetAreaData();
 
-                    // 対象までのマス数
-                    int distance = differenceAbs.x + differenceAbs.y;
+                        // ターゲット方向
+                        Vector2Int diff = targetPosi - currentPosi;
 
-                    // 確認する方向
-                    Vector2Int direction = new(
-                        Math.Sign(difference.x),
-                        Math.Sign(difference.y)
-                    );
+                        Vector2Int direction = new Vector2Int(Math.Sign(diff.x), Math.Sign(diff.y));
 
-                    // 敵自身と対象のマスは確認しない
-                    for (int i = 1; i < distance; i++)
-                    {
-                        Vector2Int checkPos = currentPosi + direction * i;
+                        // 現在位置の1マス先から確認
+                        Vector2Int checkPosi = currentPosi + direction;
 
-                        AreaController area = mapData.GetArea(checkPos);
-
-                        if (area == null)
+                        while (checkPosi != targetPosi)
                         {
-                            Debug.LogWarning($"マスが存在しません: {checkPos}");
-                            return false;
+                            // マップ範囲外
+                            if (checkPosi.x < 0 || checkPosi.x >= mapData.GetWidth() || checkPosi.y < 0 || checkPosi.y >= mapData.GetHeight()) return false;
+
+                            int targetIndex = checkPosi.y * mapData.GetWidth() + checkPosi.x;
+
+                            // 壁がある
+                            if (areaData[targetIndex] == null) return false;
+
+                            checkPosi += direction;
                         }
 
-                        // 障害物確認
-                        foreach (AreaController noArea in m_noAreaData)
-                        {
-                            if (noArea == null)
-                            {
-                                continue;
-                            }
-
-                            if (area.GetAreaName() == noArea.GetAreaName())
-                            {
-                                Debug.Log($"障害物あり: {checkPos}");
-                                return false;
-                            }
-                        }
+                        return true;
                     }
 
-                    return true;
+                    break;
                 }
         }
 
