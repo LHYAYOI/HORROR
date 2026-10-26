@@ -110,7 +110,6 @@ public class SkyboxTransition_2 : MonoBehaviour
 
     public void SetNextTexture(Texture next)
     {
-        Debug.Log(next);
         if (m_currentTexture != null) m_nextTexture = next;
         else m_nextTexture = m_currentTexture;
         m_updateSkyBoxFlag = true;

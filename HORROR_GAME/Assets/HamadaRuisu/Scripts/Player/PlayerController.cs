@@ -294,6 +294,7 @@ public class PlayerController : MonoBehaviour
         if (nextArea != null)
         {
             StartCoroutine(MoveArea(moveIndex));
+           // Debug.Log(direction);
 
             m_enemyManager.AutoMove();
         }
@@ -349,8 +350,6 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator MoveArea(Vector2Int moveIndex)
     {
-        Debug.Log("移動");
-
         MapData m_MapData = m_AreaManager.GetMapData();
 
         AreaController currentArea = m_MapData.GetArea(m_currentAreaIndex);
@@ -376,6 +375,7 @@ public class PlayerController : MonoBehaviour
 
         m_skyBoxMaterial.mainTexture = nextAreaTexture;
         m_currentAreaIndex = moveIndex;
+        Debug.Log("P: " + m_MapData.GetArea(moveIndex).name + " " + moveIndex);
 
         m_transition.SetNextTexture(nextAreaTexture);
 

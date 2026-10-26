@@ -42,8 +42,11 @@ public class WanderState : EnemyStateBase
 
     public override void AutoMove()
     {
+        // Playerを視認しているか確認
+        m_enemyObject.GetComponent<EnemyObject>().CheckPlayerInSight();
         // 移動
         m_enemyObject.GetComponent<EnemyObject>().MoveEnemy_02();
+        // Playerを視認しているか確認
         m_enemyObject.GetComponent<EnemyObject>().CheckPlayerInSight();
 
         /*Vector3 adjust = m_enemyObject.GetComponent<EnemyObject>().GetAdjustmentFromPlayer();

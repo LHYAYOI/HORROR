@@ -25,9 +25,9 @@ MonoBehaviour:
     m_distance: 100
     m_size: {x: 5, y: 5}
     m_adjustment: {x: 1, y: 0}
-  m_speed: 1
-  m_spawnPosition: {x: 4, y: 3}
-  m_searchRange: 5
+  m_speed: 2
+  m_spawnPosition: {x: 0, y: 3}
+  m_searchRange: 100
   m_searchMethod: 1
   m_stateList:
   - {fileID: 11400000, guid: 366a65faa267e204c85ade8d29fc7a41, type: 2}
