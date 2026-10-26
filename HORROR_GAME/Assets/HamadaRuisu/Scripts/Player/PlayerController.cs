@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CameraController m_cameraController;
 
     [SerializeField] LayerMask m_layerMask;
+    [SerializeField] LayerMask m_ignoreMoveLayerMask;
     [SerializeField] LayerMask m_captureLayerMask;
 
     [SerializeField] Vector2Int m_startPosition;
@@ -222,7 +223,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity,~m_ignoreMoveLayerMask))
         {
             GameObject interactedObject = hit.collider.gameObject;
 
@@ -392,7 +393,7 @@ public class PlayerController : MonoBehaviour
         m_isDead = true;
 
         //カメラをオフにする
-        m_cameraController.ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
+        //m_cameraController.ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
 
         //カーソルをデフォルトに
         CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
