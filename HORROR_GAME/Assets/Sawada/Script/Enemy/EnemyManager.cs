@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             FarstEncount();
-            SetView(true);
+            //SetView(true);
         }
     }
 
@@ -70,14 +70,22 @@ public class EnemyManager : MonoBehaviour
     // 可視 不可視
     public void SetView()
     {
-        foreach (var enemy in m_spawnedEnemyList)
+        foreach (GameObject enemy in m_spawnedEnemyList)
         {
-            enemy.GetComponent<EnemyController>().ViewSet();
+            // プレイヤーから直線だったら
+            if (enemy.GetComponent<EnemyObject>().CheckPlayerInSight())
+            {
+                enemy.GetComponent<EnemyController>().ViewSet();
+            }
+            else
+            {
+                enemy.GetComponent<EnemyController>().ViewSet(false);
+            }
         }
     }
     public void SetView(bool viewFlag)
     {
-        foreach (var enemy in m_spawnedEnemyList)
+        foreach (GameObject enemy in m_spawnedEnemyList)
         {
             enemy.GetComponent<EnemyController>().ViewSet(viewFlag);
         }
