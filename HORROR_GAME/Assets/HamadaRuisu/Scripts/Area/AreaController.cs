@@ -27,6 +27,11 @@ public class AreaController : MonoBehaviour
         return m_model.GetAreaRotation();
     }
 
+    public HideSpotController GetHidePlace()
+    {
+        return m_model.GetHidePlace();
+    }
+
     private void OnEnable()
     {
 #if UNITY_EDITOR

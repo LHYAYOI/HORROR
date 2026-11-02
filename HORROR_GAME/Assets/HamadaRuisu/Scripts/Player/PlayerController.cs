@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (!m_interactedKai) 
                         {
-                            //m_enemyManager.FarstEncount();
+                            m_enemyManager.FarstEncount();
                             m_interactedKai = true;
                         }
 
