@@ -150,18 +150,6 @@ public class StorySequenceController : MonoBehaviour
             m_typingCoroutine = null;
         }
 
-        //if (m_showMessageCoroutine != null)
-        //{
-        //    StopCoroutine(m_showMessageCoroutine);
-        //    m_showMessageCoroutine = null;
-        //}
-
-
-        //string message =
-        //    m_messageDataList[m_currentMessageIndex].GetMessage();
-
-        //m_typingCoroutine = StartCoroutine(TypeMessage(message));
-
         m_showMessageCoroutine = StartCoroutine(
            ShowMessageCoroutine(m_messageDataList[m_currentMessageIndex]));
     }

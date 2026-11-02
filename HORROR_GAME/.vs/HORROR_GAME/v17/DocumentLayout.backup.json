@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kfuku\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\users\\kfuku\\onedrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\github\\horror\\horror_game\\assets\\fukushima\\scripts\\storysequencecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\fukushima\\scripts\\storysequencecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\users\\kfuku\\onedrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\github\\horror\\horror_game\\assets\\fukushima\\scripts\\epiloguebackgrounddrift.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\fukushima\\scripts\\epiloguebackgrounddrift.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|c:\\users\\kfuku\\onedrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\github\\horror\\horror_game\\assets\\fukushima\\scripts\\chatprologuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{411FC214-6FC2-7538-03FA-32CBAEEA5BA8}|Assembly-CSharp.csproj|solutionrelative:assets\\fukushima\\scripts\\chatprologuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StorySequenceController.cs",
+              "DocumentMoniker": "C:\\Users\\kfuku\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Fukushima\\Scripts\\StorySequenceController.cs",
+              "RelativeDocumentMoniker": "Assets\\Fukushima\\Scripts\\StorySequenceController.cs",
+              "ToolTip": "C:\\Users\\kfuku\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Fukushima\\Scripts\\StorySequenceController.cs",
+              "RelativeToolTip": "Assets\\Fukushima\\Scripts\\StorySequenceController.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAACEAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T02:30:43.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ChatPrologueController.cs",
+              "DocumentMoniker": "C:\\Users\\kfuku\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Fukushima\\Scripts\\ChatPrologueController.cs",
+              "RelativeDocumentMoniker": "Assets\\Fukushima\\Scripts\\ChatPrologueController.cs",
+              "ToolTip": "C:\\Users\\kfuku\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Fukushima\\Scripts\\ChatPrologueController.cs",
+              "RelativeToolTip": "Assets\\Fukushima\\Scripts\\ChatPrologueController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T00:39:49.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EpilogueBackgroundDrift.cs",
+              "DocumentMoniker": "C:\\Users\\kfuku\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Fukushima\\Scripts\\EpilogueBackgroundDrift.cs",
+              "RelativeDocumentMoniker": "Assets\\Fukushima\\Scripts\\EpilogueBackgroundDrift.cs",
+              "ToolTip": "C:\\Users\\kfuku\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\HORROR\\HORROR_GAME\\Assets\\Fukushima\\Scripts\\EpilogueBackgroundDrift.cs",
+              "RelativeToolTip": "Assets\\Fukushima\\Scripts\\EpilogueBackgroundDrift.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAwCYAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-02T00:39:12.572Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
