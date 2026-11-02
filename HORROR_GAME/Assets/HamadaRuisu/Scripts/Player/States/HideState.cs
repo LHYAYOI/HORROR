@@ -23,14 +23,17 @@ public class HideState:StateBase
 
     public override void UpdateState()
     {
-        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.EXIT_HIDE);
+        if (m_controller.IsDead())
+        {
+            return;
+        }
+
+        CursorManager.instance.EnableCrossHair();
+        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
 
         if (Input.GetMouseButtonDown(0))
         {
-            AudioManagerHamada.instance.Play("Hide");
-
-            m_controller.GetHideAnimator().SetTrigger("StartFade");
-            m_controller.GetStateMachine().ChangeState("NormalState");
+            m_controller.ExitHideState();
         }
     }
 

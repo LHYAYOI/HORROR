@@ -23,6 +23,7 @@ public class EnemyObject : MonoBehaviour
     void Start()
     {
         m_enemyStateMachine = GetComponent<StateMachine>();
+        Debug.Log(m_enemyStateMachine);
     }
 
     private void Update()
@@ -171,24 +172,23 @@ public class EnemyObject : MonoBehaviour
                 }
                 else 
                 {
-
                     //確率で殺す殺さない
-
-                    float hideRate = m_areaManager.GetMapData().GetArea(m_currentAreaIndex).GetHidePlace().GetFindRate();
+                    float hideRate = m_playerController.GetFindRate();
 
                     float randomValue = UnityEngine.Random.Range(0f, 1f);
 
                     if (randomValue <= hideRate)
                     {   //殺す
-                        Debug.Log("一旦待つ");
                         m_playerController.KillPlayer();
                     }
                     else 
                     {
+                        //心臓バクバクならす
+
                         //殺さないならスタンドバイステートに移行
+                        Debug.Log("一旦待つ");
                         m_enemyStateMachine.ChangeState("StandbyState_Time");
                     }
-
                 }
             }
             else
@@ -196,10 +196,6 @@ public class EnemyObject : MonoBehaviour
                 NextPositionDecide();
             }
         }
-
-
-        Debug.Log($"E: {m_areaManager.GetMapData().GetArea(m_currentAreaIndex).name} {m_currentAreaIndex}");
-        //Debug.Log("Pのposi:target: " + m_playerController.GetCurrentIndex() + " : " + m_targetPosition);
     }
 
 

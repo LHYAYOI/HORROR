@@ -26,6 +26,7 @@ public class NormalState:StateBase
         m_controller.CameraInputHandler();
         m_controller.CameraStateProcess();
         m_controller.MoveAreaInputHandler();
+        m_controller.MoveRayHandler();
         m_controller.InteractionHandler();
     }
 

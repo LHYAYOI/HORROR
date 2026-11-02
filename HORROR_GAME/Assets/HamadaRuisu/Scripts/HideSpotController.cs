@@ -5,6 +5,8 @@ using UnityEngine.Rendering.Universal;
 public class HideSpotController : MonoBehaviour, IPressable
 {
     [SerializeField] HidePlaceType m_hidePlaceType;
+
+    EnemyManager m_enemyManager;
     Animator m_animator;
     PlayerController m_player;
 
@@ -16,6 +18,7 @@ public class HideSpotController : MonoBehaviour, IPressable
 
         m_animator = GameObject.Find("FadeImage").GetComponent<Animator>();
 
+        m_enemyManager = FindFirstObjectByType<EnemyManager>();
     }
 
     public void OnPressed()
@@ -28,9 +31,11 @@ public class HideSpotController : MonoBehaviour, IPressable
 
         HidePlaceUIController.instance.SetCurrentHidePlaceType(m_hidePlaceType);
 
-        IncreaseFindRate(0.2f);
+        IncreaseFindRate(0.0f);
 
         m_player.SetFindRate(m_findRate);
+
+        m_enemyManager.AutoMove();
     }
 
     public void OnReleased()

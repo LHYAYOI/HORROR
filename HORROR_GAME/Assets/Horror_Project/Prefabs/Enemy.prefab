@@ -142,8 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMove
   m_areaManager: {fileID: 0}
   m_start: {x: 0, y: 0}
-  m_goal: {x: 0, y: 0}
-  m_current: {x: 0, y: 0}
+  m_goal: {x: 3, y: 0}
+  m_current: {x: 1, y: 0}
 --- !u!1001 &7121692971069475115
 PrefabInstance:
   m_ObjectHideFlags: 0

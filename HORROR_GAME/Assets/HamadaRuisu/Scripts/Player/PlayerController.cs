@@ -54,8 +54,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveRayHandler();
-
         CaptureKaiProcess();
 
         CoolDownCaptureProcess();
@@ -133,6 +131,11 @@ public class PlayerController : MonoBehaviour
     // カメラがオンの状態で、カメラに映っているカイを捕獲する処理
     public void CaptureKaiProcess()
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         if (m_cameraController.GetCameraOnOffState() != CAMERA_ON_OFF_STATE.ON || m_captureCoolDown)
         {
             m_captureTimer = 0;
@@ -218,6 +221,11 @@ public class PlayerController : MonoBehaviour
 
     public void MoveRayHandler() 
     {
+        if (m_isDead)
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
@@ -413,5 +421,14 @@ public class PlayerController : MonoBehaviour
         }
 
         m_sceneLoader.LoadGameOverSceneWithFade();
+    }
+
+    public void ExitHideState() 
+    {
+        AudioManagerHamada.instance.Play("Hide");
+
+        CursorManager.instance.EnableCursor();
+        GetHideAnimator().SetTrigger("StartFade");
+        GetStateMachine().ChangeState("NormalState");
     }
 }

@@ -90,4 +90,9 @@ public class EnemyManager : MonoBehaviour
             enemy.GetComponent<EnemyController>().ViewSet(viewFlag);
         }
     }
+
+    public PlayerController GetPlayerController()
+    {
+        return m_playerController;
+    }
 }
