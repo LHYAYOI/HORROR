@@ -14,6 +14,8 @@ public class AreaModel : MonoBehaviour
     [SerializeField] float m_areaRotation;
     [SerializeField] Texture m_skyboxTexture;
 
+    [SerializeField] HideSpotController m_hideSpotController;
+
     private Vector2Int m_areaPosition;
 
     public string GetAreaName() => m_areaName;
@@ -33,5 +35,10 @@ public class AreaModel : MonoBehaviour
     public float GetAreaRotation() 
     {
         return m_areaRotation;
+    }
+
+    public HideSpotController GetHidePlace() 
+    {
+        return m_hideSpotController;
     }
 }

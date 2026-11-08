@@ -8,6 +8,7 @@ using UnityEngine.Splines;
 public class EnemyObject : MonoBehaviour
 {
     DefaultEnemy m_defaultEnemy;
+    StateMachine m_enemyStateMachine;
     [SerializeField] Vector2Int m_currentAreaIndex;
     [SerializeField] Vector2Int m_lastTarget;
     [SerializeField] EnemyMove m_enemyMove;
@@ -21,6 +22,7 @@ public class EnemyObject : MonoBehaviour
 
     void Start()
     {
+        m_enemyStateMachine = GetComponent<StateMachine>();
     }
 
     private void Update()
@@ -166,6 +168,27 @@ public class EnemyObject : MonoBehaviour
                 {
                     Debug.Log("hit: " + name);
                     m_playerController.KillPlayer();
+                }
+                else 
+                {
+
+                    //確率で殺す殺さない
+
+                    float hideRate = m_areaManager.GetMapData().GetArea(m_currentAreaIndex).GetHidePlace().GetFindRate();
+
+                    float randomValue = UnityEngine.Random.Range(0f, 1f);
+
+                    if (randomValue <= hideRate)
+                    {   //殺す
+                        Debug.Log("一旦待つ");
+                        m_playerController.KillPlayer();
+                    }
+                    else 
+                    {
+                        //殺さないならスタンドバイステートに移行
+                        m_enemyStateMachine.ChangeState("StandbyState_Time");
+                    }
+
                 }
             }
             else

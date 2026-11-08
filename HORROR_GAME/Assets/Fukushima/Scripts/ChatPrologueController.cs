@@ -317,26 +317,6 @@ public class ChatPrologueController : MonoBehaviour
         m_scrollRect.verticalNormalizedPosition = 0.0f;
     }
 
-    //private void StartStory()
-    //{
-    //    if (m_chatRoot != null)
-    //    {
-    //        m_chatRoot.SetActive(false);
-    //    }
-
-    //    if (m_storyRoot != null)
-    //    {
-    //        m_storyRoot.SetActive(true);
-    //    }
-
-    //    if (m_storySequenceController != null)
-    //    {
-    //        m_storySequenceController.BeginSequence();
-    //    }
-
-    //    enabled = false;
-    //}
-
     private void StartStory()
     {
         if (m_animatingFlag)
