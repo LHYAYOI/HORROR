@@ -16,7 +16,14 @@ public class UwasaMenuManager : MonoBehaviour
 
     private void Start()
     {
-        SetView();
+        m_objects.SetActive(false);
+
+        foreach (var item in m_texts)
+        {
+            item.color = new(1f, 1f, 1f, 0f);
+        }
+        m_timer = 0f;
+        Debug.Log("reset");
     }
 
     private void Update()
