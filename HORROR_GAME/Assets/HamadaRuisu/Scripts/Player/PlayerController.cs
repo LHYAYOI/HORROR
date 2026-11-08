@@ -329,6 +329,11 @@ public class PlayerController : MonoBehaviour
         return m_hideAnimator;
     }
 
+    public EnemyManager GetEnemyManager()
+    {
+        return m_enemyManager;
+    }
+
     public void SetFindRate(float rate)
     {
         m_currentFindRate = rate;
@@ -425,10 +430,55 @@ public class PlayerController : MonoBehaviour
 
     public void ExitHideState() 
     {
+        Debug.Log("出るよー");
+
         AudioManagerHamada.instance.Play("Hide");
 
         CursorManager.instance.EnableCursor();
         GetHideAnimator().SetTrigger("StartFade");
         GetStateMachine().ChangeState("NormalState");
+    }
+
+    public bool IsSameAreaWithEnemy()
+    {
+        EnemyObject enemyObject = GetEnemyObject();
+
+        if (enemyObject == null)
+        {
+            return false;
+        }
+
+        if (GetCurrentIndex() == enemyObject.GetCurrentAreaIndex())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private EnemyObject GetEnemyObject()
+    {
+        EnemyManager manager = GetEnemyManager();
+
+        if (manager == null)
+        {
+            return null;
+        }
+
+        GameObject enemy = manager.GetEnemyObject();
+
+        if (enemy == null)
+        {
+            return null;
+        }
+
+        EnemyObject enemyObject = enemy.GetComponent<EnemyObject>();
+
+        if (enemyObject == null)
+        {
+            return null;
+        }
+
+        return enemyObject;
     }
 }

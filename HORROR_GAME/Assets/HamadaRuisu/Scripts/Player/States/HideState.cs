@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using static PlayerController;
 
 [CreateAssetMenu(fileName = "newHideState", menuName = "States/PlayerStates/HideState")]
@@ -31,9 +31,12 @@ public class HideState:StateBase
         CursorManager.instance.EnableCrossHair();
         CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
 
-        if (Input.GetMouseButtonDown(0))
+        if (!m_controller.IsSameAreaWithEnemy()) 
         {
-            m_controller.ExitHideState();
+            if (Input.GetMouseButtonDown(0))
+            {
+                m_controller.ExitHideState();
+            }
         }
     }
 

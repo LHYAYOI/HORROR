@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -31,7 +31,10 @@ public class HideSpotController : MonoBehaviour, IPressable
 
         HidePlaceUIController.instance.SetCurrentHidePlaceType(m_hidePlaceType);
 
-        IncreaseFindRate(0.0f);
+        if (m_player.IsSameAreaWithEnemy()) 
+        {
+            IncreaseFindRate(0.2f);
+        }
 
         m_player.SetFindRate(m_findRate);
 
@@ -52,7 +55,7 @@ public class HideSpotController : MonoBehaviour, IPressable
         }
     }
 
-    //Œ©‚Â‚©‚éŠm—¦æ“¾
+    //è¦‹ã¤ã‹ã‚‹ç¢ºç‡å–å¾—
     public float GetFindRate() 
     {
         return m_findRate;

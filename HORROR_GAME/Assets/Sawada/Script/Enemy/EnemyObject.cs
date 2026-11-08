@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -173,18 +174,22 @@ public class EnemyObject : MonoBehaviour
                 else 
                 {
                     //確率で殺す殺さない
-                    float hideRate = m_playerController.GetFindRate();
+                    int hideRate = (int)(m_playerController.GetFindRate() * 100);
 
-                    float randomValue = UnityEngine.Random.Range(0f, 1f);
+                    int randomValue = UnityEngine.Random.Range(0, 100);
+
+                    Debug.Log("hideRate: " + hideRate);
+                    Debug.Log("randomValue: " + randomValue);
+
+                    //心臓バクバクならす
+                    AudioManagerHamada.instance.Play("HeartSound");
 
                     if (randomValue <= hideRate)
                     {   //殺す
-                        m_playerController.KillPlayer();
+                        StartCoroutine(KillPlayer());
                     }
                     else 
                     {
-                        //心臓バクバクならす
-
                         //殺さないならスタンドバイステートに移行
                         Debug.Log("一旦待つ");
                         m_enemyStateMachine.ChangeState("StandbyState_Time");
@@ -198,6 +203,12 @@ public class EnemyObject : MonoBehaviour
         }
     }
 
+
+    private IEnumerator KillPlayer() 
+    {
+        yield return new WaitForSeconds(1.0f);
+        m_playerController.KillPlayer();
+    }
 
     // Playerが視界にいるのか?
     public bool CheckPlayerInSight()
@@ -267,5 +278,10 @@ public class EnemyObject : MonoBehaviour
                 loopNum++;
             }
         }
+    }
+
+    public Vector2Int GetCurrentAreaIndex()
+    {
+        return m_currentAreaIndex;
     }
 }

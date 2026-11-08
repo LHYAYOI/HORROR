@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerController;
 
@@ -36,14 +36,15 @@ public class StandbyState_Time : EnemyStateBase
         m_timer += Time.deltaTime;
         if (m_time <= m_timer)
         {
+            
+            m_enemyManager.GetPlayerController().ExitHideState();
+
+            AudioManagerHamada.instance.Stop("HeartSound");
 
             //別のエリアに移動
 
-            m_enemyManager.GetPlayerController().ExitHideState();
-
             // 次の行先を決める
             m_stateOwner.GetComponent<EnemyObject>().NextPositionDecide();
-            //m_enemyObject.GetComponent<EnemyObject>().ChaseTarget();
 
             // state切り替え
             m_stateOwner.GetComponent<StateMachine>().ChangeState("WanderState");

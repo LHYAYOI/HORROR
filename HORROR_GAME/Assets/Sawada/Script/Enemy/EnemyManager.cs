@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +17,8 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Area")]
     [SerializeField] AreaManager m_areaManager;
+
+    GameObject m_enemyObject;
 
     private void Update()
     {
@@ -64,6 +66,8 @@ public class EnemyManager : MonoBehaviour
             m_spawnedEnemyList.Add(instantEnemy);
         }
 
+        m_enemyObject = m_spawnedEnemyList[0];
+
         SetView();
     }
 
@@ -83,6 +87,7 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+
     public void SetView(bool viewFlag)
     {
         foreach (GameObject enemy in m_spawnedEnemyList)
@@ -94,5 +99,10 @@ public class EnemyManager : MonoBehaviour
     public PlayerController GetPlayerController()
     {
         return m_playerController;
+    }
+
+    public GameObject GetEnemyObject()
+    {
+        return m_enemyObject;
     }
 }
