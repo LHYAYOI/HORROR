@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using static PlayerController;
 
 [CreateAssetMenu(fileName = "newHideState", menuName = "States/PlayerStates/HideState")]
@@ -23,14 +23,20 @@ public class HideState:StateBase
 
     public override void UpdateState()
     {
-        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.EXIT_HIDE);
-
-        if (Input.GetMouseButtonDown(0))
+        if (m_controller.IsDead())
         {
-            AudioManagerHamada.instance.Play("Hide");
+            return;
+        }
 
-            m_controller.GetHideAnimator().SetTrigger("StartFade");
-            m_controller.GetStateMachine().ChangeState("NormalState");
+        CursorManager.instance.EnableCrossHair();
+        CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);
+
+        if (!m_controller.IsSameAreaWithEnemy()) 
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                m_controller.ExitHideState();
+            }
         }
     }
 

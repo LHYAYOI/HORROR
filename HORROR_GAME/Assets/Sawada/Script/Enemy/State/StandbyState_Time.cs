@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerController;
 
@@ -12,6 +12,8 @@ public class StandbyState_Time : EnemyStateBase
     [SerializeField] float m_time;
     float m_timer;
 
+    EnemyManager m_enemyManager;
+
     public override void Awake()
     {
         m_stateName = "StandbyState_Time";
@@ -20,11 +22,13 @@ public class StandbyState_Time : EnemyStateBase
     public override void Start()
     {
         m_timer = 0.0f;
+        m_enemyManager = m_stateOwner.GetComponent<EnemyController>().GetEnemyManager();
     }
 
     public override void EnterState()
     {
-
+        m_timer = 0.0f;
+        Debug.Log(m_enemyManager);
     }
 
     public override void UpdateState()
@@ -32,11 +36,20 @@ public class StandbyState_Time : EnemyStateBase
         m_timer += Time.deltaTime;
         if (m_time <= m_timer)
         {
+            
+            m_enemyManager.GetPlayerController().ExitHideState();
+
+            AudioManagerHamada.instance.Stop("HeartSound");
+
+            //別のエリアに移動
+
             // 次の行先を決める
-            m_enemyObject.GetComponent<EnemyObject>().NextPositionDecide();
+            m_stateOwner.GetComponent<EnemyObject>().NextPositionDecide();
 
             // state切り替え
-            m_enemyObject.GetComponent<StateMachine>().ChangeState("WanderState");
+            m_stateOwner.GetComponent<StateMachine>().ChangeState("WanderState");
+
+            m_timer = 0.0f;
         }
     }
 
@@ -48,6 +61,8 @@ public class StandbyState_Time : EnemyStateBase
     public override void InitEnemyState(GameObject enemyObject)
     {
         m_enemyObject = enemyObject;
+        m_enemyManager = m_stateOwner.GetComponent<EnemyManager>();
+        Debug.Log(m_enemyManager);
     }
 
     public override void AutoMove()

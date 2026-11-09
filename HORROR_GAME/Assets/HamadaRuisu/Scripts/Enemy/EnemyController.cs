@@ -4,6 +4,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] EnemyView m_enemyView;
     [SerializeField] CameraController m_cameraController;
+    [SerializeField] EnemyManager m_enemyManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,5 +39,10 @@ public class EnemyController : MonoBehaviour
         {
             m_enemyView.Hide();
         }
+    }
+
+    public EnemyManager GetEnemyManager()
+    {
+        return m_enemyManager;
     }
 }

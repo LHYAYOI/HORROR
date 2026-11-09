@@ -186,8 +186,7 @@ namespace CriWare {
 					FindSerializePropertyRecursive(iterator, suspect, component);
 				}
 				if (CompareGuid(iterator, suspect)) {
-ReferenceFinder.foundReferences.Add(new ReferencedObjects
-{
+					ReferenceFinder.foundReferences.Add(new ReferencedObjects {
 						gameObject = component.gameObject,
 						type = component.GetType()
 					});
@@ -201,12 +200,12 @@ ReferenceFinder.foundReferences.Add(new ReferencedObjects
 			}
 
 			bool checkSubClass = property.objectReferenceValue is GameObject || property.objectReferenceValue is ScriptableObject;
-			if (checkSubClass && property.objectReferenceValue.GetEntityid() == suspect) {
+			if (checkSubClass && property.objectReferenceValue.GetInstanceID() == suspect) {
 				return true;
 			} else if (property.objectReferenceValue is Component) {
-				return (property.objectReferenceValue as Component)?.gameObject.GetEntityid() == suspect;
+				return (property.objectReferenceValue as Component)?.gameObject.GetInstanceID() == suspect;
 			}
-			return property.objectReferenceValue?.GetEntityid() == suspect;
+			return property.objectReferenceValue?.GetInstanceID() == suspect;
 		}
 	}
 
