@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class MapTexture : MonoBehaviour
 {
-    [SerializeField] Sprite m_mapImage;
+    [SerializeField] Sprite m_maskMap;
+    [SerializeField] Sprite m_map;
 
-    public Sprite GetMapImage()
+    public Sprite GetMaskMap()
     {
-        return m_mapImage;
+        return m_maskMap;
+    }
+    public Sprite GetMap()
+    {
+        return m_map;
     }
 }

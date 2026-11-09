@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c136c9de8602c74cb475c92c72f3ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  m_PlayerModel: {fileID: 0}
   m_StateMachine: {fileID: 6119072971538894324}
   m_hideAnimator: {fileID: 0}
   m_gameOverAnimation: {fileID: 0}
@@ -60,9 +61,6 @@ MonoBehaviour:
   m_layerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_ignoreMoveLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
   m_captureLayerMask:
     serializedVersion: 2
     m_Bits: 512

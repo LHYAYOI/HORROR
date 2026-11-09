@@ -6,6 +6,33 @@ public class SmartPhoneAnimation : MonoBehaviour
     [Header("Map&スマホ画面")]
     [SerializeField] GameObject m_uwasaSetUp;
     [SerializeField] Transform m_parent;
+    [Header("Animator")]
+    [SerializeField] private Animator m_animator;
+
+    private bool m_isPulled = false;
+
+    public void OnOffButton()
+    {
+        // スマホを出す
+        if (!m_isPulled)
+        {
+            m_animator.SetTrigger("PullSmartPhone");
+            m_isPulled = true;
+        }
+        // スマホをしまう
+        else
+        {
+            m_animator.SetTrigger("RemoveSmartPhone");
+            m_isPulled = false;
+        }
+    }
+
+    public void OffButton()
+    {
+        m_animator.SetTrigger("RemoveSmartPhone");
+        m_isPulled = false;
+    }
+
 
     // SetUpの適応
     public void SetUp()

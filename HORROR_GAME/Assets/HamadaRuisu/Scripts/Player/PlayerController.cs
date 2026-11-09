@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CameraController m_cameraController;
 
     [SerializeField] LayerMask m_layerMask;
-    [SerializeField] LayerMask m_ignoreMoveLayerMask;
     [SerializeField] LayerMask m_captureLayerMask;
 
     [SerializeField] Vector2Int m_startPosition;
@@ -158,7 +157,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (!m_interactedKai) 
                         {
-                            m_enemyManager.FarstEncount();
+                            //m_enemyManager.FarstEncount();
                             m_interactedKai = true;
                         }
 
@@ -223,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity,~m_ignoreMoveLayerMask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             GameObject interactedObject = hit.collider.gameObject;
 
@@ -295,7 +294,6 @@ public class PlayerController : MonoBehaviour
         if (nextArea != null)
         {
             StartCoroutine(MoveArea(moveIndex));
-           // Debug.Log(direction);
 
             m_enemyManager.AutoMove();
         }
@@ -351,6 +349,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator MoveArea(Vector2Int moveIndex)
     {
+        Debug.Log("移動");
+
         MapData m_MapData = m_AreaManager.GetMapData();
 
         AreaController currentArea = m_MapData.GetArea(m_currentAreaIndex);
@@ -376,7 +376,6 @@ public class PlayerController : MonoBehaviour
 
         m_skyBoxMaterial.mainTexture = nextAreaTexture;
         m_currentAreaIndex = moveIndex;
-        Debug.Log("P: " + m_MapData.GetArea(moveIndex).name + " " + moveIndex);
 
         m_transition.SetNextTexture(nextAreaTexture);
 
@@ -393,7 +392,7 @@ public class PlayerController : MonoBehaviour
         m_isDead = true;
 
         //カメラをオフにする
-        //m_cameraController.ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
+        m_cameraController.ChangeCameraOnOffState(CAMERA_ON_OFF_STATE.OFF);
 
         //カーソルをデフォルトに
         CursorManager.instance.ChangeCursorImage(CURSOR_TYPE.DEFAULT);

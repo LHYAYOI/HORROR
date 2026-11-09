@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -20,11 +19,6 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            FarstEncount();
-            //SetView(true);
-        }
     }
 
     public void AutoMove()
@@ -70,22 +64,14 @@ public class EnemyManager : MonoBehaviour
     // 可視 不可視
     public void SetView()
     {
-        foreach (GameObject enemy in m_spawnedEnemyList)
+        foreach (var enemy in m_spawnedEnemyList)
         {
-            // プレイヤーから直線だったら
-            if (enemy.GetComponent<EnemyObject>().CheckPlayerInSight())
-            {
-                enemy.GetComponent<EnemyController>().ViewSet();
-            }
-            else
-            {
-                enemy.GetComponent<EnemyController>().ViewSet(false);
-            }
+            enemy.GetComponent<EnemyController>().ViewSet();
         }
     }
     public void SetView(bool viewFlag)
     {
-        foreach (GameObject enemy in m_spawnedEnemyList)
+        foreach (var enemy in m_spawnedEnemyList)
         {
             enemy.GetComponent<EnemyController>().ViewSet(viewFlag);
         }
