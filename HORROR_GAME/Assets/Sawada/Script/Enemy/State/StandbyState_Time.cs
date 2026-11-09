@@ -1,6 +1,8 @@
-﻿using Unity.VisualScripting;
+﻿using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 using static PlayerController;
+using System.Collections.Generic;
 
 /*
  * プレイヤーを視認していない場合
@@ -34,14 +36,15 @@ public class StandbyState_Time : EnemyStateBase
     public override void UpdateState()
     {
         m_timer += Time.deltaTime;
+
         if (m_time <= m_timer)
         {
-            
             m_enemyManager.GetPlayerController().ExitHideState();
 
             AudioManagerHamada.instance.Stop("HeartSound");
 
             //別のエリアに移動
+
 
             // 次の行先を決める
             m_stateOwner.GetComponent<EnemyObject>().NextPositionDecide();
@@ -63,6 +66,32 @@ public class StandbyState_Time : EnemyStateBase
         m_enemyObject = enemyObject;
         m_enemyManager = m_stateOwner.GetComponent<EnemyManager>();
         Debug.Log(m_enemyManager);
+    }
+
+    private void DecideWarpPoint() 
+    {
+        Vector2 playerIndex = m_enemyManager.GetPlayerController().GetCurrentIndex();
+
+        List<AreaController> list = m_stateOwner.GetComponent<EnemyController>().GetWarpPointList();
+
+        float maxDistance = 0;
+
+        Vector2Int warpPoint = m_stateOwner.GetComponent<EnemyObject>().GetCurrentAreaIndex(); 
+
+        foreach (AreaController area in list) 
+        {
+            float distance = (area.GetAreaPosition().x + area.GetAreaPosition().y);
+
+            //最長距離更新
+            if (maxDistance > distance) 
+            {
+                maxDistance = distance;
+                warpPoint = area.GetAreaPosition();
+            }
+        }
+
+        //実際に移動
+
     }
 
     public override void AutoMove()

@@ -178,9 +178,6 @@ public class EnemyObject : MonoBehaviour
 
                     int randomValue = UnityEngine.Random.Range(0, 100);
 
-                    Debug.Log("hideRate: " + hideRate);
-                    Debug.Log("randomValue: " + randomValue);
-
                     //心臓バクバクならす
                     AudioManagerHamada.instance.Play("HeartSound");
 
