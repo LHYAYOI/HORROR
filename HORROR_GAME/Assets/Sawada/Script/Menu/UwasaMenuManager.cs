@@ -18,12 +18,12 @@ public class UwasaMenuManager : MonoBehaviour
     {
         m_objects.SetActive(false);
 
-        foreach (var item in m_texts)
-        {
-            item.color = new(1f, 1f, 1f, 0f);
-        }
-        m_timer = 0f;
-        Debug.Log("reset");
+        //foreach (var item in m_texts)
+        //{
+        //    item.color = new(1f, 1f, 1f, 0f);
+        //}
+        //m_timer = 0f;
+        //Debug.Log("reset");
     }
 
     private void Update()
@@ -36,14 +36,14 @@ public class UwasaMenuManager : MonoBehaviour
         // 再生終了後の処理
         if (IsAnimationFinished("Base Layer.PullSmartPhone"))
         {
-            foreach (var item in m_texts)
-            {
-                float alpha = m_timer * 8;
-                alpha = alpha > 1f ? 1f : alpha;
-                item.color = new(1f, 1f, 1f, alpha);
-            }
-            Debug.Log("加算中");
-            m_timer += Time.deltaTime;
+            //foreach (var item in m_texts)
+            //{
+            //    float alpha = m_timer * 8;
+            //    alpha = alpha > 1f ? 1f : alpha;
+            //    item.color = new(1f, 1f, 1f, alpha);
+            //}
+            //Debug.Log("加算中");
+            //m_timer += Time.deltaTime;
         }
     }
 
@@ -59,14 +59,14 @@ public class UwasaMenuManager : MonoBehaviour
             m_animator.SetTrigger("PullSmartPhone");
         else
         {
-            m_animator.SetTrigger("RemoveSmartPhone");
+            //m_animator.SetTrigger("RemoveSmartPhone");
 
-            foreach (var item in m_texts)
-            {
-                item.color = new(1f, 1f, 1f, 0f);
-            }
-            m_timer = 0f;
-            Debug.Log("reset");
+            //foreach (var item in m_texts)
+            //{
+            //    item.color = new(1f, 1f, 1f, 0f);
+            //}
+            //m_timer = 0f;
+            //Debug.Log("reset");
         }
     }
 
