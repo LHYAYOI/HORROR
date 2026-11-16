@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Splines;
 
 public class EnemyObject : MonoBehaviour
 {
@@ -33,6 +31,8 @@ public class EnemyObject : MonoBehaviour
         {
             Debug.Log("P : " + m_playerController.GetCurrentIndex());
             Debug.Log("E : " + m_currentAreaIndex);
+            Teleport(0,0);
+            Debug.Log("テレポート後 : " + m_currentAreaIndex);
         }
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
@@ -61,6 +61,27 @@ public class EnemyObject : MonoBehaviour
         m_currentAreaIndex = date.GetSpawnPosition();
 
         SetPositionFromPlayer();
+    }
+
+    // 瞬間移動
+    public bool Teleport(int x, int y)
+    {
+        if (m_areaManager == null || m_playerController == null || m_defaultEnemy == null)
+        {
+            return false;
+        }
+
+        MapData mapData = m_areaManager.GetMapData();
+        Vector2Int destination = new Vector2Int(x, y);
+        if (mapData == null || mapData.GetArea(destination) == null ||
+            !CheckEnemyMovePosition(destination))
+        {
+            return false;
+        }
+
+        m_currentAreaIndex = destination;
+        SetPositionFromPlayer();
+        return true;
     }
 
     public Vector3 GetAdjustmentFromPlayer()
