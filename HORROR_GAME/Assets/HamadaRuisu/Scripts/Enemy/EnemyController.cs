@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] EnemyView m_enemyView;
     [SerializeField] CameraController m_cameraController;
     [SerializeField] EnemyManager m_enemyManager;
+
     [SerializeField] List<AreaController> m_enemyWarpArea;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

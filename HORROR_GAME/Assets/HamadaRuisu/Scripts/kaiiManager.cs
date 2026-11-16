@@ -14,7 +14,7 @@ public class kaiiManager : MonoBehaviour
                 continue;
             }
 
-            if (!kaii.WasShot()) 
+            if (!kaii.IsCaptured()) 
             {
                 return false;
             }

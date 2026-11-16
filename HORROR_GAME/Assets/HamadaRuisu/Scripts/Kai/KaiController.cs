@@ -6,7 +6,7 @@ public class KaiControler : MonoBehaviour
     [SerializeField] Collider m_collider;
     CameraController m_cameraController;
 
-    bool m_wasShoted = false;
+    bool m_isCapturedFlag = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,7 +17,7 @@ public class KaiControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOnCamera() && !m_wasShoted)
+        if (IsOnCamera() && !m_isCapturedFlag)
         {
             m_kaiView.Show();
             m_collider.enabled = true;
@@ -29,9 +29,9 @@ public class KaiControler : MonoBehaviour
         }
     }
 
-    public bool WasShot() 
+    public bool IsCaptured() 
     {
-        return m_wasShoted;
+        return m_isCapturedFlag;
     }
 
     public bool IsOnCamera() 
@@ -41,7 +41,7 @@ public class KaiControler : MonoBehaviour
 
     public void Captured() 
     {
-        m_wasShoted = true;
+        m_isCapturedFlag = true;
 
         m_collider.enabled = false;
 

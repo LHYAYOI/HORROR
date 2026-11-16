@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
             {
                 KaiControler KaiController = interactedObject.transform.GetComponent<KaiControler>();
 
-                if (!KaiController.WasShot())
+                if (!KaiController.IsCaptured())
                 {
                     m_captureTimer += Time.deltaTime;
 
