@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2Int m_startPosition;
     Vector2Int m_currentAreaIndex;
 
+    HideSpotController m_hideSpotController;
+
     bool m_interactedKai = false;
 
     bool m_isDead = false;
@@ -63,6 +65,16 @@ public class PlayerController : MonoBehaviour
             KillPlayer();
         }
 
+    }
+
+    public void IncreaseHideRate() 
+    {
+        m_hideSpotController.IncreaseFindRate();
+    }
+
+    public void SetHideSpot(HideSpotController controller) 
+    {
+        m_hideSpotController = controller;
     }
 
     public bool InteractedWithKai()
@@ -430,8 +442,6 @@ public class PlayerController : MonoBehaviour
 
     public void ExitHideState() 
     {
-        Debug.Log("出るよー");
-
         AudioManagerHamada.instance.Play("Hide");
 
         CursorManager.instance.EnableCursor();

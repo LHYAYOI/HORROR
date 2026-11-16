@@ -25,16 +25,13 @@ public class HideSpotController : MonoBehaviour, IPressable
     {
         AudioManagerHamada.instance.Play("Hide");
 
+        m_player.SetHideSpot(this);
+
         m_player.ChangeSate("HideState");
 
         m_animator.SetTrigger("StartFade");
 
         HidePlaceUIController.instance.SetCurrentHidePlaceType(m_hidePlaceType);
-
-        if (m_player.IsSameAreaWithEnemy()) 
-        {
-            IncreaseFindRate(0.2f);
-        }
 
         m_player.SetFindRate(m_findRate);
 
@@ -45,7 +42,13 @@ public class HideSpotController : MonoBehaviour, IPressable
     {
     }
 
-    public void IncreaseFindRate(float IncreaseRate) 
+    public void IncreaseFindRate() 
+    {
+        Debug.Log("確率変動");
+        FindRateChanger(0.2f);
+    }
+
+    public void FindRateChanger(float IncreaseRate) 
     {
         m_findRate += IncreaseRate;
 

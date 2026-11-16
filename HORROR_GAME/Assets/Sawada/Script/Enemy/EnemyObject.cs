@@ -71,6 +71,8 @@ public class EnemyObject : MonoBehaviour
             return false;
         }
 
+        Debug.Log(x+" "+y);
+
         MapData mapData = m_areaManager.GetMapData();
         Vector2Int destination = new Vector2Int(x, y);
         if (mapData == null || mapData.GetArea(destination) == null ||
@@ -176,7 +178,7 @@ public class EnemyObject : MonoBehaviour
         }
 
         // 移動先を更新
-        //Debug.Log($"E: {m_currentAreaIndex} -> {nextPosition}");
+        Debug.Log($"E: {m_currentAreaIndex} -> {nextPosition}");
         m_currentAreaIndex = nextPosition;
 
 
@@ -189,7 +191,7 @@ public class EnemyObject : MonoBehaviour
 
                 if (m_playerState.GetCurrentState().name != "HideState")
                 {
-                    Debug.Log("hit: " + name);
+                    Debug.Log("kill");
                     m_playerController.KillPlayer();
                 }
                 else 

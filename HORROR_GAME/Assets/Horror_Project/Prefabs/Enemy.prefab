@@ -74,6 +74,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KaiController
   m_enemyView: {fileID: 7330554721138894699}
   m_cameraController: {fileID: 0}
+  m_enemyManager: {fileID: 0}
+  m_enemyWarpArea: []
 --- !u!114 &7330554721138894699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91dd0ed3915a5c448358da048649cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateMachine
-  m_stateList: []
+  m_stateList:
+  - {fileID: 11400000, guid: 366a65faa267e204c85ade8d29fc7a41, type: 2}
+  - {fileID: 11400000, guid: b73ee62218777ad439b3223bc4ddeb3d, type: 2}
+  - {fileID: 11400000, guid: 8e0edd086f34b294396ed95d0668ea68, type: 2}
 --- !u!114 &815953412737939490
 MonoBehaviour:
   m_ObjectHideFlags: 0

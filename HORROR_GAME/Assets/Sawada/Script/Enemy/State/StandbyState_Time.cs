@@ -15,6 +15,7 @@ public class StandbyState_Time : EnemyStateBase
     float m_timer;
 
     EnemyManager m_enemyManager;
+    EnemyObject  m_object;
 
     public override void Awake()
     {
@@ -25,6 +26,7 @@ public class StandbyState_Time : EnemyStateBase
     {
         m_timer = 0.0f;
         m_enemyManager = m_stateOwner.GetComponent<EnemyController>().GetEnemyManager();
+        m_object = m_stateOwner.GetComponent<EnemyObject>();
     }
 
     public override void EnterState()
@@ -39,15 +41,21 @@ public class StandbyState_Time : EnemyStateBase
 
         if (m_time <= m_timer)
         {
+            Debug.Log("eeeeeeeeeeeeeeee");
+
             m_enemyManager.GetPlayerController().ExitHideState();
+
+            m_enemyManager.GetPlayerController().IncreaseHideRate();
+
+            m_enemyManager.GetPlayerController().SetHideSpot(null);
 
             AudioManagerHamada.instance.Stop("HeartSound");
 
             //別のエリアに移動
-
+            DecideWarpPoint();
 
             // 次の行先を決める
-            m_stateOwner.GetComponent<EnemyObject>().NextPositionDecide();
+            m_object.NextPositionDecide();
 
             // state切り替え
             m_stateOwner.GetComponent<StateMachine>().ChangeState("WanderState");
@@ -80,10 +88,10 @@ public class StandbyState_Time : EnemyStateBase
 
         foreach (AreaController area in list) 
         {
-            float distance = (area.GetAreaPosition().x + area.GetAreaPosition().y);
+            float distance = Mathf.Abs((area.GetAreaPosition().x + area.GetAreaPosition().y) - (playerIndex.x + playerIndex.y));
 
             //最長距離更新
-            if (maxDistance > distance) 
+            if (maxDistance < distance)
             {
                 maxDistance = distance;
                 warpPoint = area.GetAreaPosition();
@@ -91,7 +99,7 @@ public class StandbyState_Time : EnemyStateBase
         }
 
         //実際に移動
-
+        m_object.Teleport(warpPoint.x, warpPoint.y);
     }
 
     public override void AutoMove()
